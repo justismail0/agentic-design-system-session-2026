@@ -5726,31 +5726,52 @@
     max-width: 690px;
   }
 
-  /* Slide 5 — QR hero. Single centered QR + voting URL underneath.
+  /* Slide 5 — 2-column layout.
+     Left: intro about the survey (kicker + h2 + lede).
+     Right: QR + fallback URL.
      Question, options, and live results all live in Mentimeter; the slide
      is just the door into the poll. */
   .poll-qr-content {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(0, 1fr);
+    gap: clamp(28px, 3.5vw, 72px);
+    align-items: center;
+  }
+  .poll-intro {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    gap: var(--sp-3);
+    align-items: flex-start;
+    text-align: left;
+    max-width: 460px;
   }
-  .poll-qr-content > h2 {
+  .poll-intro .kicker {
+    margin: 0;
+    text-align: left;
+  }
+  .poll-intro h2 {
+    margin: 0;
+    text-align: left;
     max-width: 18ch;
-    margin-bottom: var(--sp-6);
+  }
+  .poll-intro .lede {
+    margin: 0;
+    text-align: left;
+    max-width: 42ch;
   }
   .poll-qr-hero {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--sp-4);
+    justify-self: center;
   }
   .poll-qr-img {
-    width: clamp(280px, 32vw, 380px);
-    height: clamp(280px, 32vw, 380px);
+    width: clamp(220px, 22vw, 320px);
+    height: clamp(220px, 22vw, 320px);
     border-radius: var(--r-lg);
     background: #fff;
-    padding: 18px;
+    padding: 16px;
     object-fit: contain;
     box-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
   }
@@ -5770,14 +5791,28 @@
   }
   .poll-qr-host {
     font-family: var(--font-mono);
-    font-size: clamp(20px, 2vw, 28px);
+    font-size: clamp(18px, 1.6vw, 22px);
     font-weight: var(--fw-bold);
     color: var(--c-mint);
     letter-spacing: var(--ls-snug);
   }
   @media (max-width: 900px) {
-    .poll-qr-img { width: 240px; height: 240px; padding: 14px; }
-    .poll-qr-host { font-size: 18px; }
+    .poll-qr-content {
+      grid-template-columns: 1fr;
+      gap: var(--sp-4);
+    }
+    .poll-intro {
+      align-items: center;
+      text-align: center;
+      max-width: 100%;
+    }
+    .poll-intro .kicker,
+    .poll-intro h2,
+    .poll-intro .lede {
+      text-align: center;
+    }
+    .poll-qr-img { width: 220px; height: 220px; padding: 14px; }
+    .poll-qr-host { font-size: 16px; }
   }
 
   /* Menti results preview card (slide 5.5) — pure-CSS bar chart preview that
@@ -6676,8 +6711,11 @@
          Voting URL: menti.com/alrpx85zpf5g · QR at assets/qr-menti.png. -->
     <section class="slide poll-slide" data-section="Opener" data-notes="Say: 'Temperature check. Scan the QR or open the link below. Take a minute, multi-select everything that's been true.' Wait 60-90 sec. Then advance to the live results slide.">
       <div class="slide-content poll-qr-content">
-        <div class="kicker">Temperature check</div>
-        <h2>Take a minute. Scan to vote.</h2>
+        <div class="poll-intro">
+          <div class="kicker">Temperature check</div>
+          <h2>Take a minute. Scan to vote.</h2>
+          <p class="lede">A quick gut check on the last 90 days. Multi-select all that have been true for you. No wrong answers, only honest ones. Your bars set the table for what we'll teach next.</p>
+        </div>
         <div class="poll-qr-hero" aria-label="Scan to vote on Mentimeter">
           <img class="poll-qr-img" src="assets/qr-menti.png" alt="Mentimeter QR code" onerror="this.style.display='none'">
           <div class="poll-qr-meta">
