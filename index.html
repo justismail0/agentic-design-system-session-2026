@@ -7945,93 +7945,99 @@ why? Propose the full pairing matrix before writing.</div>
       </div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The smallest component that exercises tokens. Read the first paragraph aloud, hold for a beat, then point at the build paragraph.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The first component built live. Read the propose paragraph aloud, hold for a beat, then point at the execute paragraph. Full prompt to paste: Build a Button component in the Figma file from CLAUDE.md. Read CLAUDE.md first. Use the existing primitive and semantic collections (foundations/*.json and tokens/*.json) as context. Match the per-component file shape used elsewhere in this project — see how the structure is described in CLAUDE.md under Per-component files. Don't create anything yet. Propose: the variant matrix (Style × Size × Icon only), the component properties (Label TEXT, Show left icon BOOLEAN, Show right icon BOOLEAN, Left icon INSTANCE_SWAP, Right icon INSTANCE_SWAP), the anatomy (left-icon, label, right-icon centered horizontal flex), which semantic token each visual property aliases to, the state model (default, hover, disabled — active state has no semantic token, document the gap). When I approve: build the component set in Figma using small atomic use_figma calls (load figma:figma-use first); write components/atoms/button/button.tokens.json matching the per-component file shape from CLAUDE.md; run /component-documentation button to generate button.html and button.md from the Figma component set; return setId, every variant rendered, every fill/stroke/text bound to a semantic variable, $notes for the active-state gap.">
       <div class="slide-content">
         <div class="kicker">Component 1 · Button</div>
         <div class="prompt-frame">
-          <div class="prompt">Build a Button component in Figma. Every fill, border, text colour, padding, and radius must bind to a Semantic token — no raw values.
+          <div class="prompt">Build a Button in our Figma demo file. Read CLAUDE.md and the existing primitive + semantic collections first.
 
-Don't create anything yet. Propose the structure first: variants (size × state × type), anatomy, and which Semantic token each part references.
+Don't build anything yet. Propose: variant matrix (Style × Size × Icon only), properties (Label, icon booleans, icon swaps), anatomy, and which semantic token each visual property aliases. State model: default, hover, disabled.
 
-When I approve, build it as a component set — hug-content sizing, every variant rendered correctly.</div>
+When I approve, build the component set, write button.tokens.json, then run /component-documentation.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
-            <li><span class="check"></span><span>Every fill bound to a Semantic token</span></li>
-            <li><span class="check"></span><span>No raw hex values</span></li>
-            <li><span class="check"></span><span>Size × State × Type variants render</span></li>
-            <li><span class="check"></span><span>Hug-content sizing</span></li>
+            <li><span class="check"></span><span>Style × Size × Icon only variants rendered</span></li>
+            <li><span class="check"></span><span>Every fill / text / border bound to a semantic token</span></li>
+            <li><span class="check"></span><span>button.tokens.json matches project per-component shape</span></li>
+            <li><span class="check"></span><span>/component-documentation generates button.html + button.md</span></li>
           </ul>
         </div>
       </div>
       <div class="slide-footer"><span>1 of 4 · Button</span><span>~25 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. Same propose-then-execute discipline. The hide-by-prop pattern is load-bearing — the Welcome screen needs Title + Subtitle but no Overline or Description.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. Same propose-then-execute discipline. The hide-by-prop pattern is load-bearing — the Welcome screen needs Title + Subtitle but no Overline or Description. Full prompt to paste: Build a Jumbotron component in the Figma file from CLAUDE.md. Use components/atoms/button/button.tokens.json as the reference for the per-component file shape. It's a heading block with four optional slots: Overline, Title, Subtitle, Description. Vertical auto-layout, left-aligned by default. Don't create anything yet. Propose: variant matrix (Size lg / md / sm / xs — one axis only, slot visibility handled by component properties); properties (Show overline BOOLEAN default false, Title TEXT, Subtitle TEXT, Description TEXT, Show subtitle BOOLEAN default true, Show description BOOLEAN default false); per-size typography mapping (use semantic-typography token names not raw px — propose the mapping against semantic-typography.json); slot color tokens (Title text/primary/default, Subtitle text/secondary/default, Overline text/tertiary/default, Description text/secondary/default); spacing between slots (spacing/sm Overline→Title, spacing/md Title→Subtitle, spacing/lg Subtitle→Description). When I approve: build the component set (one variant per Size, four total — all slots present in every variant, visibility driven by booleans); write components/atoms/jumbotron/jumbotron.tokens.json matching the button.tokens.json structure; run /component-documentation jumbotron; return setId, every Size variant rendered, every typography binding via semantic tokens.">
       <div class="slide-content">
         <div class="kicker">Component 2 · Jumbotron</div>
         <div class="prompt-frame">
-          <div class="prompt">Build a Jumbotron component in Figma. It's a heading block with four optional slots: Overline, Title, Subtitle, Description.
+          <div class="prompt">Build a Jumbotron in our Figma file. Use button.tokens.json as the per-component file pattern.
 
-Don't create anything yet. Propose the structure: which Semantic typography tokens each slot uses, and how each slot is hidden via a boolean property (so the Welcome screen can show only Title + Subtitle).
+Heading block with four optional slots: Overline, Title, Subtitle, Description.
 
-When I approve, build it. Sizes: lg (Title 36), md (Title 24), sm (Title 20), xs (Title 16).</div>
+Don't build anything yet. Propose: variant matrix (Size: lg / md / sm / xs — one axis only); properties for each slot's visibility; per-size typography mapping using semantic-typography token names (no raw px); slot color and spacing tokens.
+
+When I approve, build the four Size variants, write jumbotron.tokens.json, then run /component-documentation.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
-            <li><span class="check"></span><span>Four slots: Overline · Title · Subtitle · Description</span></li>
-            <li><span class="check"></span><span>Each slot hidden via boolean property</span></li>
-            <li><span class="check"></span><span>Typography bound to Semantic tokens (no raw px)</span></li>
-            <li><span class="check"></span><span>Four sizes: lg · md · sm · xs</span></li>
+            <li><span class="check"></span><span>One axis: Size (lg / md / sm / xs)</span></li>
+            <li><span class="check"></span><span>Slot visibility via boolean properties, not variants</span></li>
+            <li><span class="check"></span><span>Typography bound to semantic tokens (no raw px)</span></li>
+            <li><span class="check"></span><span>jumbotron.tokens.json + jumbotron.html + jumbotron.md</span></li>
           </ul>
         </div>
       </div>
       <div class="slide-footer"><span>2 of 4 · Jumbotron</span><span>~20 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders. Multiple aspect ratios so it can be a square logo OR a full-bleed background.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders with aspect ratios. Welcome uses two: a 2:3 full-bleed background and a 1:1 logo. Full prompt to paste: Build an Artwork component in the Figma file from CLAUDE.md. Use components/atoms/button/button.tokens.json as the per-component file pattern. It's an image-holder with multiple aspect ratios. Don't create anything yet. Propose: variant matrix (Aspect ratio 1:1 / 4:3 / 3:2 / 16:9 / 2:3, and Full-bleed Yes / No — two axes); component property (Image INSTANCE_SWAP — default to a placeholder); anatomy (single image fill node inside the variant frame); image fill behavior (COVER not CONTAIN); corner radius mapping (Full-bleed=Yes → 0; Full-bleed=No → border-radius/lg); default size per aspect ratio at lg variant (1:1 240×240, 4:3 240×180, 3:2 240×160, 16:9 320×180, 2:3 160×240). When I approve: build the component set (5 aspect ratios × 2 full-bleed = 10 variants); write components/atoms/artwork/artwork.tokens.json matching project per-component file shape; run /component-documentation artwork; return setId, every variant rendered, COVER fill confirmed, corner radius bound correctly per Full-bleed value.">
       <div class="slide-content">
         <div class="kicker">Component 3 · Artwork</div>
         <div class="prompt-frame">
-          <div class="prompt">Build an Artwork component in Figma. It's an image-holder with multiple aspect-ratio variants: 1:1, 4:3, 3:2, 16:9, 2:3.
+          <div class="prompt">Build an Artwork in our Figma file. Use button.tokens.json as the per-component file pattern.
 
-Don't create anything yet. Propose the structure: variants by aspect ratio, image swapped via instance-swap, corner radius bound to a Semantic size token.
+Image-holder with multiple aspect ratios.
 
-When I approve, build it. Corner radius is 0 when the artwork is full-bleed; otherwise bind to a token.</div>
+Don't build yet. Propose: variant axes (Aspect ratio 1:1 / 4:3 / 3:2 / 16:9 / 2:3 and Full-bleed Yes / No); image as INSTANCE_SWAP property; image fill = COVER; corner radius = 0 when Full-bleed=Yes, else bind to border-radius/lg.
+
+When I approve, build all 10 variants, write artwork.tokens.json, then run /component-documentation.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
-            <li><span class="check"></span><span>Five aspect ratios: 1:1 · 4:3 · 3:2 · 16:9 · 2:3</span></li>
-            <li><span class="check"></span><span>Image is instance-swappable</span></li>
-            <li><span class="check"></span><span>Corner radius is a Semantic size token</span></li>
-            <li><span class="check"></span><span>Full-bleed variant uses radius 0</span></li>
+            <li><span class="check"></span><span>Two axes: Aspect ratio × Full-bleed (10 variants)</span></li>
+            <li><span class="check"></span><span>Image fill = COVER</span></li>
+            <li><span class="check"></span><span>Radius 0 when Full-bleed=Yes; semantic token otherwise</span></li>
+            <li><span class="check"></span><span>artwork.tokens.json + artwork.html + artwork.md</span></li>
           </ul>
         </div>
       </div>
       <div class="slide-footer"><span>3 of 4 · Artwork</span><span>~20 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 4 of 4 — Compose the Welcome screen. The payoff. The three components you just built drop into a real Keeta canvas.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 4 of 4 — Compose the Welcome screen. The payoff. The three components drop into a real Keeta canvas + render to HTML. Full prompt to paste: Compose the Welcome screen in the Figma file from CLAUDE.md. Frame size 393×852 (iPhone 14 Pro). Create a new top-level frame named '01 — Welcome' if it doesn't exist. Reference design assets/01 — Welcome.png. Photo background, centered Keeta logo, 'Welcome to Keeta' headline, 'Eat better, live better.' subtitle, primary 'Continue' button, legal text beneath, top status bar (9:41, signal, battery). Use the three components: Artwork (2:3 Full-bleed=Yes radius 0) for background; Artwork (1:1 Full-bleed=No 120×120) for logo; Jumbotron Size=lg Title='Welcome to Keeta' Subtitle='Eat better, live better.' (Overline + Description hidden); Button Style=Primary Size=Large Icon only=No Label='Continue'. Legal text node below button bound to text-xs and text/tertiary/default. Add iOS status bar at top with icon/primary/inverse on the dark photo. Bind every value through semantic tokens — no raw hex, no raw px. When I approve: build the screen; generate the rendered HTML at screens/welcome.html (same approach as button.html: CSS variables resolved from foundations + tokens, no raw values); return frameId, every instance bound, every text/spacing token resolved.">
       <div class="slide-content">
         <div class="kicker">Compose · Welcome screen</div>
         <div class="prompt-frame">
-          <div class="prompt">Compose the Welcome screen at the canvas frame `01 — Welcome` (node 17043:118).
+          <div class="prompt">Compose the Welcome screen in our Figma file. Frame 393×852 (iPhone 14 Pro).
 
-Use the three components we just built: an Artwork instance for the background photo (full-bleed), an Artwork instance for the logo (1:1, 120×120), a Jumbotron with Title "Welcome to Keeta" and Subtitle "Eat better, live better" (Overline + Description hidden), and a Button instance with Type=Primary and the label "Continue".
+Use the three components: Artwork (2:3 Full-bleed) for background, Artwork (1:1) for the logo, Jumbotron (lg, Title + Subtitle) with the welcome copy, Button (Style=Primary, Large) labeled "Continue". Plus a legal text node bound to text-xs and a status bar at top.
 
-Bind every value through Semantic tokens. No raw hex on the screen itself. Add the legal text below the button using a Semantic typography token.</div>
+Bind every value through semantic tokens. No raw hex, no raw px.
+
+When I approve, build the screen, then generate screens/welcome.html — same shape as button.html (resolved CSS variables, no raw values, the screen rendered in HTML).</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
-            <li><span class="check"></span><span>Three component instances on the Welcome canvas</span></li>
-            <li><span class="check"></span><span>Jumbotron: Title + Subtitle visible, Overline + Description hidden</span></li>
-            <li><span class="check"></span><span>Button: <code>Type=Primary</code>, label "Continue"</span></li>
-            <li><span class="check"></span><span>Background Artwork is full-bleed (radius 0)</span></li>
-            <li><span class="check"></span><span>Zero raw hex values on the screen</span></li>
+            <li><span class="check"></span><span>Welcome frame composed from three component instances</span></li>
+            <li><span class="check"></span><span>Style=Primary on the Button, Size=lg on the Jumbotron</span></li>
+            <li><span class="check"></span><span>Background Artwork full-bleed (radius 0)</span></li>
+            <li><span class="check"></span><span>Zero raw hex / raw px on the screen</span></li>
+            <li><span class="check"></span><span>screens/welcome.html ships with resolved CSS variables</span></li>
           </ul>
         </div>
       </div>
