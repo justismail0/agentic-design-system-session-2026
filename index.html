@@ -5784,22 +5784,23 @@
      stands in for the live iframe (Free tier blocks iframe embed). The mint
      button below is the actual production action — speaker tab-switches to
      Menti for the live results during the session. */
-  /* Slide 6 (live results) — iframe embed of the Menti voting page.
-     Voters who already submitted see live results inline. If Menti's Free
-     tier blocks the embed (sign-in wall / X-Frame-Options), the dark
-     fallback background shows through and the mint button below is the
-     production path. */
+  /* Slide 6 (live results) — Menti iframe inside a proper card container.
+     Card fills the slide-content area; iframe fills the card. */
+  .menti-results-slide .slide-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
   .menti-embed {
     position: relative;
     width: 100%;
-    max-width: 1080px;
-    margin: var(--sp-5) auto 0;
-    aspect-ratio: 16 / 9;
+    flex: 1;
+    min-height: 0;
     border-radius: var(--r-lg);
     border: 1px solid var(--border-medium);
     background: #1a1a1a;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 24px 72px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.04);
   }
   .menti-embed iframe {
     position: absolute;
@@ -6688,10 +6689,8 @@
       <div class="slide-footer"><span>Mentimeter poll</span><span>~90 sec</span></div>
     </section>
 
-    <section class="slide" data-section="Opener" data-notes="Live results companion. Iframe embed of the Menti presentation (official embed URL from Mentimeter). Live bars update as the audience votes via QR. Read the top 2-3 aloud, name the pattern, then advance to the pivot quote.">
+    <section class="slide menti-results-slide" data-section="Opener" data-notes="Live results companion. Iframe embed of the Menti presentation (official embed URL from Mentimeter). Live bars update as the audience votes via QR. Read the top 2-3 aloud, name the pattern, then advance to the pivot quote.">
       <div class="slide-content">
-        <div class="kicker">Live results</div>
-        <h2>What's true in the room?</h2>
         <div class="menti-embed">
           <iframe
             src="https://www.mentimeter.com/app/presentation/alb72s6cpzx4i9jm2msnwi4kz71vfpvu/embed"
