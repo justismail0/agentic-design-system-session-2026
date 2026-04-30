@@ -1810,6 +1810,94 @@
     bottom: 8px; left: 6px; right: 6px; height: 8px; border-radius: 4px;
   }
 
+  /* ─── Build-phase cover: 3 screens stacked, Welcome biggest in front ─── */
+  .screens-stack {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: clamp(360px, 46vh, 540px);
+    margin: var(--sp-5) auto var(--sp-7);
+    perspective: 1400px;
+  }
+  .screen-card {
+    position: absolute;
+    border-radius: 36px;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.06);
+    transform-style: preserve-3d;
+    transition: transform 320ms ease;
+  }
+  .screen-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .screen-card--front {
+    z-index: 3;
+    width: clamp(220px, 26vw, 320px);
+    box-shadow: 0 36px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  }
+  .screen-card--back-left {
+    z-index: 1;
+    width: clamp(180px, 21vw, 260px);
+    transform:
+      translateX(calc(-1 * clamp(120px, 16vw, 200px)))
+      translateY(28px)
+      rotateY(18deg)
+      scale(0.92);
+    opacity: 0.78;
+    filter: saturate(0.85);
+  }
+  .screen-card--back-right {
+    z-index: 2;
+    width: clamp(180px, 21vw, 260px);
+    transform:
+      translateX(clamp(120px, 16vw, 200px))
+      translateY(28px)
+      rotateY(-18deg)
+      scale(0.92);
+    opacity: 0.78;
+    filter: saturate(0.85);
+  }
+  .screen-card-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--c-mint);
+    color: var(--c-mint-ink, #003d29);
+    font-family: var(--font-mono);
+    font-size: var(--ts-micro);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    box-shadow: 0 8px 20px rgba(53, 255, 181, 0.36);
+  }
+  .screens-stack-caption {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .screens-stack-caption h2 {
+    margin: 0 0 var(--sp-3);
+    font-size: var(--ts-h3);
+    line-height: var(--lh-snug);
+  }
+  .screens-stack-caption .lede {
+    margin: 0 auto;
+    max-width: 56ch;
+  }
+  @media (max-width: 720px) {
+    .screens-stack--back-left,
+    .screens-stack--back-right {
+      display: none;
+    }
+  }
+
   /* ─── Welcome reveal slide — phone frame on the left, copy on the right ─── */
   .welcome-reveal {
     display: grid;
@@ -7833,6 +7921,29 @@ why? Propose the full pairing matrix before writing.</div>
       <div class="slide-footer"><span>Components &amp; Specs</span><span>120 min</span></div>
     </section>
 
+    <section class="slide" data-section="Part 2" data-notes="Build-phase cover. Show the three Capstone screens stacked with Welcome biggest in front. Say: 'These are the screens of your Capstone. Welcome ships today. The other two are your homework — same flow, your own time.' Hold for two beats. Then move to the build mechanics.">
+      <div class="slide-content">
+        <div class="kicker">What you'll build today</div>
+        <div class="screens-stack" aria-hidden="true">
+          <div class="screen-card screen-card--back-left">
+            <img src="assets/12 — Arabic Category.png" alt="Arabic Category screen">
+          </div>
+          <div class="screen-card screen-card--back-right">
+            <img src="assets/16 — Pitfire Pizza (Picks for you).png" alt="Pitfire Pizza Detail screen">
+          </div>
+          <div class="screen-card screen-card--front">
+            <img src="assets/01 — Welcome.png" alt="Welcome screen">
+            <span class="screen-card-badge">Today</span>
+          </div>
+        </div>
+        <div class="screens-stack-caption">
+          <h2>One ships today. Two are your Capstone homework.</h2>
+          <p class="lede">Welcome end-to-end: components, composition, HTML. Once that ships, the same flow scales to Arabic Category and Pitfire Pizza on your own time.</p>
+        </div>
+      </div>
+      <div class="slide-footer"><span>Build · scope</span><span>One today · two homework</span></div>
+    </section>
+
     <section class="slide" data-section="Part 2" data-notes="The reveal. Hold for two beats — show the screen before naming the components. 'A Continue button. A welcome heading. A logo over a background photo. Three components, composed.' Then move to the build.">
       <div class="slide-content">
         <div class="kicker">What you'll build</div>
@@ -7918,7 +8029,7 @@ why? Propose the full pairing matrix before writing.</div>
             <p><code>1.</code> <strong>Button</strong> — color states, radius, padding<br>
             <code>2.</code> <strong>Jumbotron</strong> — typography slots, hide-by-prop<br>
             <code>3.</code> <strong>Artwork</strong> — image scaling, aspect ratios<br>
-            <code>4.</code> <strong>Compose</strong> — Welcome screen at <code>node 17043:118</code></p>
+            <code>4.</code> <strong>Compose</strong> — Welcome screen at <code>node 1:51</code></p>
           </div>
           <div class="card dark">
             <h3>Why this order</h3>
@@ -7945,11 +8056,13 @@ why? Propose the full pairing matrix before writing.</div>
       </div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The first component built live. Read the propose paragraph aloud, hold for a beat, then point at the execute paragraph. Full prompt to paste: Build a Button component in the Figma file from CLAUDE.md. Read CLAUDE.md first. Use the existing primitive and semantic collections (foundations/*.json and tokens/*.json) as context. Match the per-component file shape used elsewhere in this project — see how the structure is described in CLAUDE.md under Per-component files. Don't create anything yet. Propose: the variant matrix (Style × Size × Icon only), the component properties (Label TEXT, Show left icon BOOLEAN, Show right icon BOOLEAN, Left icon INSTANCE_SWAP, Right icon INSTANCE_SWAP), the anatomy (left-icon, label, right-icon centered horizontal flex), which semantic token each visual property aliases to, the state model (default, hover, disabled — active state has no semantic token, document the gap). When I approve: build the component set in Figma using small atomic use_figma calls (load figma:figma-use first); write components/atoms/button/button.tokens.json matching the per-component file shape from CLAUDE.md; run /component-documentation button to generate button.html and button.md from the Figma component set; return setId, every variant rendered, every fill/stroke/text bound to a semantic variable, $notes for the active-state gap.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The first component built live. Read the propose paragraph aloud, hold for a beat, then point at the execute paragraph. Full prompt to paste: Build a Button component in the Figma file from CLAUDE.md. Read CLAUDE.md and tokens.json first. Create a new Figma page named 'Button' and place the component set on it. Match the per-component file shape used elsewhere in the project as described in CLAUDE.md. Don't create anything yet. Propose: the variant matrix (Style × Size × Icon only), the component properties (Label TEXT, Show left icon BOOLEAN, Show right icon BOOLEAN, Left icon INSTANCE_SWAP, Right icon INSTANCE_SWAP), the anatomy (left-icon, label, right-icon centered horizontal flex), which semantic token each visual property aliases to, the state model (default, hover, disabled — active state has no semantic token, document the gap). When I approve: build the component set in Figma using small atomic use_figma calls (load figma:figma-use first); write components/atoms/button/button.tokens.json matching the per-component file shape from CLAUDE.md; run /component-documentation button to generate button.html and button.md from the Figma component set; return setId, every variant rendered, every fill/stroke/text bound to a semantic variable, $notes for the active-state gap.">
       <div class="slide-content">
         <div class="kicker">Component 1 · Button</div>
         <div class="prompt-frame">
-          <div class="prompt">Build a Button in our Figma demo file. Read CLAUDE.md and the existing primitive + semantic collections first.
+          <div class="prompt">Build a Button in our Figma demo file. Read CLAUDE.md and the existing tokens.json first.
+
+Create a new Figma page named "Button" and place the component set on it.
 
 Don't build anything yet. Propose: variant matrix (Style × Size × Icon only), properties (Label, icon booleans, icon swaps), anatomy, and which semantic token each visual property aliases. State model: default, hover, disabled.
 
@@ -7968,11 +8081,13 @@ When I approve, build the component set, write button.tokens.json, then run /com
       <div class="slide-footer"><span>1 of 4 · Button</span><span>~25 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. Same propose-then-execute discipline. The hide-by-prop pattern is load-bearing — the Welcome screen needs Title + Subtitle but no Overline or Description. Full prompt to paste: Build a Jumbotron component in the Figma file from CLAUDE.md. Use components/atoms/button/button.tokens.json as the reference for the per-component file shape. It's a heading block with four optional slots: Overline, Title, Subtitle, Description. Vertical auto-layout, left-aligned by default. Don't create anything yet. Propose: variant matrix (Size lg / md / sm / xs — one axis only, slot visibility handled by component properties); properties (Show overline BOOLEAN default false, Title TEXT, Subtitle TEXT, Description TEXT, Show subtitle BOOLEAN default true, Show description BOOLEAN default false); per-size typography mapping (use semantic-typography token names not raw px — propose the mapping against semantic-typography.json); slot color tokens (Title text/primary/default, Subtitle text/secondary/default, Overline text/tertiary/default, Description text/secondary/default); spacing between slots (spacing/sm Overline→Title, spacing/md Title→Subtitle, spacing/lg Subtitle→Description). When I approve: build the component set (one variant per Size, four total — all slots present in every variant, visibility driven by booleans); write components/atoms/jumbotron/jumbotron.tokens.json matching the button.tokens.json structure; run /component-documentation jumbotron; return setId, every Size variant rendered, every typography binding via semantic tokens.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. Same propose-then-execute discipline. The hide-by-prop pattern is load-bearing — the Welcome screen needs Title + Subtitle but no Overline or Description. Full prompt to paste: Build a Jumbotron component in the Figma file from CLAUDE.md. Use components/atoms/button/button.tokens.json as the reference for the per-component file shape. Create a new Figma page named 'Jumbotron' and place the component set on it. It's a heading block with four optional slots: Overline, Title, Subtitle, Description. Vertical auto-layout, left-aligned by default. Don't create anything yet. Propose: variant matrix (Size lg / md / sm / xs — one axis only, slot visibility handled by component properties); properties (Show overline BOOLEAN default false, Title TEXT, Subtitle TEXT, Description TEXT, Show subtitle BOOLEAN default true, Show description BOOLEAN default false); per-size typography mapping (use semantic-typography token names not raw px — propose the mapping against tokens.json); slot color tokens (Title text/primary/default, Subtitle text/secondary/default, Overline text/tertiary/default, Description text/secondary/default); spacing between slots (spacing/sm Overline→Title, spacing/md Title→Subtitle, spacing/lg Subtitle→Description). When I approve: build the component set (one variant per Size, four total — all slots present in every variant, visibility driven by booleans); write components/atoms/jumbotron/jumbotron.tokens.json matching the button.tokens.json structure; run /component-documentation jumbotron; return setId, every Size variant rendered, every typography binding via semantic tokens.">
       <div class="slide-content">
         <div class="kicker">Component 2 · Jumbotron</div>
         <div class="prompt-frame">
           <div class="prompt">Build a Jumbotron in our Figma file. Use button.tokens.json as the per-component file pattern.
+
+Create a new Figma page named "Jumbotron" and place the component set on it.
 
 Heading block with four optional slots: Overline, Title, Subtitle, Description.
 
@@ -7993,11 +8108,13 @@ When I approve, build the four Size variants, write jumbotron.tokens.json, then 
       <div class="slide-footer"><span>2 of 4 · Jumbotron</span><span>~20 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders with aspect ratios. Welcome uses two: a 2:3 full-bleed background and a 1:1 logo. Full prompt to paste: Build an Artwork component in the Figma file from CLAUDE.md. Use components/atoms/button/button.tokens.json as the per-component file pattern. It's an image-holder with multiple aspect ratios. Don't create anything yet. Propose: variant matrix (Aspect ratio 1:1 / 4:3 / 3:2 / 16:9 / 2:3, and Full-bleed Yes / No — two axes); component property (Image INSTANCE_SWAP — default to a placeholder); anatomy (single image fill node inside the variant frame); image fill behavior (COVER not CONTAIN); corner radius mapping (Full-bleed=Yes → 0; Full-bleed=No → border-radius/lg); default size per aspect ratio at lg variant (1:1 240×240, 4:3 240×180, 3:2 240×160, 16:9 320×180, 2:3 160×240). When I approve: build the component set (5 aspect ratios × 2 full-bleed = 10 variants); write components/atoms/artwork/artwork.tokens.json matching project per-component file shape; run /component-documentation artwork; return setId, every variant rendered, COVER fill confirmed, corner radius bound correctly per Full-bleed value.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders with aspect ratios. Welcome uses two: a 2:3 full-bleed background and a 1:1 logo. Full prompt to paste: Build an Artwork component in the Figma file from CLAUDE.md. Use components/atoms/button/button.tokens.json as the per-component file pattern. Create a new Figma page named 'Artwork' and place the component set on it. It's an image-holder with multiple aspect ratios. Don't create anything yet. Propose: variant matrix (Aspect ratio 1:1 / 4:3 / 3:2 / 16:9 / 2:3, and Full-bleed Yes / No — two axes); component property (Image INSTANCE_SWAP — default to a placeholder); anatomy (single image fill node inside the variant frame); image fill behavior (COVER not CONTAIN); corner radius mapping (Full-bleed=Yes → 0; Full-bleed=No → border-radius/lg); default size per aspect ratio at lg variant (1:1 240×240, 4:3 240×180, 3:2 240×160, 16:9 320×180, 2:3 160×240). When I approve: build the component set (5 aspect ratios × 2 full-bleed = 10 variants); write components/atoms/artwork/artwork.tokens.json matching project per-component file shape; run /component-documentation artwork; return setId, every variant rendered, COVER fill confirmed, corner radius bound correctly per Full-bleed value.">
       <div class="slide-content">
         <div class="kicker">Component 3 · Artwork</div>
         <div class="prompt-frame">
           <div class="prompt">Build an Artwork in our Figma file. Use button.tokens.json as the per-component file pattern.
+
+Create a new Figma page named "Artwork" and place the component set on it.
 
 Image-holder with multiple aspect ratios.
 
@@ -8018,11 +8135,13 @@ When I approve, build all 10 variants, write artwork.tokens.json, then run /comp
       <div class="slide-footer"><span>3 of 4 · Artwork</span><span>~20 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 4 of 4 — Compose the Welcome screen. The payoff. The three components drop into a real Keeta canvas + render to HTML. Full prompt to paste: Compose the Welcome screen in the Figma file from CLAUDE.md. Frame size 393×852 (iPhone 14 Pro). Create a new top-level frame named '01 — Welcome' if it doesn't exist. Reference design assets/01 — Welcome.png. Photo background, centered Keeta logo, 'Welcome to Keeta' headline, 'Eat better, live better.' subtitle, primary 'Continue' button, legal text beneath, top status bar (9:41, signal, battery). Use the three components: Artwork (2:3 Full-bleed=Yes radius 0) for background; Artwork (1:1 Full-bleed=No 120×120) for logo; Jumbotron Size=lg Title='Welcome to Keeta' Subtitle='Eat better, live better.' (Overline + Description hidden); Button Style=Primary Size=Large Icon only=No Label='Continue'. Legal text node below button bound to text-xs and text/tertiary/default. Add iOS status bar at top with icon/primary/inverse on the dark photo. Bind every value through semantic tokens — no raw hex, no raw px. When I approve: build the screen; generate the rendered HTML at screens/welcome.html (same approach as button.html: CSS variables resolved from foundations + tokens, no raw values); return frameId, every instance bound, every text/spacing token resolved.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 4 of 4 — Compose the Welcome screen. The payoff. The three components drop into a real Keeta canvas + render to HTML. Full prompt to paste: Compose the Welcome screen in the Figma file from CLAUDE.md. Use the existing screen frame at node 1:51 (or the page named 'Welcome' if it exists). Frame size 393×852 (iPhone 14 Pro). Create a new Figma page named 'Welcome' if it doesn't exist; place the screen frame on it. Reference design assets/01 — Welcome.png. Photo background, centered Keeta logo, 'Welcome to Keeta' headline, 'Eat better, live better.' subtitle, primary 'Continue' button, legal text beneath, top status bar (9:41, signal, battery). Use the three components: Artwork (2:3 Full-bleed=Yes radius 0) for background; Artwork (1:1 Full-bleed=No 120×120) for logo; Jumbotron Size=lg Title='Welcome to Keeta' Subtitle='Eat better, live better.' (Overline + Description hidden); Button Style=Primary Size=Large Icon only=No Label='Continue'. Legal text node below button bound to text-xs and text/tertiary/default. Add iOS status bar at top with icon/primary/inverse on the dark photo. Bind every value through semantic tokens — no raw hex, no raw px. When I approve: build the screen; generate the rendered HTML at screens/welcome.html (same approach as button.html: CSS variables resolved from tokens.json, no raw values); return frameId, every instance bound, every text/spacing token resolved.">
       <div class="slide-content">
         <div class="kicker">Compose · Welcome screen</div>
         <div class="prompt-frame">
-          <div class="prompt">Compose the Welcome screen in our Figma file. Frame 393×852 (iPhone 14 Pro).
+          <div class="prompt">Compose the Welcome screen in our Figma file at node 1:51. Frame 393×852 (iPhone 14 Pro).
+
+Create a new Figma page named "Welcome" and place the screen frame on it.
 
 Use the three components: Artwork (2:3 Full-bleed) for background, Artwork (1:1) for the logo, Jumbotron (lg, Title + Subtitle) with the welcome copy, Button (Style=Primary, Large) labeled "Continue". Plus a legal text node bound to text-xs and a status bar at top.
 
@@ -8096,8 +8215,8 @@ When I approve, build the screen, then generate screens/welcome.html — same sh
           <pre class="claude-md-example-body"><span class="cm-h1"># Keeta Design System — AI Context</span>
 
 <span class="cm-comment">## 1 · Project identity</span>
-Figma file: <span class="cm-code">whLbpoKKIrPEBfxrKYLxLQ</span>
-Component Library section: node <span class="cm-code">7:669</span>
+Figma file: <span class="cm-code">vdVmrWthRNIyM1lf2XThdZ</span>
+Welcome screen: node <span class="cm-code">1:51</span>
 
 <span class="cm-comment">## 2 · Architecture summary</span>
 <span class="cm-code">Primitive → Semantic → Component</span>
