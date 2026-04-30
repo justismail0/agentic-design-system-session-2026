@@ -8135,19 +8135,21 @@ When I approve, build all 10 variants, write artwork.tokens.json, then run /comp
       <div class="slide-footer"><span>3 of 4 · Artwork</span><span>~20 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 4 of 4 — Compose the Welcome screen. The payoff. The three components drop into a real Keeta canvas + render to HTML. Full prompt to paste: Compose the Welcome screen in the Figma file from CLAUDE.md. Use the existing screen frame at node 1:51 (or the page named 'Welcome' if it exists). Frame size 393×852 (iPhone 14 Pro). Create a new Figma page named 'Welcome' if it doesn't exist; place the screen frame on it. Reference design assets/01 — Welcome.png. Photo background, centered Keeta logo, 'Welcome to Keeta' headline, 'Eat better, live better.' subtitle, primary 'Continue' button, legal text beneath, top status bar (9:41, signal, battery). Use the three components: Artwork (2:3 Full-bleed=Yes radius 0) for background; Artwork (1:1 Full-bleed=No 120×120) for logo; Jumbotron Size=lg Title='Welcome to Keeta' Subtitle='Eat better, live better.' (Overline + Description hidden); Button Style=Primary Size=Large Icon only=No Label='Continue'. Legal text node below button bound to text-xs and text/tertiary/default. Add iOS status bar at top with icon/primary/inverse on the dark photo. Bind every value through semantic tokens — no raw hex, no raw px. When I approve: build the screen; generate the rendered HTML at screens/welcome.html (same approach as button.html: CSS variables resolved from tokens.json, no raw values); return frameId, every instance bound, every text/spacing token resolved.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 4 of 4 — Compose the Welcome screen. The Welcome frame at node 1:51 is pre-staged with placeholder Logo / Jumbotron / Button / Status Bar / Background / Gradient Overlay / Legal text. The agent's job is INSTANCE SWAP into the existing slots, not building from scratch. Full prompt to paste: The Welcome frame already exists at node 1:51 in the Figma file from CLAUDE.md, with placeholder slots for Logo, Jumbotron, Button, plus the background, status bar, and legal text. Read the frame structure first. Replace each placeholder with the right component instance: Background swap to an Artwork instance (2:3 Full-bleed=Yes); Logo swap to an Artwork instance (1:1 Full-bleed=No 120×120); Jumbotron swap to a Jumbotron instance (Size=lg Show overline=false Show subtitle=true Show description=false) Title='Welcome to Keeta' Subtitle='Eat better, live better.'; Button swap to a Button instance (Style=Primary Size=Large Icon only=No Label='Continue'). Don't invent layout — keep the existing positions and frame structure. Bind every value through semantic tokens, no raw hex, no raw px. When I approve: perform the swaps; generate the rendered HTML at screens/welcome.html (same approach as button.html: CSS variables resolved from tokens.json, no raw values); return frameId, every instance bound, every text/spacing token resolved.">
       <div class="slide-content">
         <div class="kicker">Compose · Welcome screen</div>
         <div class="prompt-frame">
-          <div class="prompt">Compose the Welcome screen in our Figma file at node 1:51. Frame 393×852 (iPhone 14 Pro).
+          <div class="prompt">The Welcome frame already exists at node 1:51 with placeholder slots for Logo, Jumbotron, Button, plus the background, status bar, and legal text. Read the frame structure first.
 
-Create a new Figma page named "Welcome" and place the screen frame on it.
+Replace each placeholder with the right component instance:
+- Background: swap to an Artwork instance (2:3, Full-bleed=Yes).
+- Logo: swap to an Artwork instance (1:1, 120×120, Full-bleed=No).
+- Jumbotron: swap to a Jumbotron instance (Size=lg, Show overline=false, Show subtitle=true, Show description=false). Title="Welcome to Keeta", Subtitle="Eat better, live better."
+- Button: swap to a Button instance (Style=Primary, Size=Large, Icon only=No, Label="Continue").
 
-Use the three components: Artwork (2:3 Full-bleed) for background, Artwork (1:1) for the logo, Jumbotron (lg, Title + Subtitle) with the welcome copy, Button (Style=Primary, Large) labeled "Continue". Plus a legal text node bound to text-xs and a status bar at top.
+Don't invent layout — keep the existing positions and frame structure. Bind every value through semantic tokens.
 
-Bind every value through semantic tokens. No raw hex, no raw px.
-
-When I approve, build the screen, then generate screens/welcome.html — same shape as button.html (resolved CSS variables, no raw values, the screen rendered in HTML).</div>
+When I approve, perform the swaps, then generate screens/welcome.html — same shape as button.html (resolved CSS variables, no raw values, the screen rendered in HTML).</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
