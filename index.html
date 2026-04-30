@@ -5784,6 +5784,32 @@
      stands in for the live iframe (Free tier blocks iframe embed). The mint
      button below is the actual production action — speaker tab-switches to
      Menti for the live results during the session. */
+  /* Slide 6 (live results) — iframe embed of the Menti voting page.
+     Voters who already submitted see live results inline. If Menti's Free
+     tier blocks the embed (sign-in wall / X-Frame-Options), the dark
+     fallback background shows through and the mint button below is the
+     production path. */
+  .menti-embed {
+    position: relative;
+    width: 100%;
+    max-width: 1080px;
+    margin: var(--sp-5) auto 0;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--border-medium);
+    background: #1a1a1a;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  }
+  .menti-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #fff;
+  }
+
   .menti-results-card {
     position: relative;
     width: 100%;
@@ -6662,25 +6688,26 @@
       <div class="slide-footer"><span>Mentimeter poll</span><span>~90 sec</span></div>
     </section>
 
-    <section class="slide" data-section="Opener" data-notes="Live results companion. The bars are a preview — the real chart lives in Mentimeter. Speaker tab-switches to their own Menti tab to read the top 2-3 bars aloud, names the pattern, then comes back to the deck. The mint button opens menti.com/alrpx85zpf5g for any audience member who wants to see the page (voters see live results; non-voters can still vote).">
+    <section class="slide" data-section="Opener" data-notes="Live results companion. Iframe embed of the Menti voting URL — voters who already submitted see live results inline; if it shows a login wall (Free-tier limitation), use the mint button below to open in a new tab.">
       <div class="slide-content">
         <div class="kicker">Live results</div>
         <h2>What's true in the room?</h2>
-        <div class="menti-results-card" aria-hidden="true">
-          <span class="menti-results-watermark">Preview · live in Mentimeter</span>
-          <div class="menti-results-bar"><span class="menti-results-num">1</span><span class="menti-results-fill" style="--w: 92%; --i: 1;"></span></div>
-          <div class="menti-results-bar"><span class="menti-results-num">2</span><span class="menti-results-fill" style="--w: 78%; --i: 2;"></span></div>
-          <div class="menti-results-bar"><span class="menti-results-num">3</span><span class="menti-results-fill" style="--w: 64%; --i: 3;"></span></div>
-          <div class="menti-results-bar"><span class="menti-results-num">4</span><span class="menti-results-fill" style="--w: 41%; --i: 4;"></span></div>
-          <div class="menti-results-bar"><span class="menti-results-num">5</span><span class="menti-results-fill" style="--w: 28%; --i: 5;"></span></div>
-          <div class="menti-results-bar"><span class="menti-results-num">6</span><span class="menti-results-fill" style="--w: 19%; --i: 6;"></span></div>
+        <div class="menti-embed">
+          <iframe
+            src="https://www.menti.com/alrpx85zpf5g"
+            title="Mentimeter live results"
+            allow="clipboard-read; clipboard-write"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
         <div class="menti-actions">
           <a class="menti-open-btn" href="https://www.menti.com/alrpx85zpf5g" target="_blank" rel="noopener">
             <span class="menti-open-btn-icon">↗</span>
             <span>Open in Mentimeter</span>
           </a>
-          <p class="menti-fallback">Voters see live results · others can still vote at <code>menti.com/alrpx85zpf5g</code>.</p>
+          <p class="menti-fallback">If the embed shows a sign-in wall, use the button or open <code>menti.com/alrpx85zpf5g</code> in a new tab.</p>
         </div>
       </div>
       <div class="slide-footer"><span>Mentimeter live</span><span>~90 sec</span></div>
