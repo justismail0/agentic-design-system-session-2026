@@ -5603,6 +5603,95 @@
     box-shadow: 0 24px 82px rgba(78, 63, 115, 0.18);
   }
 
+  /* ─── Mobile layout fixes (≤ 640px and ≤ 420px) ────────────────────────
+     Floating-pill topbar tightens up; slide content gets edge-friendly
+     padding; safe-area insets keep the pill above home indicators. */
+  @media (max-width: 640px) {
+    .topbar {
+      bottom: max(14px, env(safe-area-inset-bottom, 0));
+      height: 40px;
+      padding: 0 8px;
+      gap: 6px;
+      opacity: 0.92;
+      max-width: calc(100vw - 24px);
+    }
+    .controls {
+      gap: 4px;
+    }
+    .controls .help {
+      display: none;
+    }
+    .icon-button {
+      width: 32px;
+      height: 32px;
+      font-size: 14px;
+      border-radius: 7px;
+    }
+    .counter {
+      min-width: 56px;
+      font-size: 11px;
+    }
+    .stage {
+      height: 100vh;
+    }
+    .slide {
+      inset: 16px 12px 70px;
+      border-radius: 22px;
+    }
+    .slide-content {
+      padding: clamp(20px, 5vw, 36px);
+      gap: 18px;
+    }
+    .slide-footer {
+      display: none;
+    }
+    /* Cover/quote/section-break already use bigger type — pull it back so
+       it actually fits on a phone */
+    .cover-title,
+    .session-cover .cover-title {
+      font-size: clamp(36px, 9vw, 60px);
+      line-height: 1.04;
+    }
+    .huge-line,
+    .large-line {
+      font-size: clamp(30px, 8vw, 52px) !important;
+      line-height: 1.05;
+    }
+    .slide .quote {
+      font-size: clamp(22px, 6vw, 40px) !important;
+      line-height: 1.18;
+    }
+    /* h2s on content slides shrink so they don't wrap into towers */
+    .slide-content > h2 {
+      font-size: clamp(20px, 5.4vw, 32px);
+      line-height: 1.15;
+    }
+    /* Two-column layouts collapse on phones — already handled per-component
+       via their own breakpoints, but force the promise + jumbotron + screens
+       just in case */
+    .promise-2col-grid,
+    .layers-diagram-hero,
+    .poll-qr-content {
+      grid-template-columns: 1fr !important;
+    }
+    .promise-2col-screens {
+      order: -1;
+    }
+  }
+
+  /* Hide non-essential buttons on very narrow screens so the controls don't
+     stack or overflow. Keep prev/next/counter, notes, overview. */
+  @media (max-width: 420px) {
+    .topbar #full-btn,
+    .topbar .theme-button {
+      display: none;
+    }
+    .icon-button {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
   /* Bento-style animated graphics */
   .bento-grid {
     width: min(100%, 1120px);
