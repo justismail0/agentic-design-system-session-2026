@@ -1810,7 +1810,91 @@
     bottom: 8px; left: 6px; right: 6px; height: 8px; border-radius: 4px;
   }
 
-  /* ─── Build-phase cover: 3 screens stacked, Welcome biggest in front ─── */
+  /* ─── Promise contract slide (slide 11): 2-column with stacked screens on right ─── */
+  .promise-2col-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(32px, 4vw, 72px);
+    align-items: center;
+    width: 100%;
+  }
+  .promise-2col-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    min-width: 0;
+  }
+  .promise-2col-content .kicker {
+    margin: 0;
+  }
+  .promise-2col-content h2 {
+    margin: 0;
+    max-width: 18ch;
+  }
+  .promise-2col-content .lede {
+    margin: 0 0 var(--sp-2);
+    max-width: 44ch;
+  }
+  .promise-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .promise-list li {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .promise-list li > span:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .promise-list-num {
+    font-family: var(--font-mono);
+    font-size: var(--ts-small);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-eyebrow);
+    color: var(--c-mint);
+  }
+  .promise-list b {
+    font-size: clamp(15px, 1.15vw, 18px);
+    font-weight: var(--fw-bold);
+    color: var(--text-strong);
+  }
+  .promise-list-meta {
+    font-size: clamp(12px, 0.95vw, 14px);
+    color: var(--text-muted);
+  }
+  .promise-2col-screens {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-3);
+    min-width: 0;
+  }
+  .promise-2col-screens-caption {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--ts-small);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: center;
+    max-width: 30ch;
+  }
+  @media (max-width: 900px) {
+    .promise-2col-grid {
+      grid-template-columns: 1fr;
+      gap: var(--sp-4);
+    }
+  }
+
+  /* ─── 3 screens stacked, Welcome biggest in front (used by slide 11) ─── */
   .screens-stack {
     position: relative;
     display: flex;
@@ -6883,74 +6967,40 @@
       <div class="slide-footer"><span>The arc</span><span>Discipline first</span></div>
     </section>
 
-    <section class="slide" data-section="Opener" data-notes="The promise. By end of day they leave with these six artifacts. Walk the cards quickly so the room sees the weight.">
+    <section class="slide promise-2col" data-section="Opener" data-notes="The promise. By end of day they leave with these six artifacts. Read the kicker, hold for a beat, then walk the six items briefly. Point at the stacked screens on the right: 'Welcome ships today. The other two are your Capstone homework.' The 3D depth tells the whole story before you say it.">
       <div class="slide-content">
-        <div class="kicker">Promise contract</div>
-        <h2>By the end, you'll have these six artifacts.</h2>
-        <p class="lede">Not inspiration. Not a tool tour. Working system pieces you can inspect, hand off, and build on.</p>
-        <div class="section-manifest deliverables-manifest">
-          <div class="manifest-header">
-            <p class="manifest-label">What you'll walk out with</p>
-            <span class="manifest-count">6 artifacts</span>
+        <div class="promise-2col-grid">
+          <div class="promise-2col-content">
+            <div class="kicker">Promise contract</div>
+            <h2>By the end, you'll have these six artifacts.</h2>
+            <p class="lede">Not inspiration. Not a tool tour. Working system pieces you can inspect, hand off, and build on.</p>
+            <ol class="promise-list">
+              <li><span class="promise-list-num">01</span><span><b>Token system</b><span class="promise-list-meta">primitives · semantics · disabled state</span></span></li>
+              <li><span class="promise-list-num">02</span><span><b>Welcome screen</b><span class="promise-list-meta">Button · Jumbotron · Artwork composed</span></span></li>
+              <li><span class="promise-list-num">03</span><span><b>CLAUDE.md</b><span class="promise-list-meta">authored from blank</span></span></li>
+              <li><span class="promise-list-num">04</span><span><b>Documentation skill</b><span class="promise-list-meta">reusable · replay forever</span></span></li>
+              <li><span class="promise-list-num">05</span><span><b>button.md</b><span class="promise-list-meta">first written spec, skill-generated</span></span></li>
+              <li><span class="promise-list-num">06</span><span><b>HTML reference</b><span class="promise-list-meta">handover artifact · all var(--*)</span></span></li>
+            </ol>
           </div>
-          <div class="manifest-grid">
-            <div class="manifest-card">
-              <span class="manifest-card-num">01</span>
-              <h4 class="manifest-card-title">Token system</h4>
-              <p class="manifest-card-meta">primitives · semantics · disabled state</p>
-              <div class="manifest-card-visual">
-                <span class="manifest-swatch" style="--swatch-color:#FFD600"></span>
-                <span class="manifest-swatch" style="--swatch-color:#14C8B0"></span>
-                <span class="manifest-swatch" style="--swatch-color:#717680"></span>
-                <span class="manifest-swatch" style="--swatch-color:#E53935"></span>
-                <span class="manifest-swatch" style="--swatch-color:#FF9500"></span>
-                <span class="manifest-swatch" style="--swatch-color:#17B26A"></span>
+          <div class="promise-2col-screens">
+            <div class="screens-stack" aria-hidden="true">
+              <div class="screen-card screen-card--back-left">
+                <img src="assets/12 — Arabic Category.png" alt="Arabic Category screen">
+              </div>
+              <div class="screen-card screen-card--back-right">
+                <img src="assets/16 — Pitfire Pizza (Picks for you).png" alt="Pitfire Pizza Detail screen">
+              </div>
+              <div class="screen-card screen-card--front">
+                <img src="assets/01 — Welcome.png" alt="Welcome screen">
+                <span class="screen-card-badge">Today</span>
               </div>
             </div>
-            <div class="manifest-card">
-              <span class="manifest-card-num">02</span>
-              <h4 class="manifest-card-title">Welcome screen, end&#8209;to&#8209;end</h4>
-              <p class="manifest-card-meta">Button · Jumbotron · Artwork — composed</p>
-              <div class="manifest-card-visual">
-                <span class="welcome-thumb" aria-hidden="true">
-                  <img class="welcome-thumb-bg" src="assets/welcome-bg.jpg" alt="">
-                  <span class="welcome-thumb-overlay"></span>
-                  <img class="welcome-thumb-logo" src="assets/welcome-logo.png" alt="">
-                  <span class="welcome-thumb-title"></span>
-                  <span class="welcome-thumb-subtitle"></span>
-                  <span class="welcome-thumb-cta"></span>
-                </span>
-              </div>
-            </div>
-            <div class="manifest-card">
-              <span class="manifest-card-num">03</span>
-              <h4 class="manifest-card-title">CLAUDE.md</h4>
-              <p class="manifest-card-meta">authored from blank</p>
-            </div>
-            <div class="manifest-card">
-              <span class="manifest-card-num">04</span>
-              <h4 class="manifest-card-title">Documentation skill</h4>
-              <p class="manifest-card-meta">reusable · replay forever</p>
-            </div>
-            <div class="manifest-card">
-              <span class="manifest-card-num">05</span>
-              <h4 class="manifest-card-title">button.md</h4>
-              <p class="manifest-card-meta">first written spec · skill-generated</p>
-            </div>
-            <div class="manifest-card">
-              <span class="manifest-card-num">06</span>
-              <h4 class="manifest-card-title">HTML reference component</h4>
-              <p class="manifest-card-meta">handover artifact · all var(--*)</p>
-              <div class="manifest-card-visual">
-                <span class="manifest-mini-btn primary">Primary</span>
-                <span class="manifest-mini-btn secondary">Secondary</span>
-                <span class="manifest-mini-btn disabled">Disabled</span>
-              </div>
-            </div>
+            <p class="promise-2col-screens-caption">One ships today. Two are your Capstone homework.</p>
           </div>
         </div>
       </div>
-      <div class="slide-footer"><span>The contract</span><span>No maybe later</span></div>
+      <div class="slide-footer"><span>The contract</span><span>One today · two homework</span></div>
     </section>
 
     <section class="slide" data-section="Opener" data-notes="Setup check before Part 0. If anything's missing, the in-session setup-clinic before Teach catches it.">
@@ -7945,29 +7995,6 @@ why? Propose the full pairing matrix before writing.</div>
         </div>
       </div>
       <div class="slide-footer"><span>Components &amp; Specs</span><span>120 min</span></div>
-    </section>
-
-    <section class="slide" data-section="Part 2" data-notes="Build-phase cover. Show the three Capstone screens stacked with Welcome biggest in front. Say: 'These are the screens of your Capstone. Welcome ships today. The other two are your homework — same flow, your own time.' Hold for two beats. Then move to the build mechanics.">
-      <div class="slide-content">
-        <div class="kicker">What you'll build today</div>
-        <div class="screens-stack" aria-hidden="true">
-          <div class="screen-card screen-card--back-left">
-            <img src="assets/12 — Arabic Category.png" alt="Arabic Category screen">
-          </div>
-          <div class="screen-card screen-card--back-right">
-            <img src="assets/16 — Pitfire Pizza (Picks for you).png" alt="Pitfire Pizza Detail screen">
-          </div>
-          <div class="screen-card screen-card--front">
-            <img src="assets/01 — Welcome.png" alt="Welcome screen">
-            <span class="screen-card-badge">Today</span>
-          </div>
-        </div>
-        <div class="screens-stack-caption">
-          <h2>One ships today. Two are your Capstone homework.</h2>
-          <p class="lede">Welcome end-to-end: components, composition, HTML. Once that ships, the same flow scales to Arabic Category and Pitfire Pizza on your own time.</p>
-        </div>
-      </div>
-      <div class="slide-footer"><span>Build · scope</span><span>One today · two homework</span></div>
     </section>
 
     <section class="slide" data-section="Part 2" data-notes="The reveal. Hold for two beats — show the screen before naming the components. 'A Continue button. A welcome heading. A logo over a background photo. Three components, composed.' Then move to the build.">
