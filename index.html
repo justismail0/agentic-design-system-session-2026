@@ -5785,8 +5785,10 @@
      button below is the actual production action — speaker tab-switches to
      Menti for the live results during the session. */
   /* Slide 6 (live results) — Menti iframe fills the entire slide
-     edge-to-edge. No internal padding. Iframe background matches the
-     slide surface so empty space blends with the deck. Scroll suppressed. */
+     edge-to-edge. No internal padding. Wrapper + iframe bg are pinned
+     to white to match Mentimeter's own content background — so any
+     cropped/empty areas blend with Menti's rendering instead of
+     flashing a different color during transitions. */
   .menti-results-slide .slide-content {
     padding: 0;
     display: flex;
@@ -5798,7 +5800,7 @@
     height: 100%;
     overflow: hidden;
     border-radius: 18px;
-    background: var(--surface);
+    background: #ffffff;
   }
   .menti-embed iframe {
     position: absolute;
@@ -5806,7 +5808,7 @@
     width: 100%;
     height: 100%;
     border: 0;
-    background: var(--surface);
+    background: #ffffff;
   }
 
   .menti-results-card {
