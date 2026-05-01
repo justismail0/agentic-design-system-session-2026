@@ -1483,10 +1483,10 @@
   }
 
   /* Interactive table (slide 67 — Lesson 4 · Context files).
-     Each <tbody> row is hoverable and keyboard-focusable (tabindex=0).
-     Hover/focus highlights the row, makes a left accent rail appear,
-     and slightly emphasises the text — speaker can point at one
-     surface at a time during the walk-through. */
+     Always-dark, regardless of slide theme. Each <tbody> row is
+     hoverable and keyboard-focusable (tabindex=0). Hover/focus tints
+     the row mint and shifts the first-cell text mint — speaker can
+     point at one surface at a time during the walk-through. */
   table.interactive-table {
     width: 100%;
     max-width: 980px;
@@ -1495,9 +1495,10 @@
     border-spacing: 0;
     border-radius: var(--r-lg);
     overflow: hidden;
-    border: 1px solid var(--border-medium);
-    background: var(--bg-surface-grad);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #1a1d24;
+    color: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
   }
 
   table.interactive-table th,
@@ -1505,7 +1506,7 @@
     padding: 16px 22px;
     text-align: left;
     vertical-align: middle;
-    border-bottom: 1px solid var(--border-medium);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     font-size: clamp(14px, 1vw, 16px);
     line-height: 1.4;
   }
@@ -1515,33 +1516,31 @@
     font-weight: var(--fw-bold);
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: var(--text-muted);
-    background: rgba(80, 65, 112, 0.04);
+    color: rgba(255, 255, 255, 0.55);
+    background: rgba(0, 0, 0, 0.22);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
   }
 
   table.interactive-table tbody tr {
     cursor: pointer;
     outline: none;
-    transition:
-      background-color 180ms ease,
-      transform 180ms ease,
-      box-shadow 180ms ease;
+    transition: background-color 180ms ease;
     position: relative;
   }
 
   table.interactive-table tbody tr td:first-child {
     font-weight: var(--fw-bold);
-    color: var(--text-strong);
+    color: #ffffff;
     transition: color 180ms ease;
   }
 
   table.interactive-table tbody tr:hover,
   table.interactive-table tbody tr:focus-visible {
-    background: rgba(0, 140, 92, 0.06);
+    background: rgba(53, 255, 181, 0.08);
   }
   table.interactive-table tbody tr:hover td:first-child,
   table.interactive-table tbody tr:focus-visible td:first-child {
-    color: var(--c-mint-ink);
+    color: var(--c-mint);
   }
 
   table.interactive-table tbody tr:last-child td {
@@ -1553,45 +1552,16 @@
     font-size: 0.92em;
     padding: 2px 8px;
     border-radius: 6px;
-    background: rgba(80, 65, 112, 0.08);
+    background: rgba(255, 255, 255, 0.08);
     color: inherit;
   }
 
-  /* Last column reads as the example — render in mono so file names
-     and slash-commands look like real artifacts. */
+  /* Last column renders the example in monospace so file names and
+     slash-commands look like real artifacts. */
   table.interactive-table tbody td:last-child {
     font-family: var(--font-mono);
     font-size: clamp(12px, 0.9vw, 14px);
-    color: var(--text-muted);
-  }
-
-  /* Dark-theme treatment */
-  :root[data-theme="dark"] table.interactive-table {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(211, 201, 232, 0.12);
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
-  }
-  :root[data-theme="dark"] table.interactive-table th,
-  :root[data-theme="dark"] table.interactive-table td {
-    border-bottom-color: rgba(211, 201, 232, 0.10);
-  }
-  :root[data-theme="dark"] table.interactive-table thead th {
-    background: rgba(255, 255, 255, 0.04);
-    color: rgba(244, 240, 255, 0.6);
-  }
-  :root[data-theme="dark"] table.interactive-table tbody tr:hover,
-  :root[data-theme="dark"] table.interactive-table tbody tr:focus-visible {
-    background: rgba(53, 255, 181, 0.07);
-  }
-  :root[data-theme="dark"] table.interactive-table tbody tr:hover td:first-child,
-  :root[data-theme="dark"] table.interactive-table tbody tr:focus-visible td:first-child {
-    color: var(--c-mint);
-  }
-  :root[data-theme="dark"] table.interactive-table code {
-    background: rgba(255, 255, 255, 0.08);
-  }
-  :root[data-theme="dark"] table.interactive-table tbody td:last-child {
-    color: rgba(244, 240, 255, 0.62);
+    color: rgba(255, 255, 255, 0.6);
   }
 
   .slide.prompt-slide .slide-content {
