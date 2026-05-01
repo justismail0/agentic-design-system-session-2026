@@ -9028,38 +9028,22 @@ Open button.html in a browser when it's done.</div>
       <div class="slide-footer"><span>Build</span><span>60 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 3" data-notes="The Part 3 chain: Figma → tokens → HTML. Docs already exist from Part 2 — show them sitting alongside as the sibling artifact, not built here.">
+    <section class="slide" data-section="Part 3" data-notes="The Part 3 chain visualized. Single horizontal flow from Figma source to button.html handover. Hold a beat on each node so students see what each file is. button.md from Part 2 sits as a sibling — call out the chain consistency: same Figma source, derived through the documentation skill.">
       <div class="slide-content">
         <div class="kicker">The chain</div>
         <h2>Figma decides. Code reads.</h2>
-        <div class="figma-branch">
-          <div class="figma-branch-source">
-            <span class="figma-branch-label">Source of truth</span>
-            <span class="figma-branch-name">Figma</span>
-            <span class="figma-branch-meta">variables · components · variants · states</span>
-          </div>
-          <div class="figma-branch-paths">
-            <div class="figma-branch-row">
-              <span class="figma-branch-row-label">This part</span>
-              <div class="flow">
-                <div class="flow-item">tokens.json<span>export</span></div>
-                <div class="arrow">-></div>
-                <div class="flow-item">tokens.css<span>:root</span></div>
-                <div class="arrow">-></div>
-                <div class="flow-item">button.html<span>handover</span></div>
-              </div>
-            </div>
-            <div class="figma-branch-row">
-              <span class="figma-branch-row-label">Already built</span>
-              <div class="flow">
-                <div class="flow-item">button.md<span>spec · derived in Part 2</span></div>
-              </div>
-            </div>
-          </div>
+        <div class="flow">
+          <div class="flow-item">Figma<span>source of truth</span></div>
+          <div class="arrow">-></div>
+          <div class="flow-item">tokens.json<span>DTCG export</span></div>
+          <div class="arrow">-></div>
+          <div class="flow-item">tokens.css<span>:root variables</span></div>
+          <div class="arrow">-></div>
+          <div class="flow-item">button.html<span>handover</span></div>
         </div>
-        <p class="lede">Both <code>button.html</code> and <code>button.md</code> are derived from Figma — sibling artifacts. The docs were generated in Part 2 when we deployed the documentation skill. Part 3 builds the implementation alongside.</p>
+        <p class="lede">Every step is a file we'll write in Part 3. <code>button.md</code> already exists from Part 2's documentation skill, derived from the same Figma source.</p>
       </div>
-      <div class="slide-footer"><span>Figma is the source</span><span>HTML and docs are siblings</span></div>
+      <div class="slide-footer"><span>Figma is the source</span><span>One chain, every artifact</span></div>
     </section>
 
     <section class="slide quote-slide" data-section="Part 3" data-notes="This is the warning for Build. The easiest place to drift is code.">
