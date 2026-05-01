@@ -8330,7 +8330,7 @@ why? Propose the full pairing matrix before writing.</div>
       </div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The first component built live, raw. No CLAUDE.md, no skill — just Figma + the binding file. Audience watches the agent propose the per-component file shape from scratch. The capture discipline lands later in Lesson 2. Full prompt to paste: Build a Button in our Figma demo file. Read tokens.json first to learn the semantic tokens you can alias. Create a new Figma page named 'Button' and place the component set on it. Don't build anything yet. Propose: the variant matrix (Style × Size × Icon only), the component properties (Label TEXT, Show left icon BOOLEAN, Show right icon BOOLEAN, Left icon INSTANCE_SWAP, Right icon INSTANCE_SWAP), the anatomy (left-icon, label, right-icon centered horizontal flex), which semantic token each visual property aliases to, the state model (default, hover, disabled. Active state has no semantic token, document the gap). When I approve: build the component set in Figma using small atomic use_figma calls (load figma:figma-use first). Write components/atoms/button/button.tokens.json. Propose the file shape with me before writing. Return setId, every variant rendered, every fill/stroke/text bound to a semantic variable, $notes for the active-state gap.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The first component built live, raw. Figma only. No JSON, no .md, no .html. Just the component set. The capture discipline lands later in Lessons 2-5; Lesson 6 audits the Figma component into JSON, then runs the skill to generate button.html and button.md. Default icon-swaps should point at instances from the Icons frame on Utility (5:355, frame 26:524). Full prompt to paste: Build a Button in our Figma demo file. Read tokens.json first to learn the semantic tokens you can alias. Create a new Figma page named 'Button' and place the component set on it. Don't build anything yet. Propose: the variant matrix (Style × Size × Icon only), the component properties (Label TEXT, Show left icon BOOLEAN, Show right icon BOOLEAN, Left icon INSTANCE_SWAP, Right icon INSTANCE_SWAP), the anatomy (left-icon, label, right-icon centered horizontal flex), which semantic token each visual property aliases to, the state model (default, hover, disabled. Active state has no semantic token, document the gap). When I approve: build the component set in Figma using small atomic use_figma calls (load figma:figma-use first). Just the component set. JSON + spec come later in Lesson 6. Return setId, every variant rendered, every fill/stroke/text bound to a semantic variable, $notes for the active-state gap.">
       <div class="slide-content">
         <div class="kicker">Component 1 · Button</div>
         <div class="prompt-frame">
@@ -8340,26 +8340,26 @@ Create a new Figma page named "Button" and place the component set on it.
 
 Don't build anything yet. Propose: variant matrix (Style × Size × Icon only), properties (Label, icon booleans, icon swaps), anatomy, and which semantic token each visual property aliases. State model: default, hover, disabled.
 
-When I approve, build the component set and write components/atoms/button/button.tokens.json. Propose the file shape with me before writing.</div>
+When I approve, build the component set in Figma. Just the component set. We'll extract bindings to JSON and write the spec later, after the skill exists.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>Style × Size × Icon only variants rendered</span></li>
             <li><span class="check"></span><span>Every fill / text / border bound to a semantic token</span></li>
-            <li><span class="check"></span><span>button.tokens.json captures every variant + state binding</span></li>
-            <li><span class="check"></span><span>Propose the per-component file shape together, before writing</span></li>
+            <li><span class="check"></span><span>Default icon-swaps point at instances from the Icons frame on Utility</span></li>
+            <li><span class="check"></span><span>JSON + spec extracted later by the skill (Lesson 6)</span></li>
           </ul>
         </div>
       </div>
       <div class="slide-footer"><span>1 of 4 · Button</span><span>~25 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. Same propose-then-execute discipline. The hide-by-prop pattern is load-bearing. The Welcome screen needs Title + Subtitle but no Overline or Description. Full prompt to paste: Build a Jumbotron in our Figma file. Use components/atoms/button/button.tokens.json as the reference for the per-component file shape. Create a new Figma page named 'Jumbotron' and place the component set on it. It's a heading block with four optional slots: Overline, Title, Subtitle, Description. Vertical auto-layout, left-aligned by default. Don't build anything yet. Propose: variant matrix (Size lg / md / sm / xs, one axis only, slot visibility handled by component properties); properties (Show overline BOOLEAN default false, Title TEXT, Subtitle TEXT, Description TEXT, Show subtitle BOOLEAN default true, Show description BOOLEAN default false); per-size typography mapping (use semantic-typography token names not raw px, propose the mapping against tokens.json); slot color tokens (Title text/primary/default, Subtitle text/secondary/default, Overline text/tertiary/default, Description text/secondary/default); spacing between slots (spacing/sm Overline→Title, spacing/md Title→Subtitle, spacing/lg Subtitle→Description). When I approve: build the component set (one variant per Size, four total. All slots present in every variant, visibility driven by booleans). Write components/atoms/jumbotron/jumbotron.tokens.json matching the button.tokens.json structure. Return setId, every Size variant rendered, every typography binding via semantic tokens.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. Same propose-then-execute discipline. The hide-by-prop pattern is load-bearing. The Welcome screen needs Title + Subtitle but no Overline or Description. Figma only at this point. JSON + spec come later in Lesson 6. Full prompt to paste: Build a Jumbotron in our Figma file. Create a new Figma page named 'Jumbotron' and place the component set on it. It's a heading block with four optional slots: Overline, Title, Subtitle, Description. Vertical auto-layout, left-aligned by default. Don't build anything yet. Propose: variant matrix (Size lg / md / sm / xs, one axis only, slot visibility handled by component properties); properties (Show overline BOOLEAN default false, Title TEXT, Subtitle TEXT, Description TEXT, Show subtitle BOOLEAN default true, Show description BOOLEAN default false); per-size typography mapping (use semantic-typography token names not raw px, propose the mapping against tokens.json); slot color tokens (Title text/primary/default, Subtitle text/secondary/default, Overline text/tertiary/default, Description text/secondary/default); spacing between slots (spacing/sm Overline→Title, spacing/md Title→Subtitle, spacing/lg Subtitle→Description). When I approve: build the component set in Figma (one variant per Size, four total. All slots present in every variant, visibility driven by booleans). Just the component set. JSON + spec come later in Lesson 6. Return setId, every Size variant rendered, every typography binding via semantic tokens.">
       <div class="slide-content">
         <div class="kicker">Component 2 · Jumbotron</div>
         <div class="prompt-frame">
-          <div class="prompt">Build a Jumbotron in our Figma file. Use button.tokens.json as the per-component file pattern.
+          <div class="prompt">Build a Jumbotron in our Figma file.
 
 Create a new Figma page named "Jumbotron" and place the component set on it.
 
@@ -8367,7 +8367,7 @@ Heading block with four optional slots: Overline, Title, Subtitle, Description.
 
 Don't build anything yet. Propose: variant matrix (Size: lg / md / sm / xs, one axis only); properties for each slot's visibility; per-size typography mapping using semantic-typography token names (no raw px); slot color and spacing tokens.
 
-When I approve, build the four Size variants and write jumbotron.tokens.json. Match the shape you used for button.tokens.json.</div>
+When I approve, build the four Size variants in Figma. Just the component set. JSON + spec come later, in Lesson 6.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
@@ -8375,26 +8375,26 @@ When I approve, build the four Size variants and write jumbotron.tokens.json. Ma
             <li><span class="check"></span><span>One axis: Size (lg / md / sm / xs)</span></li>
             <li><span class="check"></span><span>Slot visibility via boolean properties, not variants</span></li>
             <li><span class="check"></span><span>Typography bound to semantic tokens (no raw px)</span></li>
-            <li><span class="check"></span><span>jumbotron.tokens.json matches the button.tokens.json shape</span></li>
+            <li><span class="check"></span><span>JSON + spec extracted later by the skill (Lesson 6)</span></li>
           </ul>
         </div>
       </div>
       <div class="slide-footer"><span>2 of 4 · Jumbotron</span><span>~20 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders with aspect ratios. Welcome uses two: a 2:3 full-bleed background and a 1:1 logo. Full prompt to paste: Build an Artwork in our Figma file. Use components/atoms/button/button.tokens.json as the per-component file pattern. Create a new Figma page named 'Artwork' and place the component set on it. It's an image-holder with multiple aspect ratios. Don't build anything yet. Propose: variant matrix (Aspect ratio 1:1 / 4:3 / 3:2 / 16:9 / 2:3, and Full-bleed Yes / No, two axes); component property (Image INSTANCE_SWAP, default to a placeholder); anatomy (single image fill node inside the variant frame); image fill behavior (COVER not CONTAIN); corner radius mapping (Full-bleed=Yes → 0; Full-bleed=No → border-radius/lg); default size per aspect ratio at lg variant (1:1 240×240, 4:3 240×180, 3:2 240×160, 16:9 320×180, 2:3 160×240). When I approve: build the component set (5 aspect ratios × 2 full-bleed = 10 variants). Write components/atoms/artwork/artwork.tokens.json. Same shape as button.tokens.json. Return setId, every variant rendered, COVER fill confirmed, corner radius bound correctly per Full-bleed value.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders with aspect ratios. Welcome uses two: a 2:3 full-bleed background and a 1:1 logo. Figma only at this point. JSON + spec come later in Lesson 6. Default image swap should point at an icon instance from the Icons frame on Utility (5:355) so the placeholder isn't a generic rectangle. Full prompt to paste: Build an Artwork in our Figma file. Create a new Figma page named 'Artwork' and place the component set on it. It's an image-holder with multiple aspect ratios. Don't build anything yet. Propose: variant matrix (Aspect ratio 1:1 / 4:3 / 3:2 / 16:9 / 2:3, and Full-bleed Yes / No, two axes); component property (Image INSTANCE_SWAP, default to an icon instance from the Icons frame on Utility); anatomy (single image fill node inside the variant frame); image fill behavior (COVER not CONTAIN); corner radius mapping (Full-bleed=Yes → 0; Full-bleed=No → border-radius/lg); default size per aspect ratio at lg variant (1:1 240×240, 4:3 240×180, 3:2 240×160, 16:9 320×180, 2:3 160×240). When I approve: build the component set in Figma (5 aspect ratios × 2 full-bleed = 10 variants). Just the component set. JSON + spec come later in Lesson 6. Return setId, every variant rendered, COVER fill confirmed, corner radius bound correctly per Full-bleed value.">
       <div class="slide-content">
         <div class="kicker">Component 3 · Artwork</div>
         <div class="prompt-frame">
-          <div class="prompt">Build an Artwork in our Figma file. Use button.tokens.json as the per-component file pattern.
+          <div class="prompt">Build an Artwork in our Figma file.
 
 Create a new Figma page named "Artwork" and place the component set on it.
 
 Image-holder with multiple aspect ratios.
 
-Don't build yet. Propose: variant axes (Aspect ratio 1:1 / 4:3 / 3:2 / 16:9 / 2:3 and Full-bleed Yes / No); image as INSTANCE_SWAP property; image fill = COVER; corner radius = 0 when Full-bleed=Yes, else bind to border-radius/lg.
+Don't build yet. Propose: variant axes (Aspect ratio 1:1 / 4:3 / 3:2 / 16:9 / 2:3 and Full-bleed Yes / No); image as INSTANCE_SWAP property (default to an icon instance from the Icons frame on Utility); image fill = COVER; corner radius = 0 when Full-bleed=Yes, else bind to border-radius/lg.
 
-When I approve, build all 10 variants and write artwork.tokens.json. Same shape as button.tokens.json.</div>
+When I approve, build all 10 variants in Figma. Just the component set.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
@@ -8402,7 +8402,7 @@ When I approve, build all 10 variants and write artwork.tokens.json. Same shape 
             <li><span class="check"></span><span>Two axes: Aspect ratio × Full-bleed (10 variants)</span></li>
             <li><span class="check"></span><span>Image fill = COVER</span></li>
             <li><span class="check"></span><span>Radius 0 when Full-bleed=Yes; semantic token otherwise</span></li>
-            <li><span class="check"></span><span>artwork.tokens.json captures all 10 variants</span></li>
+            <li><span class="check"></span><span>JSON + spec extracted later by the skill (Lesson 6)</span></li>
           </ul>
         </div>
       </div>
@@ -8807,9 +8807,9 @@ stand alone with enough context that a fresh session can apply it.
         <div class="kicker">Lesson 5 · Documentation skill</div>
         <h2>Capture the workflow once. Replay it forever.</h2>
         <div class="pairing">
-          <div class="box"><b>v1 today</b><p>Generates <code>{name}.md</code> with eight useful sections and TODO judgment areas.</p></div>
+          <div class="box"><b>v1 today</b><p>Generates <code>{name}.md</code> (8 sections, TODO judgment) and <code>{name}.html</code> (preview with resolved tokens, every variant rendered, spec embedded).</p></div>
           <div class="center-mark" aria-hidden="true">→</div>
-          <div class="box"><b>v3 later</b><p>HTML + MD, 20 sections, drift findings, lint findings, content preservation.</p></div>
+          <div class="box"><b>v3 later</b><p>Same outputs, plus 20 sections, drift findings, lint findings, content preservation.</p></div>
         </div>
       </div>
       <div class="slide-footer"><span>Skills compound</span><span>Pay once in design</span></div>
@@ -8821,11 +8821,19 @@ stand alone with enough context that a fresh session can apply it.
         <div class="prompt compact">/skill-creator
 
 Create a skill `component-documentation` that documents a component
-from `components/{tier}/{name}/`. Read the tokens.json and CLAUDE.md.
-Generate {name}.md with 8 sections: metadata, overview, anatomy,
-tokens used, variants/properties, states, code example, cross-references.
-Stub judgment sections (when-to-use, do/don't) with TODO. Do not invent
-tokens - flag missing as TODO.</div>
+from `components/{tier}/{name}/`. Read {name}.tokens.json, tokens.json,
+and CLAUDE.md.
+
+Generate two outputs:
+1. {name}.md — narrative spec, 8 sections: metadata, overview, anatomy,
+   tokens used, variants/properties, states, code example, cross-references.
+   Stub when-to-use and do/don't with TODO.
+2. {name}.html — self-contained preview page. Resolved tokens at the top
+   as CSS variables. Every variant rendered. The {name}.md content shown
+   below the preview, rendered via marked.js.
+
+Don't invent tokens. Flag missing as TODO. Resolve every value through
+semantic tokens; never raw hex or px in either output.</div>
         <p class="lede">Then invoke it with: <code>Document component Button.</code></p>
       </div>
       <div class="slide-footer"><span>Skill creator</span><span>Description is the trigger</span></div>
@@ -8837,30 +8845,30 @@ tokens - flag missing as TODO.</div>
       <div class="slide-content">
         <p class="cover-eyebrow">Lesson 6 · Spec</p>
         <h1 class="cover-title">Document the Button</h1>
-        <p class="cover-subtitle">Run the skill we just built on the Button you built five lessons ago. The spec generates itself. Same component, now reusable.</p>
+        <p class="cover-subtitle">Audit the Button you built five lessons ago into JSON. Run the skill. Watch button.html and button.md materialize, with the preview rendered in your browser.</p>
       </div>
     </section>
 
     <section class="slide cover example-cover" data-section="Part 2" data-notes="Hands-on activity intro — deploy the skill on the Button. The Button was built raw in Lesson 1 without any docs. Now the skill retroactively generates its spec. The retroactive framing is the payoff: the same component, now documented, without a rebuild.">
       <div class="slide-content">
         <span class="ex-pill">Example · Document the Button</span>
-        <h1 class="cover-title">Built it raw. Now it's reusable.</h1>
-        <p class="cover-subtitle">The same Button from Lesson 1. The skill we just built. Watch button.md generate itself, retroactively. No rebuild.</p>
+        <h1 class="cover-title">Built it raw. Now it ships.</h1>
+        <p class="cover-subtitle">Audit the Figma Button. Run the skill. Open button.html in your browser. Same component, now with a preview teammates can read.</p>
         <div class="ex-flow" aria-label="Activity steps">
-          <span class="ex-flow-step active">Deploy skill</span>
+          <span class="ex-flow-step active">Audit Figma</span>
           <span class="ex-flow-arrow">→</span>
-          <span class="ex-flow-step">Generate docs</span>
+          <span class="ex-flow-step">Run skill</span>
           <span class="ex-flow-arrow">→</span>
-          <span class="ex-flow-step">Review</span>
+          <span class="ex-flow-step">Open the preview</span>
         </div>
       </div>
     </section>
 
     <section class="slide" data-section="Part 2" data-notes="Activity brief. The four sections the skill writes. TODO markers preserve human judgment.">
       <div class="slide-content">
-        <div class="kicker">Example · Brief</div>
-        <h2>Four sections written. Two left as TODOs.</h2>
-        <p class="lede">Skills capture mechanical extraction. Humans still own the judgment sections.</p>
+        <div class="kicker">Lesson 6 · Brief</div>
+        <h2>Two outputs. Eight sections. Two TODOs.</h2>
+        <p class="lede">The skill writes <code>button.md</code> (narrative spec) and <code>button.html</code> (preview + spec embedded). Same content, two surfaces. The four cards below describe what's in both.</p>
         <div class="brief-bento">
           <div class="brief-item">
             <span class="brief-num">01</span>
@@ -8880,30 +8888,47 @@ tokens - flag missing as TODO.</div>
           </div>
         </div>
       </div>
-      <div class="slide-footer"><span>Example · Brief</span><span>Next: deploy the skill</span></div>
+      <div class="slide-footer"><span>Two outputs from one skill</span><span>Same content, two surfaces</span></div>
     </section>
 
-    <section class="slide prompt-slide" data-section="Part 2" data-notes="Deploy the skill we just built on the same Button from Lesson 1. The skill knows where to read from: CLAUDE.md, the Button's tokens.json, the Figma component set. It encapsulates HOW. The retroactive payoff: button.md materializes from work the audience already did, without rebuilding the Button.">
+    <section class="slide" data-section="Part 2" data-notes="Audit step. Before the skill can document the Button, we need a structured spec of every variant and binding. This prompt does that audit: read the Figma component set, walk every variant, extract the variable bindings into button.tokens.json. The shape is dictated by CLAUDE.md (per-component file shape: $source, $component, $figmaNodeId, $description, $variants, $properties, $anatomy, $layout, plus per-variant token tables). Speaker note: this is where the audience sees Figma-as-source-of-truth in action. The agent reads the canvas, not a hand-written file. Full prompt to paste: Audit our Button component set in Figma. Extract every variant and every variable binding (fills, strokes, text fills, padding, gap, radius, typography). Write components/atoms/button/button.tokens.json with the bindings. Match the per-component file shape from CLAUDE.md. Don't invent. Anything you can't extract, mark TODO.">
       <div class="slide-content">
-        <div class="kicker">Example · The Prompt</div>
-        <h2>Deploy the skill on the Button.</h2>
+        <div class="kicker">Lesson 6 · Audit</div>
         <div class="prompt-frame">
-          <div class="prompt">Run the documentation skill we just built on our Button.
+          <div class="prompt">Audit our Button component set in Figma. Extract every variant and every variable binding (fills, strokes, text fills, padding, gap, radius, typography).
 
-The skill knows where to read from: CLAUDE.md, the component specs, the design notes we've captured so far. Let it pull the spec together.
+Write components/atoms/button/button.tokens.json with the bindings. Match the per-component file shape from CLAUDE.md.
 
-Save it as `components/atoms/button/button.md`. Cover:
-- What the Button is (one line)
-- Anatomy: the parts of the component
-- Variants: every variant we've defined, with the tokens each one uses
-- States: default, hover, focus, disabled
-- Accessibility notes: keyboard support, focus behaviour
-- "When to use" and "Don't": leave both as `TODO`. I'll write those. Don't guess my judgment calls.
-
-Don't invent variants we haven't defined. If something is unclear, mark it `TODO` and tell me what's missing.</div>
+Don't invent. Anything you can't extract, mark TODO.</div>
+        </div>
+        <div class="card prompt-insight">
+          <h3>Checkpoint</h3>
+          <ul class="clean-list">
+            <li><span class="check"></span><span>Every variant in the component set captured</span></li>
+            <li><span class="check"></span><span>Every fill / text / border / spacing binding pulls a semantic name</span></li>
+            <li><span class="check"></span><span>Per-component file shape matches CLAUDE.md</span></li>
+            <li><span class="check"></span><span>Anything ambiguous flagged as TODO, not invented</span></li>
+          </ul>
         </div>
       </div>
-      <div class="slide-footer"><span>Example · Prompt</span><span>Built it · Now using it</span></div>
+      <div class="slide-footer"><span>Audit before document</span><span>Figma is the source of truth</span></div>
+    </section>
+
+    <section class="slide prompt-slide" data-section="Part 2" data-notes="Deploy the skill we just built. The skill reads button.tokens.json (just written by the audit prompt), tokens.json, and CLAUDE.md, then emits button.md (narrative spec) and button.html (preview with resolved tokens, every variant rendered, spec embedded). Open button.html in a browser when done — that's the artifact teammates read. The HTML preview is the demo's whole point.">
+      <div class="slide-content">
+        <div class="kicker">Lesson 6 · Deploy</div>
+        <h2>Run the skill on the Button.</h2>
+        <div class="prompt-frame">
+          <div class="prompt">Run /component-documentation button.
+
+The skill reads button.tokens.json, tokens.json, and CLAUDE.md. It generates two files at components/atoms/button/:
+- button.md — narrative spec, 8 sections, TODOs for when-to-use and don't
+- button.html — preview with resolved tokens, every variant rendered, spec embedded
+
+Open button.html in a browser when it's done.</div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>One command, two artifacts</span><span>Open button.html in your browser</span></div>
     </section>
 
     <section class="slide section-break" data-section="Part 2" data-notes="Close Part 2 by anchoring the chain — token to screen to handover. The Welcome screen on the left, button.html on the right, the same Semantic tokens flowing through both.">
