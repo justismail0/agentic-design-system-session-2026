@@ -5011,6 +5011,110 @@
     margin: 0;
   }
 
+  /* ─── Slide 38 — Primitives → Semantics handoff visual.
+     Same swatches on both sides; left labels by hue/shade (what the value
+     IS), right labels by role (what the value is FOR). The hex doesn't
+     change; the identity does. */
+  .primitives-to-semantics {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: clamp(20px, 2.6vw, 44px);
+    align-items: stretch;
+    margin: var(--sp-5) 0 var(--sp-4);
+  }
+  .pts-side {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: clamp(20px, 2.4vw, 32px);
+    border: 1px solid var(--border-medium, rgba(24, 29, 39, 0.10));
+    border-radius: var(--r-lg);
+    background: var(--bg-surface-grad, var(--c-surface));
+    min-width: 0;
+  }
+  .pts-label {
+    font-family: var(--font-mono);
+    font-size: var(--ts-small);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--c-mint-ink, var(--c-mint));
+  }
+  .pts-cap {
+    font-size: var(--ts-small);
+    color: var(--text-muted);
+    margin-bottom: var(--sp-2);
+  }
+  .pts-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .pts-list li {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+  }
+  .pts-swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--r-sm);
+    background: var(--pts-color, #888);
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+  .pts-name {
+    font-family: var(--font-mono);
+    font-size: clamp(12px, 1vw, 14.5px);
+    color: var(--text-strong, var(--ink));
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .pts-hex {
+    font-family: var(--font-mono);
+    font-size: var(--ts-small);
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+  .pts-arrow {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--c-mint-ink, var(--c-mint));
+  }
+  .pts-arrow-glyph {
+    font-size: clamp(28px, 3.4vw, 48px);
+    font-weight: var(--fw-heavy);
+    line-height: 1;
+  }
+  .pts-arrow-label {
+    font-family: var(--font-mono);
+    font-size: var(--ts-micro);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+  @media (max-width: 900px) {
+    .primitives-to-semantics {
+      grid-template-columns: 1fr;
+      gap: var(--sp-3);
+    }
+    .pts-arrow {
+      flex-direction: row;
+    }
+    .pts-arrow-glyph {
+      transform: rotate(90deg);
+    }
+  }
+
   .center-mark {
     position: relative;
     z-index: 1;
@@ -7858,19 +7962,34 @@ Preserve shade numbering from the palette.</div>
       <div class="slide-footer"><span>Step 2</span><span>Create</span></div>
     </section>
 
-    <section class="slide" data-section="Part 1" data-notes="Use this as the handoff from primitives to semantics. First we extracted values faithfully. Next we give those values jobs the system can reuse.">
+    <section class="slide" data-section="Part 1" data-notes="Use this as the handoff from primitives to semantics. The visual carries the lesson: same colors on both sides, but on the left they're identified by what they ARE (yellow/500, teal/500, red/500, neutral/900); on the right they carry a JOB (background/brand/solid, background/accent/solid, background/error/solid, text/primary/default). The hex values don't change. The identity does.">
       <div class="slide-content">
         <div class="kicker">Next · Lesson 2 · Semantics</div>
         <h2>You have the values. Now give them meaning.</h2>
-        <div class="pairing">
-          <div class="box">
-            <b>Lesson 1 · Primitives</b>
-            <p>Read the palette. Preserve the hues, shade scale, and source structure.</p>
+        <div class="primitives-to-semantics">
+          <div class="pts-side">
+            <span class="pts-label">Primitives</span>
+            <span class="pts-cap">what the values are</span>
+            <ul class="pts-list">
+              <li><span class="pts-swatch" style="--pts-color:#ffd600"></span><code class="pts-name">yellow/500</code><span class="pts-hex">#ffd600</span></li>
+              <li><span class="pts-swatch" style="--pts-color:#14c8b0"></span><code class="pts-name">teal/500</code><span class="pts-hex">#14c8b0</span></li>
+              <li><span class="pts-swatch" style="--pts-color:#e53935"></span><code class="pts-name">red/500</code><span class="pts-hex">#e53935</span></li>
+              <li><span class="pts-swatch" style="--pts-color:#181d27"></span><code class="pts-name">neutral/900</code><span class="pts-hex">#181d27</span></li>
+            </ul>
           </div>
-          <div class="center-mark" aria-hidden="true">→</div>
-          <div class="box">
-            <b>Lesson 2 · Semantics</b>
-            <p>Turn those values into roles like background, text, border, and state.</p>
+          <div class="pts-arrow" aria-hidden="true">
+            <span class="pts-arrow-glyph">→</span>
+            <span class="pts-arrow-label">same color,<br>new identity</span>
+          </div>
+          <div class="pts-side">
+            <span class="pts-label">Semantics</span>
+            <span class="pts-cap">what the values are for</span>
+            <ul class="pts-list">
+              <li><span class="pts-swatch" style="--pts-color:#ffd600"></span><code class="pts-name">background/brand/solid</code></li>
+              <li><span class="pts-swatch" style="--pts-color:#14c8b0"></span><code class="pts-name">background/accent/solid</code></li>
+              <li><span class="pts-swatch" style="--pts-color:#e53935"></span><code class="pts-name">background/error/solid</code></li>
+              <li><span class="pts-swatch" style="--pts-color:#181d27"></span><code class="pts-name">text/primary/default</code></li>
+            </ul>
           </div>
         </div>
         <p class="lede">Primitives answer <em>what the values are</em>. Semantics answer <em>what the values are for</em>.</p>
