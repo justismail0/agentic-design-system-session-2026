@@ -2071,6 +2071,161 @@
     }
   }
 
+  /* ─── Skill anatomy (slide 70 — Lesson 5 · What is a skill).
+     Right column of the promise-2col layout. Three vertically stacked
+     cards: Trigger → Procedure → Output, with thin chevron arrows
+     between them. Procedure card is wider/taller and shows the
+     internal SKILL.md steps as a small list. ─── */
+  .skill-anatomy {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+    max-width: 360px;
+  }
+  .skill-anatomy-step {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 20px;
+    border: 1px solid var(--border-medium);
+    border-radius: var(--r-lg);
+    background: var(--bg-surface-grad);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  }
+  .skill-anatomy-step--procedure {
+    border-color: var(--c-mint-ink);
+    background:
+      linear-gradient(160deg, rgba(0, 140, 92, 0.06), rgba(0, 140, 92, 0.02));
+  }
+  .skill-anatomy-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+  }
+  .skill-anatomy-value {
+    font-size: clamp(15px, 1.15vw, 18px);
+    font-weight: var(--fw-bold);
+    color: var(--text-strong);
+    line-height: 1.3;
+  }
+  .skill-anatomy-value code {
+    font-family: var(--font-mono);
+    font-size: 0.95em;
+    background: rgba(80, 65, 112, 0.08);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .skill-anatomy-list {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .skill-anatomy-list li {
+    position: relative;
+    padding-left: 18px;
+    font-size: clamp(13px, 0.95vw, 15px);
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .skill-anatomy-list li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-mint-ink);
+    transform: translateY(-50%);
+  }
+  .skill-anatomy-arrow {
+    align-self: center;
+    width: 2px;
+    height: 18px;
+    background: linear-gradient(180deg, rgba(0, 140, 92, 0) 0%, var(--c-mint-ink) 100%);
+    position: relative;
+  }
+  .skill-anatomy-arrow::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -1px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 4px 0 4px;
+    border-color: var(--c-mint-ink) transparent transparent transparent;
+    transform: translateX(-50%);
+  }
+
+  /* Skill meta chips — sit at the bottom of the left column.
+     Smaller weight than the recipe list above. */
+  .skill-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: var(--sp-3);
+  }
+  .skill-meta-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--border-medium);
+    border-radius: 999px;
+    background: rgba(80, 65, 112, 0.04);
+    font-size: clamp(12px, 0.85vw, 14px);
+    line-height: 1.2;
+  }
+  .skill-meta-chip-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+  }
+  .skill-meta-chip-value {
+    font-weight: var(--fw-medium);
+    color: var(--text-strong);
+  }
+
+  /* Dark-theme overrides */
+  :root[data-theme="dark"] .skill-anatomy-step {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(211, 201, 232, 0.14);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.32);
+  }
+  :root[data-theme="dark"] .skill-anatomy-step--procedure {
+    border-color: var(--c-mint);
+    background:
+      linear-gradient(160deg, rgba(53, 255, 181, 0.08), rgba(53, 255, 181, 0.02));
+  }
+  :root[data-theme="dark"] .skill-anatomy-value code {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  :root[data-theme="dark"] .skill-anatomy-arrow {
+    background: linear-gradient(180deg, rgba(53, 255, 181, 0) 0%, var(--c-mint) 100%);
+  }
+  :root[data-theme="dark"] .skill-anatomy-arrow::after {
+    border-top-color: var(--c-mint);
+  }
+  :root[data-theme="dark"] .skill-anatomy-list li::before {
+    background: var(--c-mint);
+  }
+  :root[data-theme="dark"] .skill-meta-chip {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(211, 201, 232, 0.14);
+  }
+
   /* ─── 3 screens stacked, Welcome biggest in front (used by slide 11) ─── */
   .screens-stack {
     position: relative;
@@ -8964,28 +9119,51 @@ stand alone with enough context that a fresh session can apply it.
       <div class="slide-footer"><span>Skills compound</span><span>Pay once in design</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Foundations of skills, with hierarchy: definition first, then a concrete invocation diagram, then supporting blocks for types and when-to-use. The 'why' is implicit in the diagram (one name in, artifact out — pay once, replay forever). The Document-the-Button example previews exactly what students will run in Lesson 6, so the abstract concept is grounded in something they're about to do.">
+    <section class="slide promise-2col" data-section="Part 2" data-notes="Foundations of skills, two-column layout. Left: definition is the hero, supported by a 3-step recipe (where it lives, how it triggers, what it does). Right: anatomy of a skill — TRIGGER → PROCEDURE → OUTPUT — so students see what's inside SKILL.md, not just the I/O. Types and When-to-use are demoted to chips at the bottom of the left column.">
       <div class="slide-content">
-        <div class="kicker">Lesson 5 · What is a skill</div>
-        <h2>A reusable workflow the agent invokes by name.</h2>
-        <p class="lede">A procedure stored in your project. Rules, context, and output shape, captured once. The agent loads it on demand and replays the steps every time you call it.</p>
-
-        <div class="flow">
-          <div class="flow-item">Document the Button<span>your request</span></div>
-          <div class="arrow">-></div>
-          <div class="flow-item">/component-documentation<span>the skill</span></div>
-          <div class="arrow">-></div>
-          <div class="flow-item">button.html + button.md<span>artifact</span></div>
-        </div>
-
-        <div class="grid-2">
-          <div class="card">
-            <h3>Types</h3>
-            <p><b>Built-in</b> — <code>/init</code>, <code>/skill-creator</code>. Packaged with Claude Code.<br><b>Custom</b> — you author them once per project. Replay forever.</p>
+        <div class="promise-2col-grid">
+          <div class="promise-2col-content">
+            <div class="kicker">Lesson 5 · What is a skill</div>
+            <h2>A reusable workflow the agent invokes by name.</h2>
+            <p class="lede">Capture a procedure once: rules, context, output shape. The agent replays it on every call.</p>
+            <ol class="promise-list">
+              <li><span class="promise-list-num">01</span><span><b>Stored</b><span class="promise-list-meta"><code>.claude/skills/{name}/SKILL.md</code></span></span></li>
+              <li><span class="promise-list-num">02</span><span><b>Triggered by name</b><span class="promise-list-meta">slash command or natural prompt</span></span></li>
+              <li><span class="promise-list-num">03</span><span><b>Replayable</b><span class="promise-list-meta">same procedure, every invocation</span></span></li>
+            </ol>
+            <div class="skill-meta-row">
+              <div class="skill-meta-chip">
+                <span class="skill-meta-chip-label">Types</span>
+                <span class="skill-meta-chip-value">Built-in · Custom</span>
+              </div>
+              <div class="skill-meta-chip">
+                <span class="skill-meta-chip-label">Use when</span>
+                <span class="skill-meta-chip-value">repeatable, mechanical work</span>
+              </div>
+            </div>
           </div>
-          <div class="card">
-            <h3>When to use it</h3>
-            <p>A repeatable, mechanical workflow you'll run more than once. Skip for one-off tasks; the setup overhead doesn't pay off.</p>
+          <div class="promise-2col-screens">
+            <div class="skill-anatomy" aria-label="Skill anatomy">
+              <div class="skill-anatomy-step">
+                <span class="skill-anatomy-label">Trigger</span>
+                <span class="skill-anatomy-value"><code>/component-documentation</code></span>
+              </div>
+              <span class="skill-anatomy-arrow" aria-hidden="true"></span>
+              <div class="skill-anatomy-step skill-anatomy-step--procedure">
+                <span class="skill-anatomy-label">Procedure</span>
+                <span class="skill-anatomy-value">SKILL.md</span>
+                <ul class="skill-anatomy-list">
+                  <li>Read inputs</li>
+                  <li>Apply rules</li>
+                  <li>Write outputs</li>
+                </ul>
+              </div>
+              <span class="skill-anatomy-arrow" aria-hidden="true"></span>
+              <div class="skill-anatomy-step">
+                <span class="skill-anatomy-label">Output</span>
+                <span class="skill-anatomy-value"><code>button.html</code> &middot; <code>button.md</code></span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
