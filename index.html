@@ -4815,6 +4815,16 @@
     .tools-panel-title { font-size: clamp(32px, 8vw, 44px); }
   }
 
+  /* Slide with full CLAUDE.md (~256 lines) — content starts at the top
+     instead of being vertically centered, so the slide-content scroll
+     can reach the full file. */
+  .claude-md-full-slide .slide-content {
+    justify-content: flex-start;
+  }
+  .claude-md-full-slide .claude-md-example {
+    flex-shrink: 0;
+  }
+
   /* CLAUDE.md filled-in example — markdown-as-canvas with subtle syntax highlighting */
   .claude-md-example {
     margin-top: var(--sp-5);
@@ -8381,7 +8391,7 @@ When I approve, perform the swaps, then generate screens/welcome.html — same s
       <div class="slide-footer"><span>After /init</span><span>Refine to project</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="This is what a real CLAUDE.md looks like once authored. The full file from the demo project. Walk it from top to bottom — point out: project context up top, repository layout, token system architecture, per-component file shape, workflow patterns, runtime gotchas, and the living Discovered rules log at the bottom. The slide content scrolls so students can read every line.">
+    <section class="slide claude-md-full-slide" data-section="Part 2" data-notes="This is what a real CLAUDE.md looks like once authored. The full file from the demo project. Walk it from top to bottom — point out: project context up top, repository layout, token system architecture, per-component file shape, workflow patterns, runtime gotchas, and the living Discovered rules log at the bottom. The slide content scrolls so students can read every line.">
       <div class="slide-content">
         <div class="kicker">CLAUDE.md · After /init + authoring</div>
         <h2>Here's what good looks like.</h2>
