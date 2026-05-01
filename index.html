@@ -7680,7 +7680,7 @@
       <div class="slide-footer"><span>Recap</span><span>Hands on the keyboard next</span></div>
     </section>
 
-    <section class="slide" data-section="Part 0" data-notes="Setup phase. The first prompt the agent runs. Establishes that the agent reads CLAUDE.md before doing anything else, AND that the agent is the maintainer of CLAUDE.md going forward — every change to project state is reflected back into the file. Full prompt to paste: Read CLAUDE.md and tokens.json first to understand the project conventions and tier vocabulary. Create the project file structure described in CLAUDE.md: foundations/ (for split primitive token exports), tokens/ (for split semantic token exports), components/ with subfolders atoms/ molecules/ organisms/ patterns/, and screens/ (for composed screen artifacts). Add a README.md in each component tier folder, 1-2 paragraphs each, drawing from CLAUDE.md's tier definitions: atoms = smallest functional units that bind directly to semantic tokens; molecules = compositions of atoms with their own layout/composition rules; organisms = feature-level UI blocks composed of molecules and atoms, context-aware; patterns = composition blueprints, MD-only (no token files since patterns aren't consumable components). Don't write any token JSON files in foundations/ or tokens/ yet. Don't pre-create .claude/skills/ or .claude/commands/. After creating the structure, update CLAUDE.md to reflect the new project state: confirm the file tree section matches what now exists on disk, and from this point forward keep CLAUDE.md current — when you discover a rule, build a component, or change the project shape, update CLAUDE.md in the same turn. The file is alive. Return: tree of created paths plus the diff to CLAUDE.md.">
+    <section class="slide" data-section="Part 0" data-notes="Setup phase. The first prompt the agent runs. Establishes that the agent reads CLAUDE.md before doing anything else, and that project shape comes from convention. Full prompt to paste: Read CLAUDE.md and tokens.json first to understand the project conventions and tier vocabulary. Create the project file structure described in CLAUDE.md: foundations/ (for split primitive token exports — kept empty for now, populated during the primitive build), tokens/ (for split semantic token exports — same pattern), components/ with subfolders atoms/ molecules/ organisms/ patterns/, and screens/ (for composed screen artifacts). Add a README.md in each component tier folder, 1-2 paragraphs each, drawing from CLAUDE.md's tier definitions: atoms = smallest functional units that bind directly to semantic tokens; molecules = compositions of atoms with their own layout/composition rules; organisms = feature-level UI blocks composed of molecules and atoms, context-aware; patterns = composition blueprints, MD-only (no token files since patterns aren't consumable components). Don't write any token JSON files in foundations/ or tokens/ yet. Don't pre-create .claude/skills/ or .claude/commands/ — those appear when /skill-creator runs in the next lesson. Return: tree of created paths.">
       <div class="slide-content">
         <div class="kicker">Setup · Project structure</div>
         <h2>Shape the project before the agent does anything else.</h2>
@@ -7691,19 +7691,19 @@ Create the project file structure described in CLAUDE.md: foundations/, tokens/,
 
 Add a README.md in each component tier folder explaining what qualifies — atoms, molecules, organisms, patterns. 1-2 paragraphs each, drawing from CLAUDE.md's tier definitions.
 
-After creating the structure, update CLAUDE.md to reflect the new state. From now on, keep CLAUDE.md current as the project evolves — every component you build, every rule you discover, lands in CLAUDE.md the same turn.</div>
+Don't write any token files yet. Just the folder skeleton and the four tier READMEs.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>foundations/, tokens/, components/{atoms, molecules, organisms, patterns}/, screens/</span></li>
             <li><span class="check"></span><span>README.md in each component tier folder</span></li>
-            <li><span class="check"></span><span>CLAUDE.md updated to reflect the new state — and stays current going forward</span></li>
             <li><span class="check"></span><span>No token JSON files written yet</span></li>
+            <li><span class="check"></span><span>.claude/ NOT created — built by /skill-creator in the next lesson</span></li>
           </ul>
         </div>
       </div>
-      <div class="slide-footer"><span>Setup</span><span>The file is alive</span></div>
+      <div class="slide-footer"><span>Setup</span><span>Folders before content</span></div>
     </section>
 
     <section class="slide section-break" data-section="Part 1" data-notes="This begins the hands-on section. The first sentence should make the shift from concept to action obvious.">
@@ -8343,6 +8343,39 @@ When I approve, perform the swaps, then generate screens/welcome.html — same s
         </table>
       </div>
       <div class="slide-footer"><span>Always-loaded layer</span><span>Under 200 lines</span></div>
+    </section>
+
+    <section class="slide prompt-slide labeled-prompt-slide" data-section="Part 2" data-notes="The post-/init refinement prompt. Walk through each row, calling out which framework part it is and how it maps to the eight CLAUDE.md sections from the previous slide. Hold on Constraints — the eight sections list is the load-bearing rule. Then move to the after-state slide. Full prompt to paste: Act as a design system architect refining the /init-generated CLAUDE.md into working project documentation. The /init produced a starter CLAUDE.md — refine it for this project. Replace the boilerplate with what the agent actually needs to work in this repo. Project context: token-driven design system, Figma file vdVmrWthRNIyM1lf2XThdZ is the source of truth, Welcome screen at node 1:51, Foundations page at node 2:82 with primitive colors planning canvas at 2:3389 and semantic colors at 2:3856. Repo tiers: foundations/, tokens/, components/atoms/molecules/organisms/patterns/, screens/. Constraints: eight sections in this order — 1) Project identity, 2) Architecture summary, 3) Reference tables, 4) Conventions, 5) Critical rules, 6) Workflow patterns, 7) File references, 8) Discovered rules (living log, appended immediately). No demo or session context. Project documentation only. Output: show me the diff before writing — I'll approve before commit.">
+      <div class="slide-content">
+        <div class="kicker">After /init · Refine the prompt</div>
+        <h2>Five rows. Eight sections. One CLAUDE.md.</h2>
+        <div class="labeled-prompt prompt-panel">
+          <div class="lp-header prompt-toolbar">
+            <span class="lp-header-label prompt-badge">CLAUDE.md refinement</span>
+          </div>
+          <div class="lp-row">
+            <span class="lp-label">Role</span>
+            <div class="lp-text">Act as a design system architect refining the <code>/init</code>-generated CLAUDE.md into working project documentation.</div>
+          </div>
+          <div class="lp-row">
+            <span class="lp-label">Ask</span>
+            <div class="lp-text">Refine CLAUDE.md for this project. Replace the boilerplate with what the agent actually needs to work in this repo.</div>
+          </div>
+          <div class="lp-row">
+            <span class="lp-label">Context</span>
+            <div class="lp-text">Token-driven design system. Figma file <code>vdVmrWthRNIyM1lf2XThdZ</code> is the source of truth. Welcome screen at node <code>1:51</code>. Foundations page at <code>2:82</code> — primitive colors canvas <code>2:3389</code>, semantic colors canvas <code>2:3856</code>. Repo tiers: <code>foundations/</code>, <code>tokens/</code>, <code>components/atoms · molecules · organisms · patterns/</code>, <code>screens/</code>.</div>
+          </div>
+          <div class="lp-row">
+            <span class="lp-label">Constraints</span>
+            <div class="lp-text">Eight sections, in this order: <b>1</b> Project identity · <b>2</b> Architecture summary · <b>3</b> Reference tables · <b>4</b> Conventions · <b>5</b> Critical rules · <b>6</b> Workflow patterns · <b>7</b> File references · <b>8</b> Discovered rules (living log). No demo or session context. Project documentation only.</div>
+          </div>
+          <div class="lp-row">
+            <span class="lp-label">Output</span>
+            <div class="lp-text">Show me the diff before writing. I'll approve before commit.</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>After /init</span><span>Refine to project</span></div>
     </section>
 
     <section class="slide" data-section="Part 2" data-notes="This is what a real CLAUDE.md looks like once authored. Show this slide so students have a concrete model of 'good' before they write their own. Quick walk: name the eight sections in the file, point at the discovered-rule entry, then move on.">
