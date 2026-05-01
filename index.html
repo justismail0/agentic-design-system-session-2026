@@ -8381,42 +8381,230 @@ When I approve, perform the swaps, then generate screens/welcome.html — same s
       <div class="slide-footer"><span>After /init</span><span>Refine to project</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="This is what a real CLAUDE.md looks like once authored. Show this slide so students have a concrete model of 'good' before they write their own. Quick walk: name the eight sections in the file, point at the discovered-rule entry, then move on.">
+    <section class="slide" data-section="Part 2" data-notes="This is what a real CLAUDE.md looks like once authored. The full file from the demo project. Walk it from top to bottom — point out: project context up top, repository layout, token system architecture, per-component file shape, workflow patterns, runtime gotchas, and the living Discovered rules log at the bottom. The slide content scrolls so students can read every line.">
       <div class="slide-content">
         <div class="kicker">CLAUDE.md · After /init + authoring</div>
         <h2>Here's what good looks like.</h2>
-        <p class="lede">A real CLAUDE.md from a working project. Notice: every rule has a reason, every reference points outward, the discovered-rules log is alive.</p>
+        <p class="lede">The full CLAUDE.md from a working project. Every rule has a reason, every reference points outward, the discovered-rules log is alive.</p>
         <div class="claude-md-example">
           <div class="claude-md-example-header">
             <span class="claude-md-example-file">CLAUDE.md</span>
-            <span class="claude-md-example-meta">~140 lines · always loaded</span>
+            <span class="claude-md-example-meta">~256 lines · always loaded</span>
           </div>
-          <pre class="claude-md-example-body"><span class="cm-h1"># Keeta Design System — AI Context</span>
+          <pre class="claude-md-example-body"><span class="cm-h1"># CLAUDE.md</span>
 
-<span class="cm-comment">## 1 · Project identity</span>
-Figma file: <span class="cm-code">vdVmrWthRNIyM1lf2XThdZ</span>
-Welcome screen: node <span class="cm-code">1:51</span>
+Project context for Claude Code working in this design-system repo.
+<span class="cm-em">Figma is the source of truth</span> for every token. The local
+<span class="cm-code">tokens.json</span> is the consolidated DTCG export — the same data, in a
+file the agent can read alongside the Figma file.
 
-<span class="cm-comment">## 2 · Architecture summary</span>
-<span class="cm-code">Primitive → Semantic → Component</span>
-Components MUST only reference semantic tokens, never primitives directly.
+- <span class="cm-em">Figma file:</span> <span class="cm-code">vdVmrWthRNIyM1lf2XThdZ</span>
+- <span class="cm-em">Welcome screen:</span> node <span class="cm-code">1:51</span>
+- <span class="cm-em">Foundations page:</span> node <span class="cm-code">2:82</span>
+  - Primitive colors planning canvas: node <span class="cm-code">2:3389</span>
+  - Semantic colors planning canvas: node <span class="cm-code">2:3856</span>
 
-<span class="cm-comment">## 3 · Reference tables</span>
-| Collection | Variables | Naming Pattern |
-| --- | --- | --- |
-| Primitive: Colors | 90 | <span class="cm-code">color/{hue}/{shade}</span> |
-| Semantic: Colors | 122 | <span class="cm-code">{category}/{role}-{state}</span> |
+<span class="cm-comment">## Repository layout</span>
 
-<span class="cm-comment">## 5 · Critical rules</span>
-1. <span class="cm-em">Semantic only</span> — components reference semantic tokens, never primitives
-2. <span class="cm-em">4px grid</span> — all sizing multiples of 4 (exception: 11px Text XS)
-9. <span class="cm-em">Text-on-solid contrast</span> — on <span class="cm-code">brand-solid</span> (yellow) use <span class="cm-code">text/primary-default</span>
-   (dark). Yellow is too bright for white. Same rule for icon colour.
+<span class="cm-code">.
+├── CLAUDE.md                    project context (this file)
+├── tokens.json                  DTCG export, source of truth
+├── foundations/                 split primitive exports per collection
+│   ├── primitive-colors.json
+│   ├── primitive-size.json
+│   └── primitive-typography.json
+├── tokens/                      split semantic exports per collection
+│   ├── semantic-colors.json
+│   ├── semantic-size.json
+│   └── semantic-typography.json
+├── components/                  atomic-design tier
+│   ├── atoms/                   smallest functional units
+│   │   └── {name}/
+│   │       ├── {name}.tokens.json    authored — canonical bindings
+│   │       ├── {name}.html           generated — self-contained doc + preview
+│   │       └── {name}.md             mostly generated, judgment sections preserved
+│   ├── molecules/               compositions of atoms
+│   ├── organisms/               feature-level UI blocks
+│   └── patterns/                composition blueprints (MD-only)
+├── screens/                     composed screen artifacts (HTML)
+└── .claude/
+    ├── commands/                slash-command wrappers
+    └── skills/                  reusable workflows
+        └── component-documentation/</span>
 
-<span class="cm-comment">## 8 · Discovered rules <span class="cm-pulse">●</span> appended live</span>
-28. <span class="cm-em">SF Pro "Semibold" spelling</span> — SF Pro weight is <span class="cm-code">Semibold</span> (no space),
-    not <span class="cm-code">Semi Bold</span> (Inter). When creating text programmatically,
-    use <span class="cm-code">{family: 'SF Pro Text', style: 'Semibold'}</span>.</pre>
+The split files in <span class="cm-code">foundations/</span> and <span class="cm-code">tokens/</span> mirror sections of the
+consolidated <span class="cm-code">tokens.json</span>. The consolidated file is the source — never
+hand-edit the split files. To refresh: round-trip through Figma, regenerate
+<span class="cm-code">tokens.json</span>, then re-split into the per-collection files.
+
+<span class="cm-comment">## Required skill before touching Figma</span>
+
+Always load <span class="cm-code">figma:figma-use</span> <span class="cm-em">before</span> any <span class="cm-code">use_figma</span> call. Skipping it
+causes hard-to-debug failures. Pass <span class="cm-code">skillNames: "figma-use"</span> on every
+<span class="cm-code">use_figma</span> invocation.
+
+For building or updating whole screens or libraries, additionally load
+<span class="cm-code">figma:figma-generate-design</span> or <span class="cm-code">figma:figma-generate-library</span>.
+
+<span class="cm-comment">## Token system architecture</span>
+
+Six collections organized as primitive → semantic. Component-level tokens
+live alongside each component in <span class="cm-code">components/{tier}/{name}/{name}.tokens.json</span>
+— never in a shared collection.
+
+| Collection                | Modes        | Role |
+|---------------------------|--------------|---|
+| <span class="cm-code">Primitive: Colors</span>     | 1            | Raw palette scales (yellow/teal/green/red/orange/blue/neutral × 50–900, base) |
+| <span class="cm-code">Primitive: Typography</span> | 1            | font-family, font-weight (STRING); font-size, line-height (FLOAT) |
+| <span class="cm-code">Primitive: Size</span>       | 1            | 4px-grid scale (0–999) |
+| <span class="cm-code">Semantic: Colors</span>      | <span class="cm-em">Light, Dark</span>  | Property/role/state aliases to primitives |
+| <span class="cm-code">Semantic: Typography</span>  | 1            | Aliases to primitive typography |
+| <span class="cm-code">Semantic: Size</span>        | 1            | spacing, border-radius, border-width, icon, component-height |
+
+<span class="cm-comment">### Naming conventions</span>
+
+- <span class="cm-em">Semantic colors:</span> <span class="cm-code">{property}/{role}/{state}</span> (e.g.
+  <span class="cm-code">background/brand/default-hover</span>, <span class="cm-code">text/primary/disabled</span>). Split
+  composite state keys on the <span class="cm-em">first hyphen only</span> so <span class="cm-code">solid-hover</span>
+  stays as one state.
+- <span class="cm-em">Everything else:</span> slash-grouped paths (<span class="cm-code">border-radius/full</span>,
+  <span class="cm-code">font-size/headline-xl</span>).
+- <span class="cm-em">Primitives:</span> <span class="cm-code">{group}/{step}</span> (<span class="cm-code">yellow/500</span>, <span class="cm-code">neutral/100</span>).
+
+<span class="cm-comment">### Scopes by token type</span>
+
+| Token area              | Scopes |
+|-------------------------|---|
+| Color: background/*     | <span class="cm-code">FRAME_FILL, SHAPE_FILL</span> |
+| Color: text/*           | <span class="cm-code">TEXT_FILL</span> |
+| Color: icon/*           | <span class="cm-code">SHAPE_FILL, TEXT_FILL</span> |
+| Color: border/*         | <span class="cm-code">STROKE_COLOR</span> |
+| Primitive colors        | <span class="cm-code">ALL_FILLS, STROKE_COLOR, EFFECT_COLOR</span> |
+| Dimensions              | <span class="cm-code">GAP, WIDTH_HEIGHT</span> (spacing), <span class="cm-code">CORNER_RADIUS</span> (radius), <span class="cm-code">STROKE_FLOAT</span> (border-width), <span class="cm-code">FONT_SIZE</span>, <span class="cm-code">LINE_HEIGHT</span>, <span class="cm-code">FONT_FAMILY</span>, <span class="cm-code">FONT_STYLE</span> |
+
+Always set <span class="cm-code">variable.scopes</span> explicitly. The <span class="cm-code">ALL_SCOPES</span> default pollutes
+pickers.
+
+<span class="cm-comment">## Token export format</span>
+
+Top-level keys in <span class="cm-code">tokens.json</span> are collection slugs:
+<span class="cm-code">primitive-colors</span>, <span class="cm-code">primitive-size</span>, <span class="cm-code">primitive-typography</span>,
+<span class="cm-code">semantic-colors</span>, <span class="cm-code">semantic-size</span>, <span class="cm-code">semantic-typography</span>.
+
+Each collection has metadata (<span class="cm-code">$collection</span>, <span class="cm-code">$slug</span>, <span class="cm-code">$modes</span>,
+<span class="cm-code">$defaultMode</span>, <span class="cm-code">$description</span>) and a tree of tokens. Leaf tokens use
+<span class="cm-code">$type</span> (<span class="cm-code">COLOR</span>/<span class="cm-code">FLOAT</span>/<span class="cm-code">STRING</span>), <span class="cm-code">$scopes</span>, <span class="cm-code">$values</span> keyed by mode name.
+Aliases use <span class="cm-code">{"$alias": "{collection-slug.path.to.var}"}</span>.
+
+<span class="cm-comment">## Per-component files</span>
+
+Atomic-design tiered: <span class="cm-code">atoms/</span> → <span class="cm-code">molecules/</span> → <span class="cm-code">organisms/</span> → <span class="cm-code">patterns/</span>.
+One folder per component. Each component folder contains <span class="cm-em">three files</span>:
+
+- <span class="cm-code">{name}.tokens.json</span> — <span class="cm-em">authored</span>. The canonical token bindings.
+- <span class="cm-code">{name}.html</span> — <span class="cm-em">generated</span>. Self-contained documentation page emitted
+  by the <span class="cm-code">component-documentation</span> skill from the Figma model and
+  <span class="cm-code">{name}.tokens.json</span>. Hand edits are lost on regen.
+- <span class="cm-code">{name}.md</span> — <span class="cm-em">mostly generated, partially authored</span>. Spec written by
+  the skill; judgment sections (When to use / Don't / Accessibility / Content
+  guidelines / Cross-references) preserved verbatim across regenerations.
+
+<span class="cm-em">Tier reference rule:</span> molecule tokens may reference atom tokens via <span class="cm-code">$alias</span>
+paths. Never the other way around — atoms don't reference molecules or
+organisms.
+
+<span class="cm-em">Patterns are MD-only</span> — they describe composition, not consumable
+components.
+
+State tokens (hover, disabled) come from the semantic <span class="cm-code">-hover</span> / <span class="cm-code">-disabled</span>
+tokens — don't invent new component-level state tokens.
+
+Active state has no semantic token; CSS <span class="cm-code">filter: brightness(0.95)</span> is the
+stopgap. Document it in the component MD's Known issues.
+
+<span class="cm-comment">## Workflow patterns</span>
+
+<span class="cm-comment">### Inspect first, write second</span>
+
+Always run a read-only <span class="cm-code">use_figma</span> (list collections, list component names)
+before creating anything, so new work matches the existing naming and
+structure.
+
+<span class="cm-comment">### Small atomic steps</span>
+
+Never try to build the whole system in one <span class="cm-code">use_figma</span> call. Pattern that
+works:
+
+1. Inspect the file
+2. Create or update primitives (one collection per call)
+3. Create the semantic layer
+4. Create the component layer
+5. Validate with <span class="cm-code">get_metadata</span> (and <span class="cm-code">get_screenshot</span> for visual changes)
+
+<span class="cm-comment">### Page-per-component</span>
+
+Every component build creates a new Figma page named after the component.
+Place the component set on that page. Keeps the file organized as the
+system grows.
+
+<span class="cm-comment">### Cross-collection aliasing order</span>
+
+Primitives must exist before semantics alias them; semantics before
+components.
+
+<span class="cm-comment">### Returning output</span>
+
+<span class="cm-code">use_figma</span> only returns the script's <span class="cm-code">return</span> value — <span class="cm-code">console.log</span> is
+invisible. Every script that creates or mutates nodes must return the
+affected IDs:
+
+<span class="cm-code">return { createdNodeIds: [...], mutatedNodeIds: [...] };</span>
+
+<span class="cm-comment">## Known runtime limitations (Figma MCP)</span>
+
+- <span class="cm-em">hiddenFromPublishing</span> cannot be set via <span class="cm-code">use_figma</span>. Both setter and
+  getter throw "Node not found". Toggle manually via Local Variables panel.
+- <span class="cm-em">Page context resets</span> between <span class="cm-code">use_figma</span> calls — always
+  <span class="cm-code">await figma.setCurrentPageAsync(page)</span> at the start.
+- <span class="cm-em">Scripts are atomic</span> — on error, no partial state is written; safe to
+  fix and retry.
+
+<span class="cm-comment">## Discovered rules <span class="cm-pulse">●</span> appended live</span>
+
+<span class="cm-em">Append new rules here the moment they're learned.</span> Font naming quirks,
+API gotchas, file-specific conventions, tool behaviors — add them in the
+middle of the task that taught you, not at end-of-turn.
+
+<span class="cm-comment">### Fonts</span>
+
+- <span class="cm-em">Inter</span> — Semi-bold is <span class="cm-code">"Semi Bold"</span> (with a space). Same for
+  <span class="cm-code">"Extra Bold"</span>. Using <span class="cm-code">"SemiBold"</span> fails <span class="cm-code">loadFontAsync</span>.
+- <span class="cm-em">SF Pro</span> — Semi-bold is <span class="cm-code">"Semibold"</span> (one word). Different from Inter.
+- When <span class="cm-code">loadFontAsync</span> throws, call <span class="cm-code">figma.listAvailableFontsAsync()</span> to
+  discover the exact style string rather than guessing.
+
+<span class="cm-comment">### Figma variable API</span>
+
+- <span class="cm-code">figma.notify()</span> throws "not implemented" — never use it. Return output
+  via <span class="cm-code">return</span>.
+- <span class="cm-code">figma.currentPage = page</span> throws "not supported". Always use
+  <span class="cm-code">await figma.setCurrentPageAsync(page)</span>.
+- <span class="cm-code">getPluginData</span> / <span class="cm-code">setPluginData</span> are not supported. Use
+  <span class="cm-code">getSharedPluginData</span> / <span class="cm-code">setSharedPluginData</span> with a stable 3+ char
+  namespace.
+- Setting <span class="cm-code">layoutSizingHorizontal/Vertical = 'FILL'</span> must happen <span class="cm-em">after</span>
+  <span class="cm-code">parent.appendChild(child)</span>. Setting before throws.
+- <span class="cm-code">setBoundVariableForPaint</span> returns a <span class="cm-em">new</span> paint — capture and reassign,
+  don't assume in-place mutation.
+- <span class="cm-code">addComponentProperty(name, "INSTANCE_SWAP", defaultValue)</span> —
+  <span class="cm-code">defaultValue</span> must be the <span class="cm-em">node ID</span>, NOT <span class="cm-code">component.key</span>.
+
+<span class="cm-comment">### Semantic naming</span>
+
+- Split composite <span class="cm-code">{role}-{state}</span> keys on <span class="cm-em">first hyphen only</span>.
+  <span class="cm-code">brand-default-hover</span> → <span class="cm-code">brand/default-hover</span>, not
+  <span class="cm-code">brand/default/hover</span>. Keeps <span class="cm-code">default-hover</span> and <span class="cm-code">solid-hover</span>
+  readable as one state unit.</pre>
         </div>
       </div>
       <div class="slide-footer"><span>Concrete reference</span><span>Discovered rules grow live</span></div>
