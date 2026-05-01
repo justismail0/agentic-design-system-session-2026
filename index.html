@@ -1348,52 +1348,108 @@
     font-weight: var(--fw-semibold);
   }
 
+  /* File tree styled as a macOS-style terminal pane.
+     Always-dark, regardless of theme. CSS-drawn connectors so vertical
+     and horizontal lines stay continuous between rows. */
   .file-tree {
     width: 100%;
-    max-width: 920px;
+    max-width: 880px;
     margin-top: var(--sp-4);
-    padding: 20px 22px;
-    border: 1px solid rgba(80, 65, 112, 0.12);
-    border-radius: 18px;
-    background:
-      linear-gradient(180deg, rgba(255, 252, 247, 0.88), rgba(244, 239, 252, 0.74));
-    box-shadow:
-      0 20px 60px rgba(78, 63, 115, 0.10),
-      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    padding: 0 0 18px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    background: #1a1d24;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
     font-family: var(--font-mono);
-    overflow-x: auto;
+    color: rgba(255, 255, 255, 0.86);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Header bar with the three traffic-light dots */
+  .file-tree::before {
+    content: '';
+    display: block;
+    height: 38px;
+    margin-bottom: 14px;
+    background-color: rgba(0, 0, 0, 0.22);
+    background-image:
+      radial-gradient(circle at 18px 19px, #ff5f57 6px, transparent 7px),
+      radial-gradient(circle at 38px 19px, #febc2e 6px, transparent 7px),
+      radial-gradient(circle at 58px 19px, #28c840 6px, transparent 7px);
+    background-repeat: no-repeat;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .file-tree-row {
     display: flex;
-    align-items: center;
-    min-height: 22px;
+    align-items: stretch;
+    min-height: 24px;
     white-space: nowrap;
-    font-size: clamp(12px, 1vw, 15px);
-    line-height: 1.3;
+    font-size: clamp(13px, 1vw, 15px);
+    line-height: 1.4;
+    padding: 0 22px;
   }
 
   .file-tree-guides {
     display: inline-flex;
-    align-items: center;
-    color: rgba(72, 61, 92, 0.34);
+    align-items: stretch;
     flex: 0 0 auto;
+    font-size: 0;
   }
 
   .file-tree-guide {
-    width: 18px;
-    text-align: center;
+    width: 22px;
+    position: relative;
+    font-size: 0;
+    flex: 0 0 auto;
+  }
+  .file-tree-guide::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: rgba(74, 142, 217, 0.65);
   }
 
   .file-tree-branch {
-    width: 28px;
-    margin-right: 4px;
-    color: rgba(72, 61, 92, 0.52);
+    width: 32px;
+    margin-right: 8px;
+    position: relative;
+    font-size: 0;
     flex: 0 0 auto;
+  }
+  .file-tree-branch::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: rgba(74, 142, 217, 0.65);
+  }
+  .file-tree-branch--last::before {
+    bottom: 50%;
+  }
+  .file-tree-branch::after {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    width: 18px;
+    height: 1.5px;
+    background: rgba(74, 142, 217, 0.65);
+    transform: translateY(-50%);
   }
 
   .file-tree-node {
-    color: #1d162b;
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    font-size: clamp(13px, 1vw, 15px);
+    color: rgba(255, 255, 255, 0.86);
   }
 
   .file-tree-node + .file-tree-node {
@@ -1401,26 +1457,28 @@
   }
 
   .file-tree-row.root .file-tree-node {
-    font-weight: var(--fw-heavy);
-    color: #2c2250;
+    color: #ffffff;
+    font-weight: var(--fw-bold);
   }
 
   .file-tree-node.folder {
-    color: #57459a;
+    color: #6db1ff;
     font-weight: var(--fw-bold);
   }
 
   .file-tree-node.file {
-    color: #1d162b;
+    color: rgba(255, 255, 255, 0.86);
     font-weight: var(--fw-medium);
   }
 
   .file-tree-node.accent {
-    color: #12695f;
+    color: #ffd866;
+    font-weight: var(--fw-bold);
   }
 
   .file-tree-node.meta {
-    color: rgba(72, 61, 92, 0.74);
+    color: rgba(255, 255, 255, 0.46);
+    font-style: italic;
     font-weight: var(--fw-medium);
   }
 
@@ -6799,42 +6857,8 @@
     color: #fff;
   }
 
-  :root[data-theme="dark"] .file-tree {
-    border-color: rgba(211, 201, 232, 0.12);
-    background:
-      linear-gradient(180deg, rgba(24, 18, 42, 0.88), rgba(10, 7, 21, 0.78));
-    box-shadow:
-      0 24px 70px rgba(0, 0, 0, 0.28),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  }
-
-  :root[data-theme="dark"] .file-tree-guides {
-    color: rgba(244, 240, 255, 0.22);
-  }
-
-  :root[data-theme="dark"] .file-tree-branch {
-    color: rgba(244, 240, 255, 0.42);
-  }
-
-  :root[data-theme="dark"] .file-tree-node {
-    color: rgba(244, 240, 255, 0.90);
-  }
-
-  :root[data-theme="dark"] .file-tree-row.root .file-tree-node {
-    color: #fff;
-  }
-
-  :root[data-theme="dark"] .file-tree-node.folder {
-    color: #d7c3ff;
-  }
-
-  :root[data-theme="dark"] .file-tree-node.accent {
-    color: #94f0bd;
-  }
-
-  :root[data-theme="dark"] .file-tree-node.meta {
-    color: rgba(244, 240, 255, 0.68);
-  }
+  /* File-tree is always-dark (terminal-pane style); no theme-specific
+     overrides needed. The .file-tree rule defines the dark palette. */
 
   /* Legacy :root[data-theme="dark"] .prompt-copy overrides retired —
      submit button styles already work in both themes. */
@@ -8728,18 +8752,18 @@ stand alone with enough context that a fresh session can apply it.
           <div class="file-tree-row"><span class="file-tree-branch" aria-hidden="true">├──</span><span class="file-tree-node folder">.claude/</span></div>
           <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span></span><span class="file-tree-branch" aria-hidden="true">├──</span><span class="file-tree-node file">settings.json</span></div>
           <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span></span><span class="file-tree-branch" aria-hidden="true">├──</span><span class="file-tree-node folder">commands/</span></div>
-          <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span></span><span class="file-tree-branch" aria-hidden="true">└──</span><span class="file-tree-node folder">skills/</span><span class="file-tree-node meta">{skill-name}/SKILL.md</span></div>
+          <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span></span><span class="file-tree-branch file-tree-branch--last" aria-hidden="true">└──</span><span class="file-tree-node folder">skills/</span><span class="file-tree-node meta">{skill-name}/SKILL.md</span></div>
           <div class="file-tree-row"><span class="file-tree-branch" aria-hidden="true">├──</span><span class="file-tree-node folder">foundations/</span></div>
           <div class="file-tree-row"><span class="file-tree-branch" aria-hidden="true">├──</span><span class="file-tree-node folder">tokens/</span></div>
           <div class="file-tree-row"><span class="file-tree-branch" aria-hidden="true">├──</span><span class="file-tree-node folder">components/</span></div>
           <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span></span><span class="file-tree-branch" aria-hidden="true">├──</span><span class="file-tree-node folder">atoms/</span><span class="file-tree-node meta">{name}/</span></div>
           <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span><span class="file-tree-guide">│</span></span><span class="file-tree-branch" aria-hidden="true">├──</span><span class="file-tree-node file">{name}.html</span></div>
           <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span><span class="file-tree-guide">│</span></span><span class="file-tree-branch" aria-hidden="true">├──</span><span class="file-tree-node file">{name}.tokens.json</span></div>
-          <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span><span class="file-tree-guide">│</span></span><span class="file-tree-branch" aria-hidden="true">└──</span><span class="file-tree-node file">{name}.md</span></div>
+          <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span><span class="file-tree-guide">│</span></span><span class="file-tree-branch file-tree-branch--last" aria-hidden="true">└──</span><span class="file-tree-node file">{name}.md</span></div>
           <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span></span><span class="file-tree-branch" aria-hidden="true">├──</span><span class="file-tree-node folder">molecules/</span></div>
           <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span></span><span class="file-tree-branch" aria-hidden="true">├──</span><span class="file-tree-node folder">organisms/</span></div>
-          <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span></span><span class="file-tree-branch" aria-hidden="true">└──</span><span class="file-tree-node folder">patterns/</span></div>
-          <div class="file-tree-row"><span class="file-tree-branch" aria-hidden="true">└──</span><span class="file-tree-node folder">knowledge-base/</span></div>
+          <div class="file-tree-row"><span class="file-tree-guides" aria-hidden="true"><span class="file-tree-guide">│</span></span><span class="file-tree-branch file-tree-branch--last" aria-hidden="true">└──</span><span class="file-tree-node folder">patterns/</span></div>
+          <div class="file-tree-row"><span class="file-tree-branch file-tree-branch--last" aria-hidden="true">└──</span><span class="file-tree-node folder">knowledge-base/</span></div>
         </div>
       </div>
       <div class="slide-footer"><span>Agent-readable architecture</span><span>Colocated component context</span></div>
