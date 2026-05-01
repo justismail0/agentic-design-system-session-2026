@@ -4825,14 +4825,16 @@
     flex-shrink: 0;
   }
 
-  /* CLAUDE.md filled-in example — markdown-as-canvas with subtle syntax highlighting */
+  /* CLAUDE.md filled-in example — Claude.ai-style dark elevated card,
+     matching .prompt and .labeled-prompt. Same #1f1f1f bg, white-ish text,
+     mint-tinted syntax highlighting. */
   .claude-md-example {
     margin-top: var(--sp-5);
-    border: 1px solid var(--border-medium, rgba(24, 29, 39, 0.12));
-    border-radius: var(--r-lg);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 18px;
     overflow: hidden;
-    background: var(--bg-surface-grad, var(--c-surface));
-    box-shadow: var(--shadow-sm);
+    background: #1f1f1f;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     min-width: 0;
   }
   .claude-md-example-header {
@@ -4840,20 +4842,20 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 16px;
-    background: rgba(53, 255, 181, 0.06);
-    border-bottom: 1px solid var(--border-subtle, rgba(24, 29, 39, 0.08));
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
   .claude-md-example-file {
     font-family: var(--font-mono);
     font-size: var(--ts-small);
     font-weight: var(--fw-semibold);
-    color: var(--text-strong, var(--ink));
+    color: rgba(255, 255, 255, 0.96);
   }
   .claude-md-example-meta {
     font-family: var(--font-mono);
     font-size: var(--ts-micro);
     letter-spacing: var(--ls-eyebrow);
-    color: var(--text-muted, var(--muted));
+    color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
   }
   .claude-md-example-body {
@@ -4862,27 +4864,27 @@
     font-family: var(--font-mono);
     font-size: clamp(11px, 0.92vw, 13px);
     line-height: 1.55;
-    color: var(--text-default, var(--ink));
+    color: rgba(255, 255, 255, 0.86);
     white-space: pre-wrap;
     overflow-x: auto;
   }
   .claude-md-example-body .cm-h1 {
-    color: var(--text-strong, var(--ink));
+    color: rgba(255, 255, 255, 0.98);
     font-weight: var(--fw-bold);
   }
   .claude-md-example-body .cm-comment {
-    color: var(--text-accent, var(--c-mint));
+    color: var(--c-mint);
     font-weight: var(--fw-semibold);
   }
   .claude-md-example-body .cm-code {
-    background: rgba(53, 255, 181, 0.10);
-    color: var(--text-strong, var(--ink));
+    background: rgba(53, 255, 181, 0.15);
+    color: rgba(255, 255, 255, 0.96);
     padding: 1px 5px;
     border-radius: 4px;
     font-size: 0.95em;
   }
   .claude-md-example-body .cm-em {
-    color: var(--text-strong, var(--ink));
+    color: rgba(255, 255, 255, 0.98);
     font-weight: var(--fw-semibold);
   }
   .claude-md-example-body .cm-pulse {
