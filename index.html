@@ -8414,39 +8414,6 @@ file the agent can read alongside the Figma file.
   - Primitive colors planning canvas: node <span class="cm-code">2:3389</span>
   - Semantic colors planning canvas: node <span class="cm-code">2:3856</span>
 
-<span class="cm-comment">## Repository layout</span>
-
-<span class="cm-code">.
-├── CLAUDE.md                    project context (this file)
-├── tokens.json                  DTCG export, source of truth
-├── foundations/                 split primitive exports per collection
-│   ├── primitive-colors.json
-│   ├── primitive-size.json
-│   └── primitive-typography.json
-├── tokens/                      split semantic exports per collection
-│   ├── semantic-colors.json
-│   ├── semantic-size.json
-│   └── semantic-typography.json
-├── components/                  atomic-design tier
-│   ├── atoms/                   smallest functional units
-│   │   └── {name}/
-│   │       ├── {name}.tokens.json    authored — canonical bindings
-│   │       ├── {name}.html           generated — self-contained doc + preview
-│   │       └── {name}.md             mostly generated, judgment sections preserved
-│   ├── molecules/               compositions of atoms
-│   ├── organisms/               feature-level UI blocks
-│   └── patterns/                composition blueprints (MD-only)
-├── screens/                     composed screen artifacts (HTML)
-└── .claude/
-    ├── commands/                slash-command wrappers
-    └── skills/                  reusable workflows
-        └── component-documentation/</span>
-
-The split files in <span class="cm-code">foundations/</span> and <span class="cm-code">tokens/</span> mirror sections of the
-consolidated <span class="cm-code">tokens.json</span>. The consolidated file is the source — never
-hand-edit the split files. To refresh: round-trip through Figma, regenerate
-<span class="cm-code">tokens.json</span>, then re-split into the per-collection files.
-
 <span class="cm-comment">## Required skill before touching Figma</span>
 
 Always load <span class="cm-code">figma:figma-use</span> <span class="cm-em">before</span> any <span class="cm-code">use_figma</span> call. Skipping it
