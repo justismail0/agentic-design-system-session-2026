@@ -8319,18 +8319,18 @@ why? Propose the full pairing matrix before writing.</div>
       <div class="slide-content">
         <span class="ex-pill">Example · Button in Figma</span>
         <h1 class="cover-title">Build the first component.</h1>
-        <p class="cover-subtitle">Cross-reference your token JSON, let Claude propose the variant matrix and bindings, then execute against the canvas.</p>
+        <p class="cover-subtitle">Cross-reference your token JSON, name the variant matrix, and watch the agent build the component set straight against the canvas.</p>
         <div class="ex-flow" aria-label="Activity steps">
-          <span class="ex-flow-step active">Propose</span>
+          <span class="ex-flow-step active">Read tokens</span>
           <span class="ex-flow-arrow">→</span>
-          <span class="ex-flow-step">Push back</span>
+          <span class="ex-flow-step">Build component set</span>
           <span class="ex-flow-arrow">→</span>
-          <span class="ex-flow-step">Build</span>
+          <span class="ex-flow-step">Verify bindings</span>
         </div>
       </div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The first component built live, raw. Figma only. No JSON, no .md, no .html. Just the component set. The capture discipline lands later in Lessons 2-5; Lesson 6 audits the Figma component into JSON, then runs the skill to generate button.html and button.md. Default icon-swaps should point at instances from the Icons frame on Utility (5:355, frame 26:524). Full prompt to paste: Build a Button in our Figma demo file. Read tokens.json first to learn the semantic tokens you can alias. Create a new Figma page named 'Button' and place the component set on it. Don't build anything yet. Propose: the variant matrix (Style × Size × Icon only), the component properties (Label TEXT, Show left icon BOOLEAN, Show right icon BOOLEAN, Left icon INSTANCE_SWAP, Right icon INSTANCE_SWAP), the anatomy (left-icon, label, right-icon centered horizontal flex), which semantic token each visual property aliases to, the state model (default, hover, disabled. Active state has no semantic token, document the gap). When I approve: build the component set in Figma using small atomic use_figma calls (load figma:figma-use first). Just the component set. JSON + spec come later in Lesson 6. Return setId, every variant rendered, every fill/stroke/text bound to a semantic variable, $notes for the active-state gap.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The first component built live, direct (no propose-then-approve). Figma only at this point — capture comes later in the session. Default icon-swaps should point at instances from the Icons frame on Utility (5:355, frame 26:524). Full prompt to paste: Build a Button in our Figma demo file. Read tokens.json first to learn the semantic tokens you can alias. Create a new Figma page named 'Button' and place the component set on it. Variant matrix: Style × Size × Icon only. Properties: Label (TEXT), Show left icon (BOOLEAN), Show right icon (BOOLEAN), Left icon (INSTANCE_SWAP), Right icon (INSTANCE_SWAP). Anatomy: left-icon, label, right-icon, centered horizontal flex. State model: default, hover, disabled. Active state has no semantic token, mark it. Bind every fill, stroke, text, and spacing through semantic tokens, never primitives. Default icon-swaps point at instances from the Icons frame on Utility.">
       <div class="slide-content">
         <div class="kicker">Component 1 · Button</div>
         <div class="prompt-frame">
@@ -8338,24 +8338,27 @@ why? Propose the full pairing matrix before writing.</div>
 
 Create a new Figma page named "Button" and place the component set on it.
 
-Don't build anything yet. Propose: variant matrix (Style × Size × Icon only), properties (Label, icon booleans, icon swaps), anatomy, and which semantic token each visual property aliases. State model: default, hover, disabled.
+Variant matrix: Style × Size × Icon only.
+Properties: Label (TEXT), Show left icon (BOOLEAN), Show right icon (BOOLEAN), Left icon (INSTANCE_SWAP), Right icon (INSTANCE_SWAP).
+Anatomy: left-icon, label, right-icon, centered horizontal flex.
+State model: default, hover, disabled. Active state has no semantic token, mark it.
 
-When I approve, build the component set in Figma. Just the component set. We'll extract bindings to JSON and write the spec later, after the skill exists.</div>
+Bind every fill, stroke, text, and spacing through semantic tokens, never primitives. Default icon-swaps point at instances from the Icons frame on Utility.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>Style × Size × Icon only variants rendered</span></li>
             <li><span class="check"></span><span>Every fill / text / border bound to a semantic token</span></li>
+            <li><span class="check"></span><span>Hover and disabled states visible per variant</span></li>
             <li><span class="check"></span><span>Default icon-swaps point at instances from the Icons frame on Utility</span></li>
-            <li><span class="check"></span><span>JSON + spec extracted later by the skill (Lesson 6)</span></li>
           </ul>
         </div>
       </div>
       <div class="slide-footer"><span>1 of 4 · Button</span><span>~25 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. Same propose-then-execute discipline. The hide-by-prop pattern is load-bearing. The Welcome screen needs Title + Subtitle but no Overline or Description. Figma only at this point. JSON + spec come later in Lesson 6. Full prompt to paste: Build a Jumbotron in our Figma file. Create a new Figma page named 'Jumbotron' and place the component set on it. It's a heading block with one required slot (Title) and three optional ones (Overline, Subtitle, Description). Vertical auto-layout, left-aligned by default. Don't build anything yet. Propose: variant matrix (Size lg / md / sm / xs, one axis only, slot visibility handled by component properties); properties (Title TEXT required, Show overline BOOLEAN default false, Subtitle TEXT, Show subtitle BOOLEAN default true, Description TEXT, Show description BOOLEAN default false); per-size typography mapping (use semantic-typography token names not raw px, propose the mapping against tokens.json); slot color tokens (Title text/primary/default, Subtitle text/secondary/default, Overline text/tertiary/default, Description text/secondary/default); spacing between slots (spacing/sm Overline→Title, spacing/md Title→Subtitle, spacing/lg Subtitle→Description). When I approve: build the component set in Figma (one variant per Size, four total. All slots present in every variant, visibility driven by booleans). Just the component set. JSON + spec come later in Lesson 6. Return setId, every Size variant rendered, every typography binding via semantic tokens.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. The hide-by-prop pattern is load-bearing. The Welcome screen needs Title + Subtitle but no Overline or Description. Direct build, no propose-then-approve. Figma only at this point. Full prompt to paste: Build a Jumbotron in our Figma file. Create a new Figma page named 'Jumbotron' and place the component set on it. Heading block with one required slot (Title) and three optional ones (Overline, Subtitle, Description). Vertical auto-layout, left-aligned by default. Variant matrix: Size (lg / md / sm / xs), one axis only. Properties: Title (TEXT, required); Show overline (BOOLEAN, default false), Subtitle (TEXT), Show subtitle (BOOLEAN, default true), Description (TEXT), Show description (BOOLEAN, default false). Per-size typography: bind to semantic-typography tokens (no raw px). Slot colors via semantic text tokens. Slot spacing via semantic spacing tokens. Build the four Size variants. All slots present in every variant; visibility driven by booleans.">
       <div class="slide-content">
         <div class="kicker">Component 2 · Jumbotron</div>
         <div class="prompt-frame">
@@ -8365,24 +8368,26 @@ Create a new Figma page named "Jumbotron" and place the component set on it.
 
 Heading block with one required slot (Title) and three optional ones (Overline, Subtitle, Description).
 
-Don't build anything yet. Propose: variant matrix (Size: lg / md / sm / xs, one axis only); visibility booleans for the three optional slots; per-size typography mapping using semantic-typography token names (no raw px); slot color and spacing tokens.
+Variant matrix: Size (lg / md / sm / xs), one axis only.
+Properties: Title (TEXT, required); Show overline (BOOLEAN, default false), Subtitle (TEXT), Show subtitle (BOOLEAN, default true), Description (TEXT), Show description (BOOLEAN, default false).
+Per-size typography: bind to semantic-typography tokens (no raw px). Slot colors via semantic text tokens. Slot spacing via semantic spacing tokens.
 
-When I approve, build the four Size variants in Figma. Just the component set. JSON + spec come later, in Lesson 6.</div>
+Build the four Size variants. All slots present in every variant; visibility driven by booleans.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>One axis: Size (lg / md / sm / xs)</span></li>
-            <li><span class="check"></span><span>Title always present; Overline/Subtitle/Description toggle via booleans</span></li>
+            <li><span class="check"></span><span>Title always present; Overline / Subtitle / Description toggle via booleans</span></li>
             <li><span class="check"></span><span>Typography bound to semantic tokens (no raw px)</span></li>
-            <li><span class="check"></span><span>JSON + spec extracted later by the skill (Lesson 6)</span></li>
+            <li><span class="check"></span><span>All slots present in every variant; visibility driven by booleans</span></li>
           </ul>
         </div>
       </div>
       <div class="slide-footer"><span>2 of 4 · Jumbotron</span><span>~20 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders with aspect ratios. Welcome uses two: a 2:3 full-bleed background and a 1:1 logo. Figma only at this point. JSON + spec come later in Lesson 6. Default image swap should point at an icon instance from the Icons frame on Utility (5:355) so the placeholder isn't a generic rectangle. Full prompt to paste: Build an Artwork in our Figma file. Create a new Figma page named 'Artwork' and place the component set on it. It's an image-holder with multiple aspect ratios. Don't build anything yet. Propose: variant matrix (Aspect ratio 1:1 / 4:3 / 3:2 / 16:9 / 2:3, and Full-bleed Yes / No, two axes); component property (Image INSTANCE_SWAP, default to an icon instance from the Icons frame on Utility); anatomy (single image fill node inside the variant frame); image fill behavior (COVER not CONTAIN); corner radius mapping (Full-bleed=Yes → 0; Full-bleed=No → border-radius/lg); default size per aspect ratio at lg variant (1:1 240×240, 4:3 240×180, 3:2 240×160, 16:9 320×180, 2:3 160×240). When I approve: build the component set in Figma (5 aspect ratios × 2 full-bleed = 10 variants). Just the component set. JSON + spec come later in Lesson 6. Return setId, every variant rendered, COVER fill confirmed, corner radius bound correctly per Full-bleed value.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders with aspect ratios. Welcome uses two: a 2:3 full-bleed background and a 1:1 logo. Direct build, Figma only. Default image swap should point at an icon instance from the Icons frame on Utility (5:355) so the placeholder isn't a generic rectangle. Default size per aspect ratio at lg variant: 1:1 240×240, 4:3 240×180, 3:2 240×160, 16:9 320×180, 2:3 160×240. Full prompt to paste: Build an Artwork in our Figma file. Create a new Figma page named 'Artwork' and place the component set on it. Image-holder with multiple aspect ratios. Variant matrix: Aspect ratio (1:1 / 4:3 / 3:2 / 16:9 / 2:3) and Full-bleed (Yes / No). Two axes, ten variants. Property: Image (INSTANCE_SWAP). Default to an icon instance from the Icons frame on Utility. Image fill: COVER. Corner radius: 0 when Full-bleed=Yes; bind to border-radius/lg when Full-bleed=No. Build all ten variants.">
       <div class="slide-content">
         <div class="kicker">Component 3 · Artwork</div>
         <div class="prompt-frame">
@@ -8392,9 +8397,12 @@ Create a new Figma page named "Artwork" and place the component set on it.
 
 Image-holder with multiple aspect ratios.
 
-Don't build yet. Propose: variant axes (Aspect ratio 1:1 / 4:3 / 3:2 / 16:9 / 2:3 and Full-bleed Yes / No); image as INSTANCE_SWAP property (default to an icon instance from the Icons frame on Utility); image fill = COVER; corner radius = 0 when Full-bleed=Yes, else bind to border-radius/lg.
+Variant matrix: Aspect ratio (1:1 / 4:3 / 3:2 / 16:9 / 2:3) and Full-bleed (Yes / No). Two axes, ten variants.
+Property: Image (INSTANCE_SWAP). Default to an icon instance from the Icons frame on Utility.
+Image fill: COVER.
+Corner radius: 0 when Full-bleed=Yes; bind to border-radius/lg when Full-bleed=No.
 
-When I approve, build all 10 variants in Figma. Just the component set.</div>
+Build all ten variants.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
@@ -8402,14 +8410,14 @@ When I approve, build all 10 variants in Figma. Just the component set.</div>
             <li><span class="check"></span><span>Two axes: Aspect ratio × Full-bleed (10 variants)</span></li>
             <li><span class="check"></span><span>Image fill = COVER</span></li>
             <li><span class="check"></span><span>Radius 0 when Full-bleed=Yes; semantic token otherwise</span></li>
-            <li><span class="check"></span><span>JSON + spec extracted later by the skill (Lesson 6)</span></li>
+            <li><span class="check"></span><span>Image swap defaults to an icon instance, not a generic rectangle</span></li>
           </ul>
         </div>
       </div>
       <div class="slide-footer"><span>3 of 4 · Artwork</span><span>~20 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 4 of 4 — Compose the Welcome screen. Figma finish line. The Welcome frame is pre-staged with placeholder Logo / Jumbotron / Button / Status Bar / Background / Gradient Overlay / Legal text. The agent's job is INSTANCE SWAP into the existing slots, not building from scratch. HTML rendering happens later, after the skill exists. Full prompt to paste: Find the Welcome screen frame in our Figma file. It already exists with placeholder slots for Logo, Jumbotron, Button, plus the background, status bar, and legal text. Read the frame structure first. Replace each placeholder with the right component instance: Background swap to an Artwork instance (2:3 Full-bleed=Yes); Logo swap to an Artwork instance (1:1 Full-bleed=No 120×120); Jumbotron swap to a Jumbotron instance (Size=lg Show overline=false Show subtitle=true Show description=false) Title='Welcome to Keeta' Subtitle='Eat better, live better.'; Button swap to a Button instance (Style=Primary Size=Large Icon only=No Label='Continue'). Don't invent layout. Keep the existing positions and frame structure. Bind every value through semantic tokens, no raw hex, no raw px. When I approve: perform the swaps. Return frameId, every instance bound, every text/spacing token resolved.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 4 of 4 — Compose the Welcome screen. Figma finish line. The Welcome frame is pre-staged with placeholder Logo / Jumbotron / Button / Status Bar / Background / Gradient Overlay / Legal text. The agent's job is INSTANCE SWAP into the existing slots, not building from scratch. Full prompt to paste: Find the Welcome screen frame in our Figma file. It already exists with placeholder slots for Logo, Jumbotron, Button, plus the background, status bar, and legal text. Read the frame structure first. Replace each placeholder with the right component instance: Background swap to an Artwork instance (2:3 Full-bleed=Yes); Logo swap to an Artwork instance (1:1 Full-bleed=No 120×120); Jumbotron swap to a Jumbotron instance (Size=lg Show overline=false Show subtitle=true Show description=false) Title='Welcome to Keeta' Subtitle='Eat better, live better.'; Button swap to a Button instance (Style=Primary Size=Large Icon only=No Label='Continue'). Don't invent layout. Keep the existing positions and frame structure. Bind every value through semantic tokens, no raw hex, no raw px. Perform the swaps. Return frameId, every instance bound, every text/spacing token resolved.">
       <div class="slide-content">
         <div class="kicker">Compose · Welcome screen</div>
         <div class="prompt-frame">
@@ -8423,7 +8431,7 @@ Replace each placeholder with the right component instance:
 
 Don't invent layout. Keep the existing positions and frame structure. Bind every value through semantic tokens.
 
-When I approve, perform the swaps. Return the frameId and confirm every instance is bound through semantic tokens.</div>
+Perform the swaps. Return the frameId and confirm every instance is bound through semantic tokens.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
