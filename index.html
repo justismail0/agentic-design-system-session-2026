@@ -8964,9 +8964,35 @@ stand alone with enough context that a fresh session can apply it.
       <div class="slide-footer"><span>Skills compound</span><span>Pay once in design</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="This is the skill creator prompt. Keep it visible long enough for students to see the shape.">
+    <section class="slide" data-section="Part 2" data-notes="Foundations of skills. Walk the four cards: WHAT a skill is (a workflow stored at .claude/skills/{name}/SKILL.md), the TYPES (built-in like /init and /skill-creator, vs. custom skills you author), WHY they exist (capture a procedure once with its rules and output shape so it never has to be re-explained), and WHEN to use them (repeatable, mechanical workflows; skip for one-off tasks). The v1/v3 contrast on the previous slide showed what a skill produces; this slide explains the foundations.">
       <div class="slide-content">
-        <div class="kicker">Skill prompt · v1</div>
+        <div class="kicker">Lesson 5 · What is a skill</div>
+        <h2>A reusable workflow the agent invokes by name.</h2>
+        <div class="grid-4">
+          <div class="card">
+            <h3>What it is</h3>
+            <p>A versioned mini-workflow stored at <code>.claude/skills/{name}/SKILL.md</code>. The agent loads it on demand and replays the steps inside.</p>
+          </div>
+          <div class="card">
+            <h3>Types</h3>
+            <p><b>Built-in</b> — <code>/init</code>, <code>/skill-creator</code>. <b>Custom</b> — author once for your project, replay forever.</p>
+          </div>
+          <div class="card">
+            <h3>Why it exists</h3>
+            <p>Capture a procedure once with its rules, context, and output shape. Every future run produces the same artifact, no re-explaining.</p>
+          </div>
+          <div class="card">
+            <h3>When to use it</h3>
+            <p>A repeatable, mechanical workflow you'll run more than once. Skip for one-off tasks; the overhead doesn't pay off.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>Reusable workflows</span><span>Pay once, replay forever</span></div>
+    </section>
+
+    <section class="slide" data-section="Part 2" data-notes="The skill creator prompt. Now that students know what a skill is, this is how you build one. Speaker pastes /skill-creator and walks the body. Keep it visible long enough for students to see the shape.">
+      <div class="slide-content">
+        <div class="kicker">Build the skill</div>
         <div class="prompt compact">/skill-creator
 
 Create a skill `component-documentation` that documents a component
