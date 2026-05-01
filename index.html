@@ -1530,10 +1530,9 @@
   }
 
   table.interactive-table tbody tr td:first-child {
-    border-left: 3px solid transparent;
-    transition: border-color 180ms ease;
     font-weight: var(--fw-bold);
     color: var(--text-strong);
+    transition: color 180ms ease;
   }
 
   table.interactive-table tbody tr:hover,
@@ -1542,7 +1541,6 @@
   }
   table.interactive-table tbody tr:hover td:first-child,
   table.interactive-table tbody tr:focus-visible td:first-child {
-    border-left-color: var(--c-mint-ink);
     color: var(--c-mint-ink);
   }
 
@@ -1587,7 +1585,6 @@
   }
   :root[data-theme="dark"] table.interactive-table tbody tr:hover td:first-child,
   :root[data-theme="dark"] table.interactive-table tbody tr:focus-visible td:first-child {
-    border-left-color: var(--c-mint);
     color: var(--c-mint);
   }
   :root[data-theme="dark"] table.interactive-table code {
