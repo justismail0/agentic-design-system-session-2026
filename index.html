@@ -9398,55 +9398,84 @@ Open button.html in a browser when it's done.</div>
       <div class="slide-footer"><span>Back in 10 min</span><span>Welcome screen → button.html</span></div>
     </section>
 
-    <section class="slide" data-section="Part 3" data-notes="Handover contract — name exactly what engineering receives and what each artifact is for. This closes the promise made in the opener and frames Part 3 as the moment we make the system shippable.">
+    <section class="slide" data-section="Part 3" data-notes="Part 3 opener — show the configurable goal up front. Audience sees the restaurant card from Keeta DS in 4 configurations side-by-side: compact, standard, promoted (border), unavailable (dimmed). Walk left-first — point at each card and name what 'configurable' means: same component, different size/state/variant. Then walk the 5 artifacts on the right. Don't dwell — the lessons unpack each one. TODO: replace mock card styles with real Keeta DS token bindings once the Figma URL is provided.">
       <div class="slide-content">
-        <div class="kicker">Handover contract</div>
-        <h2>What engineering picks up.</h2>
-        <p class="lede">Five artifacts. Each one answers one question a developer has on day one — and none of them require a Figma seat.</p>
-        <div class="handover-contract">
-          <div class="handover-contract-row">
-            <span class="handover-contract-num">01</span>
-            <div class="handover-contract-body">
-              <span class="handover-contract-name">tokens.css</span>
-              <span class="handover-contract-q">"What values can I use?"</span>
+        <div class="kicker">Part 3 · Goal</div>
+        <h2>What you'll ship: a configurable restaurant card.</h2>
+        <div class="grid-2">
+          <!-- LEFT: configurable restaurant card preview. TODO: rebind to Keeta DS tokens. -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; align-content:start;">
+            <!-- compact -->
+            <div style="background:#fff; border:1px solid #e5e7eb; border-radius:10px; padding:10px; display:flex; flex-direction:column; gap:6px;">
+              <div style="height:54px; background:linear-gradient(135deg,#fde68a,#f59e0b); border-radius:6px;"></div>
+              <div style="font-weight:600; font-size:12px; color:#111;">Spice Garden</div>
+              <div style="font-size:10px; color:#6b7280;">★ 4.6 · 20 min</div>
+              <div style="margin-top:auto; font-size:9px; text-transform:uppercase; letter-spacing:0.6px; color:#9ca3af;">compact</div>
             </div>
-            <span class="handover-contract-meta">CSS <code>:root</code> — every var(--*) the system owns</span>
+            <!-- standard -->
+            <div style="background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:8px;">
+              <div style="height:74px; background:linear-gradient(135deg,#fecaca,#ef4444); border-radius:8px;"></div>
+              <div style="font-weight:600; font-size:13px; color:#111;">Pasta Pronto</div>
+              <div style="font-size:11px; color:#6b7280;">★ 4.8 · 25 min · $$</div>
+              <div style="margin-top:auto; font-size:9px; text-transform:uppercase; letter-spacing:0.6px; color:#9ca3af;">standard</div>
+            </div>
+            <!-- promoted -->
+            <div style="background:#fff; border:2px solid #fbbf24; border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:8px; position:relative;">
+              <span style="position:absolute; top:8px; right:8px; background:#fbbf24; color:#111; font-size:9px; font-weight:700; padding:2px 6px; border-radius:4px; letter-spacing:0.4px;">PROMO</span>
+              <div style="height:74px; background:linear-gradient(135deg,#bbf7d0,#16a34a); border-radius:8px;"></div>
+              <div style="font-weight:600; font-size:13px; color:#111;">Green Bowl</div>
+              <div style="font-size:11px; color:#6b7280;">★ 4.9 · 15 min</div>
+              <div style="margin-top:auto; font-size:9px; text-transform:uppercase; letter-spacing:0.6px; color:#d97706;">promoted</div>
+            </div>
+            <!-- unavailable -->
+            <div style="background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:8px; opacity:0.5;">
+              <div style="height:74px; background:linear-gradient(135deg,#bfdbfe,#3b82f6); border-radius:8px;"></div>
+              <div style="font-weight:600; font-size:13px; color:#111;">Late Night Diner</div>
+              <div style="font-size:11px; color:#6b7280;">Closed · opens 17:00</div>
+              <div style="margin-top:auto; font-size:9px; text-transform:uppercase; letter-spacing:0.6px; color:#9ca3af;">unavailable</div>
+            </div>
           </div>
-          <div class="handover-contract-row">
-            <span class="handover-contract-num">02</span>
-            <div class="handover-contract-body">
-              <span class="handover-contract-name">design-tokens.json</span>
-              <span class="handover-contract-q">"Where do the values come from?"</span>
+          <!-- RIGHT: 5-artifact handover contract, compact -->
+          <div class="handover-contract">
+            <div class="handover-contract-row">
+              <span class="handover-contract-num">01</span>
+              <div class="handover-contract-body">
+                <span class="handover-contract-name">tokens.css</span>
+                <span class="handover-contract-q">"What values can I use?"</span>
+              </div>
             </div>
-            <span class="handover-contract-meta">DTCG export — the source CSS is generated from</span>
-          </div>
-          <div class="handover-contract-row">
-            <span class="handover-contract-num">03</span>
-            <div class="handover-contract-body">
-              <span class="handover-contract-name">button.html</span>
-              <span class="handover-contract-q">"How does it look and behave?"</span>
+            <div class="handover-contract-row">
+              <span class="handover-contract-num">02</span>
+              <div class="handover-contract-body">
+                <span class="handover-contract-name">design-tokens.json</span>
+                <span class="handover-contract-q">"Where do the values come from?"</span>
+              </div>
             </div>
-            <span class="handover-contract-meta">every variant + state on one page, browsable in any browser</span>
-          </div>
-          <div class="handover-contract-row">
-            <span class="handover-contract-num">04</span>
-            <div class="handover-contract-body">
-              <span class="handover-contract-name">button.css</span>
-              <span class="handover-contract-q">"How is it built?"</span>
+            <div class="handover-contract-row">
+              <span class="handover-contract-num">03</span>
+              <div class="handover-contract-body">
+                <span class="handover-contract-name">restaurant-card.html</span>
+                <span class="handover-contract-q">"How does it look and behave?"</span>
+              </div>
             </div>
-            <span class="handover-contract-meta">all var(--*) bindings, no raw values, base + modifiers</span>
-          </div>
-          <div class="handover-contract-row">
-            <span class="handover-contract-num">05</span>
-            <div class="handover-contract-body">
-              <span class="handover-contract-name">button.md</span>
-              <span class="handover-contract-q">"Why is it built this way?"</span>
+            <div class="handover-contract-row">
+              <span class="handover-contract-num">04</span>
+              <div class="handover-contract-body">
+                <span class="handover-contract-name">restaurant-card.css</span>
+                <span class="handover-contract-q">"How is it built?"</span>
+              </div>
             </div>
-            <span class="handover-contract-meta">spec generated in Part 2 — intent, props, accessibility</span>
+            <div class="handover-contract-row">
+              <span class="handover-contract-num">05</span>
+              <div class="handover-contract-body">
+                <span class="handover-contract-name">restaurant-card.md</span>
+                <span class="handover-contract-q">"Why is it built this way?"</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="slide-footer"><span>Five artifacts</span><span>One handover contract</span></div>
+      <div class="slide-footer"><span>One configurable component</span><span>One handover contract</span></div>
     </section>
 
     <section class="slide section-break" data-section="Part 3" data-notes="Start Build by reframing the surface: HTML reference is what every developer reads — the foundation layer real design systems ship before any framework wrapper.">
@@ -9513,7 +9542,7 @@ Open button.html in a browser when it's done.</div>
       <div class="slide-footer"><span>No raw values</span><span>Token discipline continues</span></div>
     </section>
 
-    <section class="slide cover" data-section="Part 3" data-notes="Lesson 1 cover — translates JSON to CSS. Keep the chain visible.">
+    <section class="slide cover" data-section="Part 3" data-skip="true" data-notes="SKIPPED — soft cover removed; the substantive Lesson 1 slide that follows carries the framing. Kept in file for safety. Lesson 1 cover — translates JSON to CSS. Keep the chain visible.">
       <div class="slide-content">
         <p class="cover-eyebrow">Lesson 1 · Translate</p>
         <h1 class="cover-title">Tokens → CSS</h1>
@@ -9521,7 +9550,7 @@ Open button.html in a browser when it's done.</div>
       </div>
     </section>
 
-    <section class="slide" data-section="Part 3" data-notes="JSON to CSS to component. The token chain is visible in the file system, end to end.">
+    <section class="slide" data-section="Part 3" data-skip="true" data-notes="SKIPPED — duplicate chain visualization. The chain at 'The chain · Figma decides. Code reads.' (earlier in Part 3) carries this. Kept in file for safety. JSON to CSS to component. The token chain is visible in the file system, end to end.">
       <div class="slide-content">
         <div class="kicker">Lesson 1 · Token-driven foundation</div>
         <h2>Tokens become CSS variables.</h2>
@@ -9688,7 +9717,7 @@ If a value doesn't have a token yet (button-specific padding, a focus ring colou
       <div class="slide-footer"><span>Example · Prompt</span><span>Propose → Build → Demo</span></div>
     </section>
 
-    <section class="slide" data-section="Part 3" data-notes="The discipline beat for the HTML build. The agent will reach for raw values — that's the teaching moment, not a slip. Mirrors 'Challenge the weak cell' from Part 1.">
+    <section class="slide" data-section="Part 3" data-skip="true" data-notes="SKIPPED — challenge beat removed from Part 3 per restructure. Kept in file for safety. The discipline beat for the HTML build. The agent will reach for raw values — that's the teaching moment, not a slip. Mirrors 'Challenge the weak cell' from Part 1.">
       <div class="slide-content">
         <div class="kicker">Discipline beat</div>
         <h2>Challenge the missing token.</h2>
@@ -9732,13 +9761,86 @@ If a value doesn't have a token yet (button-specific padding, a focus ring colou
       <div class="slide-footer"><span>The handover</span><span>One folder, one PR</span></div>
     </section>
 
-    <!-- ─── LESSON 3 — Library Replication (was L4 before docs lesson moved to Part 2) ─── -->
+    <!-- ─── LESSON 3 — Restaurant card · Configurable hero (Keeta DS) ─── -->
 
-    <section class="slide cover" data-section="Part 3" data-notes="Lesson 3 cover — replicate the pattern across three more atoms. 12 files total, one PR.">
+    <section class="slide cover" data-section="Part 3" data-notes="Lesson 3 cover — restaurant card from Keeta DS. The configurable hero shown on slide 1 of Part 3; this is where we build it. Sizes, variants, states — all on one component, all token-bound.">
       <div class="slide-content">
-        <p class="cover-eyebrow">Lesson 3 · Scale</p>
+        <p class="cover-eyebrow">Lesson 3 · Configurable</p>
+        <h1 class="cover-title">Restaurant card</h1>
+        <p class="cover-subtitle">From Keeta DS. Sizes · variants · states — one component, every configuration token-bound.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-section="Part 3" data-notes="Walk the class matrix slowly. Each modifier maps to one token — same shape as Button, just more rows. The point: configurability lives in the modifier classes, not the base. 3 sizes × 3 variants × 3 states all compose with the same boring pattern.">
+      <div class="slide-content">
+        <div class="kicker">Lesson 3 · Class matrix</div>
+        <h2>Same pattern, more configurations.</h2>
+        <div class="grid-2">
+          <div class="terminal compact">.restaurant-card                  /* base */
+.restaurant-card--compact         /* size */
+.restaurant-card--standard
+.restaurant-card--hero
+.restaurant-card--promoted        /* variant */
+.restaurant-card--sponsored
+.restaurant-card--unavailable     /* state */
+.restaurant-card--favorited
+.restaurant-card:hover            /* state — pseudo */
+.restaurant-card:focus-within</div>
+          <div class="terminal compact">.restaurant-card {
+  background: var(--card-bg-default);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding-md);
+  gap: var(--card-gap);
+}
+.restaurant-card--compact {
+  padding: var(--card-padding-sm);
+  font-size: var(--card-text-sm);
+}
+.restaurant-card--promoted {
+  border: 1px solid var(--card-border-promoted);
+}
+.restaurant-card--unavailable {
+  opacity: var(--state-disabled-opacity);
+}</div>
+        </div>
+        <p class="lede"><strong>Same composition, same tokens — just more rows.</strong> Configurability lives in the modifier classes, not the base.</p>
+      </div>
+      <div class="slide-footer"><span>Class matrix</span><span>Configurations as modifiers</span></div>
+    </section>
+
+    <section class="slide prompt-slide" data-section="Part 3" data-notes="The restaurant-card build prompt. Mirrors the Button prompt — Propose first, then Build. Token bindings come from the Keeta DS Figma file the audience referenced earlier in the session. Full prompt to paste shows the 3-axis matrix the agent should produce: sizes × variants × states all rendered on restaurant-card.html.">
+      <div class="slide-content">
+        <div class="kicker">Example · The Prompt</div>
+        <h2>Build the configurable hero.</h2>
+        <p class="prompt-context">You have <strong>tokens/design-tokens.json</strong>, the <strong>Restaurant card</strong> component set in the Keeta DS Figma file, and the Button pattern from Lesson 2. Same shape, more configurations.</p>
+        <div class="prompt-frame">
+          <div class="prompt">Build a reference page for the Restaurant card. Pull bindings from the Keeta DS Figma file. Every value through a token, never typed in directly.
+
+Don't create anything yet. Propose first:
+- Sizes: compact, standard, hero
+- Variants: default, promoted, sponsored
+- States: default, unavailable, favorited, hover, focus-within
+- Which tokens drive background, border, padding, type, image area, primary action
+
+Sketch the markup for one card (standard, default, default state) so I can see the anatomy before you scale.
+
+When I approve, save two files in `components/molecules/restaurant-card/`:
+- `restaurant-card.html`: every size × variant × state combination rendered on one page so I can see configurability at a glance
+- `restaurant-card.css`: every value pulls from a token, nothing typed in directly
+
+If a configuration needs a token we don't have yet (a promoted-card border, a favorited heart fill), stop. Propose the token name and value, we'll add it together.</div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>Example · Prompt</span><span>Configurable hero</span></div>
+    </section>
+
+    <!-- ─── LESSON 4 — Library Replication (was L3 before restaurant-card hero added) ─── -->
+
+    <section class="slide cover" data-section="Part 3" data-notes="Lesson 4 cover — replicate the pattern across three more atoms. 12 files total, one PR.">
+      <div class="slide-content">
+        <p class="cover-eyebrow">Lesson 4 · Scale</p>
         <h1 class="cover-title">Library Replication</h1>
-        <p class="cover-subtitle">Replicate the pattern across the family. Input · Chip · Card — each one a token-bound HTML reference with docs to match.</p>
+        <p class="cover-subtitle">Replicate the pattern across the family. Input · Chip · Badge — each one a token-bound HTML reference with docs to match.</p>
       </div>
     </section>
 
@@ -9747,7 +9849,7 @@ If a value doesn't have a token yet (button-specific padding, a focus ring colou
         <div class="kicker">Example · Library prompt</div>
         <h2>Twelve files. One PR.</h2>
         <div class="prompt-frame">
-          <div class="prompt">Now do the same thing for three more components: Input, Chip, and Card. Same pattern as Button.
+          <div class="prompt">Now do the same thing for three more components: Input, Chip, and Badge. Same pattern as Button.
 
 For each one, build three files in `components/atoms/{name}/`:
 - A reference page showing every variant and state on one page
@@ -9759,9 +9861,9 @@ Use the same naming pattern as Button — base class plus extra classes for each
 What each component should cover:
 - **Input** — text, email, password. States: default, focus, error.
 - **Chip** — neutral, brand, accent. States: idle, active, disabled.
-- **Card** — small, medium, large padding. Variants: elevated, outlined, filled.
+- **Badge** — neutral, success, warning, error. Variants: default, with icon, dot-only.
 
-If you need new tokens for any of these (a focus ring colour, a card shadow, anything that's not in our tokens yet), stop and ask. Don't shortcut.
+If you need new tokens for any of these (a focus ring colour, a badge pill radius, anything that's not in our tokens yet), stop and ask. Don't shortcut.
 
 When you're done: 12 files (4 components × HTML, CSS, docs). Show me the file tree.</div>
         </div>
@@ -9774,7 +9876,7 @@ When you're done: 12 files (4 components × HTML, CSS, docs). Show me the file t
         <div class="kicker">Spot-check</div>
         <h2>The agent scales the pattern. The designer adjudicates the bindings.</h2>
         <div class="grid-2">
-          <div class="prompt">The Card "elevated" variant has no shadow on its rendered example. Add <code>--card-shadow-elevated</code> as a new token first, then bind it on .card--elevated only.</div>
+          <div class="prompt">The Badge "dot-only" variant has no pill radius on its rendered example. Add <code>--badge-radius-pill</code> as a new token first, then bind it on .badge--dot-only only.</div>
           <ul class="clean-list">
             <li><span class="check"></span><span>Open each rendered .html in a browser</span></li>
             <li><span class="check"></span><span>Spot one wrong binding per component</span></li>
