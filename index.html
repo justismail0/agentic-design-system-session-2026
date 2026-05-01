@@ -2083,6 +2083,7 @@
     gap: 8px;
     width: 100%;
     max-width: 360px;
+    min-width: 0;
   }
   .skill-anatomy-step {
     display: flex;
@@ -2093,6 +2094,7 @@
     border-radius: var(--r-lg);
     background: var(--bg-surface-grad);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    min-width: 0;
   }
   .skill-anatomy-step--procedure {
     border-color: var(--c-mint-ink);
@@ -2112,6 +2114,8 @@
     font-weight: var(--fw-bold);
     color: var(--text-strong);
     line-height: 1.3;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
   .skill-anatomy-value code {
     font-family: var(--font-mono);
@@ -2119,6 +2123,7 @@
     background: rgba(80, 65, 112, 0.08);
     padding: 2px 8px;
     border-radius: 6px;
+    overflow-wrap: anywhere;
   }
   .skill-anatomy-list {
     list-style: none;
@@ -2224,6 +2229,48 @@
   :root[data-theme="dark"] .skill-meta-chip {
     background: rgba(255, 255, 255, 0.04);
     border-color: rgba(211, 201, 232, 0.14);
+  }
+
+  /* Responsive — when promise-2col-grid stacks (<900px), let the
+     anatomy use the column's full width so it doesn't look stranded. */
+  @media (max-width: 900px) {
+    .skill-anatomy {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+  }
+
+  /* Phone-portrait — tighten paddings, stack chips vertically, allow
+     the value text to wrap on long slash-commands. */
+  @media (max-width: 640px) {
+    .skill-anatomy {
+      max-width: 100%;
+    }
+    .skill-anatomy-step {
+      padding: 13px 16px;
+      gap: 6px;
+    }
+    .skill-anatomy-list {
+      margin-top: 4px;
+    }
+    .skill-anatomy-list li {
+      padding-left: 16px;
+      font-size: 13px;
+    }
+    .skill-anatomy-arrow {
+      height: 14px;
+    }
+    .skill-meta-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+    .skill-meta-chip {
+      width: 100%;
+      justify-content: flex-start;
+      border-radius: 12px;
+      padding: 10px 14px;
+    }
   }
 
   /* ─── 3 screens stacked, Welcome biggest in front (used by slide 11) ─── */
