@@ -8355,7 +8355,7 @@ When I approve, build the component set in Figma. Just the component set. We'll 
       <div class="slide-footer"><span>1 of 4 · Button</span><span>~25 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. Same propose-then-execute discipline. The hide-by-prop pattern is load-bearing. The Welcome screen needs Title + Subtitle but no Overline or Description. Figma only at this point. JSON + spec come later in Lesson 6. Full prompt to paste: Build a Jumbotron in our Figma file. Create a new Figma page named 'Jumbotron' and place the component set on it. It's a heading block with four optional slots: Overline, Title, Subtitle, Description. Vertical auto-layout, left-aligned by default. Don't build anything yet. Propose: variant matrix (Size lg / md / sm / xs, one axis only, slot visibility handled by component properties); properties (Show overline BOOLEAN default false, Title TEXT, Subtitle TEXT, Description TEXT, Show subtitle BOOLEAN default true, Show description BOOLEAN default false); per-size typography mapping (use semantic-typography token names not raw px, propose the mapping against tokens.json); slot color tokens (Title text/primary/default, Subtitle text/secondary/default, Overline text/tertiary/default, Description text/secondary/default); spacing between slots (spacing/sm Overline→Title, spacing/md Title→Subtitle, spacing/lg Subtitle→Description). When I approve: build the component set in Figma (one variant per Size, four total. All slots present in every variant, visibility driven by booleans). Just the component set. JSON + spec come later in Lesson 6. Return setId, every Size variant rendered, every typography binding via semantic tokens.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. Same propose-then-execute discipline. The hide-by-prop pattern is load-bearing. The Welcome screen needs Title + Subtitle but no Overline or Description. Figma only at this point. JSON + spec come later in Lesson 6. Full prompt to paste: Build a Jumbotron in our Figma file. Create a new Figma page named 'Jumbotron' and place the component set on it. It's a heading block with one required slot (Title) and three optional ones (Overline, Subtitle, Description). Vertical auto-layout, left-aligned by default. Don't build anything yet. Propose: variant matrix (Size lg / md / sm / xs, one axis only, slot visibility handled by component properties); properties (Title TEXT required, Show overline BOOLEAN default false, Subtitle TEXT, Show subtitle BOOLEAN default true, Description TEXT, Show description BOOLEAN default false); per-size typography mapping (use semantic-typography token names not raw px, propose the mapping against tokens.json); slot color tokens (Title text/primary/default, Subtitle text/secondary/default, Overline text/tertiary/default, Description text/secondary/default); spacing between slots (spacing/sm Overline→Title, spacing/md Title→Subtitle, spacing/lg Subtitle→Description). When I approve: build the component set in Figma (one variant per Size, four total. All slots present in every variant, visibility driven by booleans). Just the component set. JSON + spec come later in Lesson 6. Return setId, every Size variant rendered, every typography binding via semantic tokens.">
       <div class="slide-content">
         <div class="kicker">Component 2 · Jumbotron</div>
         <div class="prompt-frame">
@@ -8363,9 +8363,9 @@ When I approve, build the component set in Figma. Just the component set. We'll 
 
 Create a new Figma page named "Jumbotron" and place the component set on it.
 
-Heading block with four optional slots: Overline, Title, Subtitle, Description.
+Heading block with one required slot (Title) and three optional ones (Overline, Subtitle, Description).
 
-Don't build anything yet. Propose: variant matrix (Size: lg / md / sm / xs, one axis only); properties for each slot's visibility; per-size typography mapping using semantic-typography token names (no raw px); slot color and spacing tokens.
+Don't build anything yet. Propose: variant matrix (Size: lg / md / sm / xs, one axis only); visibility booleans for the three optional slots; per-size typography mapping using semantic-typography token names (no raw px); slot color and spacing tokens.
 
 When I approve, build the four Size variants in Figma. Just the component set. JSON + spec come later, in Lesson 6.</div>
         </div>
@@ -8373,7 +8373,7 @@ When I approve, build the four Size variants in Figma. Just the component set. J
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>One axis: Size (lg / md / sm / xs)</span></li>
-            <li><span class="check"></span><span>Slot visibility via boolean properties, not variants</span></li>
+            <li><span class="check"></span><span>Title always present; Overline/Subtitle/Description toggle via booleans</span></li>
             <li><span class="check"></span><span>Typography bound to semantic tokens (no raw px)</span></li>
             <li><span class="check"></span><span>JSON + spec extracted later by the skill (Lesson 6)</span></li>
           </ul>
