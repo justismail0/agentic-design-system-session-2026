@@ -8387,7 +8387,7 @@ Build the four Size variants. All slots present in every variant; visibility dri
       <div class="slide-footer"><span>2 of 4 · Jumbotron</span><span>~20 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders with aspect ratios. Welcome uses two: a 2:3 full-bleed background and a 1:1 logo. Direct build, Figma only. Default image swap should point at an icon instance from the Icons frame on Utility (5:355) so the placeholder isn't a generic rectangle. Default size per aspect ratio at lg variant: 1:1 240×240, 4:3 240×180, 3:2 240×160, 16:9 320×180, 2:3 160×240. Full prompt to paste: Build an Artwork in our Figma file. Create a new Figma page named 'Artwork' and place the component set on it. Image-holder with multiple aspect ratios. Variant matrix: Aspect ratio (1:1 / 4:3 / 3:2 / 16:9 / 2:3) and Full-bleed (Yes / No). Two axes, ten variants. Property: Image (INSTANCE_SWAP). Default to an icon instance from the Icons frame on Utility. Image fill: COVER. Corner radius: 0 when Full-bleed=Yes; bind to border-radius/lg when Full-bleed=No. Build all ten variants.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders with aspect ratios. Welcome uses one (the logo at 1:1) and the screen's background is a raw image placed directly in the frame, not an Artwork. Direct build, Figma only. Bindings (corner radius, etc) come from reading the design + tokens.json, not from a list in the prompt. Full prompt to paste: Build an Artwork in our Figma file. Create a new Figma page named 'Artwork' and place the component set on it. Image-holder with multiple aspect ratios. Variant matrix: Aspect ratio (1:1 / 4:3 / 3:2 / 16:9 / 2:3), one axis only. Each variant has a single image layer that gets filled later when the component is placed on a screen. Build all five variants.">
       <div class="slide-content">
         <div class="kicker">Component 3 · Artwork</div>
         <div class="prompt-frame">
@@ -8395,50 +8395,39 @@ Build the four Size variants. All slots present in every variant; visibility dri
 
 Create a new Figma page named "Artwork" and place the component set on it.
 
-Image-holder with multiple aspect ratios.
+Image-holder with multiple aspect ratios. Variant matrix: Aspect ratio (1:1 / 4:3 / 3:2 / 16:9 / 2:3), one axis only. Each variant has a single image layer that gets filled later when the component is placed on a screen.
 
-Variant matrix: Aspect ratio (1:1 / 4:3 / 3:2 / 16:9 / 2:3) and Full-bleed (Yes / No). Two axes, ten variants.
-Property: Image (INSTANCE_SWAP). Default to an icon instance from the Icons frame on Utility.
-Image fill: COVER.
-Corner radius: 0 when Full-bleed=Yes; bind to border-radius/lg when Full-bleed=No.
-
-Build all ten variants.</div>
+Build all five variants.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
-            <li><span class="check"></span><span>Two axes: Aspect ratio × Full-bleed (10 variants)</span></li>
-            <li><span class="check"></span><span>Image fill = COVER</span></li>
-            <li><span class="check"></span><span>Radius 0 when Full-bleed=Yes; semantic token otherwise</span></li>
-            <li><span class="check"></span><span>Image swap defaults to an icon instance, not a generic rectangle</span></li>
+            <li><span class="check"></span><span>Five aspect-ratio variants rendered (1:1 / 4:3 / 3:2 / 16:9 / 2:3)</span></li>
+            <li><span class="check"></span><span>One axis only — no Full-bleed, no INSTANCE_SWAP property</span></li>
+            <li><span class="check"></span><span>Each variant has a single image layer ready to fill</span></li>
+            <li><span class="check"></span><span>Style and bindings inferred from the design + tokens.json</span></li>
           </ul>
         </div>
       </div>
       <div class="slide-footer"><span>3 of 4 · Artwork</span><span>~20 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 4 of 4 — Compose the Welcome screen. Figma finish line. The Welcome frame is pre-staged with placeholder Logo / Jumbotron / Button / Status Bar / Background / Gradient Overlay / Legal text. The agent's job is INSTANCE SWAP into the existing slots, not building from scratch. Full prompt to paste: Find the Welcome screen frame in our Figma file. It already exists with placeholder slots for Logo, Jumbotron, Button, plus the background, status bar, and legal text. Read the frame structure first. Replace each placeholder with the right component instance: Background swap to an Artwork instance (2:3 Full-bleed=Yes); Logo swap to an Artwork instance (1:1 Full-bleed=No 120×120); Jumbotron swap to a Jumbotron instance (Size=lg Show overline=false Show subtitle=true Show description=false) Title='Welcome to Keeta' Subtitle='Eat better, live better.'; Button swap to a Button instance (Style=Primary Size=Large Icon only=No Label='Continue'). Don't invent layout. Keep the existing positions and frame structure. Bind every value through semantic tokens, no raw hex, no raw px. Perform the swaps. Return frameId, every instance bound, every text/spacing token resolved.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 4 of 4 — Compose the Welcome screen. The Figma finish line. The agent creates a new 'Screens with components' page, uses the original Welcome on the Screens page as the layout reference, places component instances where matches exist (Button, Jumbotron, Artwork for the logo, Status Bar at the top), and pulls non-component items (the background image) directly from the source. Trust-the-agent prompt; bindings inferred from the design. Full prompt to paste: Compose the Welcome screen in our Figma file. Create a new page called 'Screens with components' and assemble the screen there. Use the original Welcome on the Screens page as the layout reference. Use available components (Button, Jumbotron, Artwork, Status Bar) wherever a match exists. For anything that isn't a component, pull it from the source design and place it directly. Bind every value through semantic tokens. Return the frameId.">
       <div class="slide-content">
         <div class="kicker">Compose · Welcome screen</div>
         <div class="prompt-frame">
-          <div class="prompt">Find the Welcome screen frame in our Figma file. It already exists with placeholder slots for Logo, Jumbotron, Button, plus the background, status bar, and legal text. Read the frame structure first.
+          <div class="prompt">Compose the Welcome screen in our Figma file. Create a new page called "Screens with components" and assemble the screen there. Use the original Welcome on the Screens page as the layout reference.
 
-Replace each placeholder with the right component instance:
-- Background: swap to an Artwork instance (2:3, Full-bleed=Yes).
-- Logo: swap to an Artwork instance (1:1, 120×120, Full-bleed=No).
-- Jumbotron: swap to a Jumbotron instance (Size=lg, Show overline=false, Show subtitle=true, Show description=false). Title="Welcome to Keeta", Subtitle="Eat better, live better."
-- Button: swap to a Button instance (Style=Primary, Size=Large, Icon only=No, Label="Continue").
+Use available components (Button, Jumbotron, Artwork, Status Bar) wherever a match exists. For anything that isn't a component, pull it from the source design and place it directly.
 
-Don't invent layout. Keep the existing positions and frame structure. Bind every value through semantic tokens.
-
-Perform the swaps. Return the frameId and confirm every instance is bound through semantic tokens.</div>
+Bind every value through semantic tokens. Return the frameId.</div>
         </div>
         <div class="card prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
-            <li><span class="check"></span><span>Welcome frame composed from three component instances</span></li>
-            <li><span class="check"></span><span>Style=Primary on the Button, Size=lg on the Jumbotron</span></li>
-            <li><span class="check"></span><span>Background Artwork full-bleed (radius 0)</span></li>
+            <li><span class="check"></span><span>New page "Screens with components" created with the assembled Welcome</span></li>
+            <li><span class="check"></span><span>Component instances used for every match (Button, Jumbotron, Artwork, Status Bar)</span></li>
+            <li><span class="check"></span><span>Background image placed directly from the source (not a component)</span></li>
             <li><span class="check"></span><span>Zero raw hex / raw px on the screen</span></li>
           </ul>
         </div>
