@@ -4412,6 +4412,7 @@
   .prompt {
     position: relative;
     max-width: min(100%, 1120px);
+    max-height: min(54vh, 480px);
     border: 1px solid rgba(255, 255, 255, 0.10);
     border-radius: 18px;
     background: #1f1f1f;
@@ -4430,6 +4431,21 @@
   .terminal.compact {
     font-size: clamp(13px, 1.0vw, 15px);
     line-height: 1.5;
+  }
+
+  /* Subtle scrollbar — same in both themes (lives on .prompt-body, the scroller) */
+  .prompt-body::-webkit-scrollbar { width: 10px; }
+  .prompt-body::-webkit-scrollbar-track { background: transparent; }
+  .prompt-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background 200ms ease;
+  }
+  .prompt-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.32);
+    background-clip: padding-box;
   }
 
   /* Inline code inside the prompt — mono chip on neutral white tint */
@@ -4527,17 +4543,22 @@
     .prompt-claude-mark svg { animation: none; }
   }
 
-  /* Body text wrapper. No internal scroll — the prompt expands to its full
-     content and the slide-content surface scrolls if the slide is taller
-     than the viewport. */
+  /* Body text wrapper — the actual scroll container, so the absolute
+     .prompt-submit button below stays pinned to the bottom of the box
+     regardless of how far the body has scrolled. flex-basis: auto so body
+     sizes to its content first (otherwise it collapses to 0 in flex columns
+     without an explicit parent height). */
   .prompt-body {
     display: block;
     flex: 1 1 auto;
     min-height: 0;
     padding: 20px 22px 60px;
-    overflow: visible;
+    overflow-y: auto;
+    overflow-x: hidden;
     overflow-wrap: anywhere;
     white-space: pre-wrap;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
   }
 
   /* Animated text caret — like a real input field's cursor */
@@ -5556,6 +5577,7 @@
      dark-elevated style for both themes (Claude.ai-style). Sizing only. */
   .prompt {
     max-width: min(100%, 1120px);
+    max-height: min(50vh, 440px);
   }
   .prompt.compact {
     font-size: clamp(13px, 1.0vw, 15px);
