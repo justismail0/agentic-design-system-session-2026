@@ -1482,6 +1482,95 @@
     font-weight: var(--fw-medium);
   }
 
+  /* Context surface grid (slide 67 — Lesson 4 · Context files).
+     Four interactive cards in a 2×2 grid. Hover lifts and accents the
+     border in mint; click/focus uses the same treatment. */
+  .context-surface-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    width: 100%;
+    max-width: 920px;
+    margin-top: var(--sp-4);
+  }
+
+  .context-surface-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 24px 26px;
+    text-align: left;
+    border: 1px solid var(--border-medium);
+    border-radius: var(--r-lg);
+    background: var(--bg-surface-grad);
+    color: var(--text-strong);
+    font-family: inherit;
+    cursor: pointer;
+    transition:
+      transform 200ms ease,
+      box-shadow 220ms ease,
+      border-color 200ms ease,
+      background-color 200ms ease;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    outline: none;
+  }
+
+  .context-surface-card:hover,
+  .context-surface-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--c-mint-ink);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  }
+
+  .context-surface-card:active {
+    transform: translateY(-1px);
+  }
+
+  .context-surface-name {
+    font-size: clamp(18px, 1.5vw, 22px);
+    font-weight: var(--fw-bold);
+    color: var(--text-strong);
+  }
+  .context-surface-name code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: rgba(80, 65, 112, 0.08);
+    padding: 1px 8px;
+    border-radius: 6px;
+  }
+
+  .context-surface-role {
+    font-size: clamp(14px, 1vw, 16px);
+    color: var(--text-muted);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+  }
+
+  .context-surface-example {
+    font-size: clamp(12px, 0.9vw, 14px);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    opacity: 0.78;
+    line-height: 1.5;
+  }
+
+  /* Dark-theme treatment */
+  :root[data-theme="dark"] .context-surface-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(211, 201, 232, 0.14);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  }
+  :root[data-theme="dark"] .context-surface-card:hover,
+  :root[data-theme="dark"] .context-surface-card:focus-visible {
+    border-color: var(--c-mint);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.5);
+  }
+  :root[data-theme="dark"] .context-surface-name code {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
   .slide.prompt-slide .slide-content {
     align-items: stretch;
   }
@@ -8777,19 +8866,32 @@ stand alone with enough context that a fresh session can apply it.
       </div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Choose the right context surface for the right kind of content.">
+    <section class="slide" data-section="Part 2" data-notes="Choose the right context surface for the right kind of content. Each card is interactive — hover to lift, click to focus. Walk the four surfaces in order: CLAUDE.md is always loaded (rules); per-component .md files are loaded only when referenced (specs); .json files are structured data the agent queries; Skills are scoped, replayable workflows.">
       <div class="slide-content">
         <div class="kicker">Lesson 4 · Context files</div>
         <h2>Choose the right surface for the context.</h2>
-        <table>
-          <thead><tr><th>Surface</th><th>Role</th><th>Example</th></tr></thead>
-          <tbody>
-            <tr><td><code>CLAUDE.md</code></td><td>Rules, always loaded</td><td>Token architecture</td></tr>
-            <tr><td><code>*.md</code></td><td>Deep reference on demand</td><td>Component specs</td></tr>
-            <tr><td><code>*.json</code></td><td>Structured query targets</td><td>Tokens, registry</td></tr>
-            <tr><td>Skills</td><td>Scoped workflows</td><td>Documentation flow</td></tr>
-          </tbody>
-        </table>
+        <div class="context-surface-grid">
+          <button class="context-surface-card" type="button">
+            <div class="context-surface-name"><code>CLAUDE.md</code></div>
+            <div class="context-surface-role">Rules, always loaded</div>
+            <div class="context-surface-example">project identity · conventions · discovered rules</div>
+          </button>
+          <button class="context-surface-card" type="button">
+            <div class="context-surface-name">Per-component <code>*.md</code></div>
+            <div class="context-surface-role">Loaded only when the task references it by name</div>
+            <div class="context-surface-example">button.md · jumbotron.md · artwork.md</div>
+          </button>
+          <button class="context-surface-card" type="button">
+            <div class="context-surface-name"><code>*.json</code></div>
+            <div class="context-surface-role">Structured query targets</div>
+            <div class="context-surface-example">tokens.json · button.tokens.json</div>
+          </button>
+          <button class="context-surface-card" type="button">
+            <div class="context-surface-name">Skills</div>
+            <div class="context-surface-role">Scoped, replayable workflows</div>
+            <div class="context-surface-example">/component-documentation</div>
+          </button>
+        </div>
       </div>
       <div class="slide-footer"><span>Context surfaces</span><span>Right place, right role</span></div>
     </section>
