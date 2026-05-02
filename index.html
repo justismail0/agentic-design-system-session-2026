@@ -1294,9 +1294,11 @@
   /* Insights container — used as the consolidated "after the prompt" card on
      slide 39 (Checkpoint) and slide 42 (Insights for this prompt). One container
      with a mint mono micro-caps label, matching the deck's eyebrow vocabulary.
-     `.card.prompt-insight` is double-classed to win specificity over the
-     visual-refresh `.card` rule that sits later in the file. */
-  .card.prompt-insight {
+     The .card class is intentionally NOT applied to .prompt-insight in
+     markup — the .card base class has backdrop-filter: blur(18px) which
+     created a glass effect over the prompt below, looking like overlap.
+     .prompt-insight stands alone with its own opaque card chrome. */
+  .prompt-insight {
     width: 100%;
     max-width: min(100%, 1120px);
     margin-top: var(--sp-5);
@@ -8391,7 +8393,7 @@ Add a README.md in each component tier folder explaining what qualifies — atom
 
 Don't write any token files yet. Just the folder skeleton and the four tier READMEs.</div>
         </div>
-        <div class="card prompt-insight">
+        <div class="prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>foundations/, tokens/, components/{atoms, molecules, organisms, patterns}/, screens/</span></li>
@@ -8527,7 +8529,7 @@ structure of a new Variables collection called `Primitive: Colors`. Cover the gr
         <div class="prompt-frame">
           <div class="prompt">Proceed. Create the collection. Group by hue, naming `color/{hue}/{shade}`.
 Preserve shade numbering from the palette.</div>
-          <div class="card prompt-insight">
+          <div class="prompt-insight">
             <h3>Checkpoint</h3>
             <ul class="clean-list">
               <li><span class="check"></span><span>7 hues</span></li>
@@ -8593,7 +8595,7 @@ Preserve shade numbering from the palette.</div>
 Use Figma MCP to read it. Do not create anything yet. Propose the
 structure of a new Variables collection called `Semantic: Colors`. Every value aliases a primitive from `Primitive: Colors` (no raw hex). Preserve the exact labels from the canvas (do not normalize or tidy). Wait for my approval.</div>
         </div>
-        <div class="card prompt-insight">
+        <div class="prompt-insight">
           <h3>Insights for this prompt</h3>
           <div class="concept-chain" aria-hidden="true">
             <span class="concept-chain-step">primitive</span>
@@ -8897,7 +8899,7 @@ State model: default, hover, disabled. Active state has no semantic token, mark 
 
 Bind every fill, stroke, text, and spacing through semantic tokens, never primitives. Default icon-swaps point at instances from the Icons frame on Utility.</div>
         </div>
-        <div class="card prompt-insight">
+        <div class="prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>Style × Size × Icon only variants rendered</span></li>
@@ -8926,7 +8928,7 @@ Per-size typography: bind to semantic-typography tokens (no raw px). Slot colors
 
 Build the four Size variants. All slots present in every variant; visibility driven by booleans.</div>
         </div>
-        <div class="card prompt-insight">
+        <div class="prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>One axis: Size (lg / md / sm / xs)</span></li>
@@ -8951,7 +8953,7 @@ Image-holder with multiple aspect ratios. Variant matrix: Aspect ratio (1:1 / 4:
 
 Build all five variants.</div>
         </div>
-        <div class="card prompt-insight">
+        <div class="prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>Five aspect-ratio variants rendered (1:1 / 4:3 / 3:2 / 16:9 / 2:3)</span></li>
@@ -8974,7 +8976,7 @@ Use available components (Button, Jumbotron, Artwork, Status Bar) wherever a mat
 
 Bind every value through semantic tokens.</div>
         </div>
-        <div class="card prompt-insight">
+        <div class="prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>New page "Screens with components" created with the assembled Welcome</span></li>
@@ -9563,7 +9565,7 @@ Write components/atoms/button/button.tokens.json with the bindings. Match the pe
 
 Don't invent. Anything you can't extract, mark TODO.</div>
         </div>
-        <div class="card prompt-insight">
+        <div class="prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>Every variant in the component set captured</span></li>
