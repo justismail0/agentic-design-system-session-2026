@@ -4091,38 +4091,46 @@
   .quote-slide .lede,
   .quote-slide .slide-footer { color: rgba(255, 255, 255, 0.64); }
 
-  /* Sticky line — used on the opener (slide ~9) and the closing
-     (final beat). Two-line typography with the surface line muted,
-     a mint rule between, and the architecture line full strength
-     with "yours" highlighted in mint. */
+  /* Sticky line — used on the opener Sticky-line slide and the
+     closing Final-beat slide. Eyebrow + hero treatment: AI line is
+     a small mono eyebrow with a mint tick to the left; architecture
+     line is display-size and dominates the slide, with "yours" in
+     mint. */
   .sticky-line {
     display: flex;
     flex-direction: column;
-    gap: clamp(14px, 2.4vw, 28px);
-    margin-top: clamp(20px, 5vh, 60px);
     align-items: flex-start;
+    gap: clamp(20px, 4vh, 48px);
+    margin-top: clamp(20px, 4vh, 48px);
   }
-  .sticky-line-top {
+  .sticky-line-eyebrow {
     margin: 0;
-    font-size: clamp(40px, 6vw, 84px);
+    font-family: var(--font-mono);
+    font-size: clamp(13px, 1vw, 16px);
     font-weight: var(--fw-bold);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: rgba(255, 255, 255, 0.42);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.48);
+    position: relative;
+    padding-left: clamp(28px, 3vw, 44px);
   }
-  .sticky-line-rule {
-    display: block;
-    width: clamp(72px, 14vw, 160px);
+  .sticky-line-eyebrow::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: clamp(18px, 2vw, 28px);
     height: 2px;
-    background: linear-gradient(90deg, var(--c-mint), transparent);
+    background: var(--c-mint);
+    transform: translateY(-50%);
     border-radius: 2px;
   }
-  .sticky-line-bottom {
+  .sticky-line-hero {
     margin: 0;
-    font-size: clamp(48px, 7vw, 100px);
+    font-size: clamp(56px, 9vw, 144px);
     font-weight: var(--fw-heavy);
-    line-height: 1;
-    letter-spacing: -0.02em;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
     color: #ffffff;
   }
   .sticky-line-emphasis {
@@ -4133,8 +4141,7 @@
     max-width: 52ch;
   }
   @media (max-width: 640px) {
-    .sticky-line-top { font-size: clamp(32px, 9vw, 48px); }
-    .sticky-line-bottom { font-size: clamp(40px, 11vw, 60px); }
+    .sticky-line-hero { font-size: clamp(40px, 12vw, 64px); }
   }
 
   .twocol {
@@ -7544,13 +7551,12 @@
       <div class="slide-footer"><span>Designer = architect</span><span>1 min</span></div>
     </section>
 
-    <section class="slide section-break quote-slide" data-section="Opener" data-notes="Hold for three seconds after reading. The two lines play against each other: AI as surface (muted, lighter weight), architecture as foundation (full strength, mint accent on 'yours'). This line returns throughout the session.">
+    <section class="slide section-break quote-slide" data-section="Opener" data-notes="Hold for three seconds after reading. The first line is treated as a small mono eyebrow — AI gets demoted to context. The second line dominates the slide as the hero, with 'yours' picked out in mint. This line returns throughout the session.">
       <div class="slide-content">
         <div class="kicker">Sticky line</div>
         <div class="sticky-line">
-          <p class="sticky-line-top">AI is the surface.</p>
-          <span class="sticky-line-rule" aria-hidden="true"></span>
-          <p class="sticky-line-bottom">The architecture is <span class="sticky-line-emphasis">yours</span>.</p>
+          <p class="sticky-line-eyebrow">AI is the surface.</p>
+          <p class="sticky-line-hero">The architecture<br>is <span class="sticky-line-emphasis">yours</span>.</p>
         </div>
       </div>
       <div class="slide-footer"><span>Remember this</span><span>Return often</span></div>
@@ -9884,13 +9890,12 @@ When you're done: 12 files (4 components × HTML, CSS, docs). Show me the file t
       <div class="slide-footer"><span>Monday morning</span><span>Lowest political cost first</span></div>
     </section>
 
-    <section class="slide section-break quote-slide" data-section="Closing" data-notes="Final line. Mirror of the opener Sticky-line slide. Same typography, same mint accent. Closes the loop — line introduced on slide 9 lands again as the goodbye.">
+    <section class="slide section-break quote-slide" data-section="Closing" data-notes="Final line. Mirror of the opener Sticky-line slide. AI line as small mono eyebrow with mint tick, architecture line as display-size hero. Closes the loop — line introduced on slide 9 lands again as the goodbye.">
       <div class="slide-content">
         <div class="kicker">Final beat</div>
         <div class="sticky-line">
-          <p class="sticky-line-top">AI is the surface.</p>
-          <span class="sticky-line-rule" aria-hidden="true"></span>
-          <p class="sticky-line-bottom">The architecture is <span class="sticky-line-emphasis">yours</span>.</p>
+          <p class="sticky-line-eyebrow">AI is the surface.</p>
+          <p class="sticky-line-hero">The architecture<br>is <span class="sticky-line-emphasis">yours</span>.</p>
         </div>
         <p class="lede sticky-line-tail">You already knew how to build design systems. Now you know how to teach an agent to build them with you.</p>
       </div>
