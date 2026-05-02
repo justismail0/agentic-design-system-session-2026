@@ -4111,16 +4111,14 @@
   }
   .hands-on-caret {
     display: inline-block;
-    width: clamp(3px, 0.32vw, 6px);
-    height: 0.82em;
-    margin-left: clamp(8px, 0.6vw, 14px);
+    width: clamp(2px, 0.22vw, 4px);
+    height: 0.78em;
+    margin-left: clamp(3px, 0.25vw, 6px);
     background: var(--c-mint);
-    border-radius: 2px;
     vertical-align: -0.04em;
-    animation: handsOnCaretBlink 1.2s ease-in-out infinite;
+    animation: handsOnCaretBlink 1.05s steps(2, start) infinite;
   }
   @keyframes handsOnCaretBlink {
-    0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
