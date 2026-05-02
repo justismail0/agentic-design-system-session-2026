@@ -2708,21 +2708,42 @@
   }
   .connection-option {
     position: relative;
-    padding: 22px 22px 20px;
+    padding: 26px 24px 22px;
     background: var(--bg-surface-grad);
     border: 1px solid var(--border-medium);
     border-radius: var(--r-lg);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     min-width: 0;
     isolation: isolate;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transition:
+      transform 220ms ease,
+      box-shadow 220ms ease,
+      border-color 220ms ease;
+  }
+  .connection-option:hover {
+    transform: translateY(-3px);
+    border-color: var(--c-mint-ink);
+    box-shadow:
+      0 18px 44px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
   .connection-option.recommended {
     border-color: rgba(53, 255, 181, 0.55);
-    box-shadow: 0 16px 40px rgba(53, 255, 181, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.10);
+    box-shadow:
+      0 18px 44px rgba(53, 255, 181, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+  .connection-option.recommended:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 24px 56px rgba(53, 255, 181, 0.30),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
   }
   .connection-option.recommended::before {
     content: '';
@@ -3022,6 +3043,40 @@
     flex-direction: column;
     gap: var(--sp-3);
     min-width: 0;
+  }
+
+  /* Slide 24 — agent capabilities list. Lives inside .llm-claude-card,
+     same chrome as the Claude family card. Each row: bold name + muted
+     description, divided by hairline borders. */
+  .agent-capabilities-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .agent-capabilities-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 18px;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .agent-capabilities-list li:first-child {
+    border-top: 0;
+  }
+  .agent-capability-name {
+    font-size: clamp(15px, 1.05vw, 17px);
+    font-weight: var(--fw-bold);
+    color: var(--text-strong);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .agent-capability-desc {
+    font-size: clamp(13px, 0.95vw, 15px);
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  :root[data-theme="dark"] .agent-capabilities-list li {
+    border-top-color: rgba(211, 201, 232, 0.10);
   }
 
   /* Left column — three info rows (What / When / Best for) */
@@ -4113,6 +4168,24 @@
     font-size: var(--ts-lede);
     line-height: var(--lh-snug);
     font-weight: var(--fw-medium);
+  }
+
+  /* Stronger lede — used where the muted text is too low-contrast.
+     Falls back to text-default so it reads cleanly in both themes. */
+  .lede.lede-strong {
+    color: var(--text-default);
+  }
+  :root[data-theme="dark"] .lede.lede-strong {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  /* Bridge titles — section-break slides that need a smaller, more
+     readable headline than the giant H1 default. */
+  .section-bridge-title {
+    font-size: clamp(28px, 4vw, 56px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0;
   }
 
   .large-line {
@@ -8263,41 +8336,45 @@
       <div class="slide-footer"><span>Live demo</span><span>MCP roundtrip</span></div>
     </section>
 
-    <section class="slide" data-section="Part 0" data-notes="Recap before Part 1. The four layers stacked top-down so the audience sees the architecture as a stack.">
+    <section class="slide" data-section="Part 0" data-notes="Recap before Part 1. Two-column layout. Left: kicker + h2 + lede. Right: the four layers stacked top-down so the audience sees the architecture as a stack.">
       <div class="slide-content">
         <div class="kicker">Recap · Before we build</div>
-        <h2>You now have the four layers.</h2>
-        <div class="layer-stack">
-          <div class="layer-stack-row" data-layer="connection">
-            <span class="layer-stack-num">04</span>
-            <div class="layer-stack-body">
-              <span class="layer-stack-name">Connection</span>
-              <span class="layer-stack-meta">Figma Remote MCP — how Claude reads and writes the file</span>
-            </div>
+        <div class="llm-2col">
+          <div class="llm-2col-text">
+            <h2>You now have the four layers.</h2>
+            <p class="lede">Up next, all four converge — you'll teach the agent your tokens, watch the protocol carry the work, see Claude write back to Figma.</p>
           </div>
-          <div class="layer-stack-row" data-layer="protocol">
-            <span class="layer-stack-num">03</span>
-            <div class="layer-stack-body">
-              <span class="layer-stack-name">Protocol</span>
-              <span class="layer-stack-meta">MCP — one language for many systems</span>
+          <div class="layer-stack">
+            <div class="layer-stack-row" data-layer="connection">
+              <span class="layer-stack-num">04</span>
+              <div class="layer-stack-body">
+                <span class="layer-stack-name">Connection</span>
+                <span class="layer-stack-meta">Figma Remote MCP — how Claude reads and writes the file</span>
+              </div>
             </div>
-          </div>
-          <div class="layer-stack-row" data-layer="agent">
-            <span class="layer-stack-num">02</span>
-            <div class="layer-stack-body">
-              <span class="layer-stack-name">Agent</span>
-              <span class="layer-stack-meta">Claude Code — files, commands, persistent memory</span>
+            <div class="layer-stack-row" data-layer="protocol">
+              <span class="layer-stack-num">03</span>
+              <div class="layer-stack-body">
+                <span class="layer-stack-name">Protocol</span>
+                <span class="layer-stack-meta">MCP — one language for many systems</span>
+              </div>
             </div>
-          </div>
-          <div class="layer-stack-row" data-layer="model">
-            <span class="layer-stack-num">01</span>
-            <div class="layer-stack-body">
-              <span class="layer-stack-name">Model</span>
-              <span class="layer-stack-meta">Claude — predicts the next token, needs context</span>
+            <div class="layer-stack-row" data-layer="agent">
+              <span class="layer-stack-num">02</span>
+              <div class="layer-stack-body">
+                <span class="layer-stack-name">Agent</span>
+                <span class="layer-stack-meta">Claude Code — files, commands, persistent memory</span>
+              </div>
+            </div>
+            <div class="layer-stack-row" data-layer="model">
+              <span class="layer-stack-num">01</span>
+              <div class="layer-stack-body">
+                <span class="layer-stack-name">Model</span>
+                <span class="layer-stack-meta">Claude — predicts the next token, needs context</span>
+              </div>
             </div>
           </div>
         </div>
-        <p class="lede">Up next, all four converge — you'll teach the agent your tokens, watch the protocol carry the work, see Claude write back to Figma.</p>
       </div>
       <div class="slide-footer"><span>Recap</span><span>Hands on the keyboard next</span></div>
     </section>
@@ -8656,7 +8733,7 @@ why? Propose the full pairing matrix before writing.</div>
     <section class="slide section-break" data-section="Part 1" data-notes="Final bridge: visual context to textual context. The fresh tokens JSON baseline happens during the break.">
       <div class="slide-content">
         <div class="kicker">Next · Part 2 · Persist</div>
-        <h1>Part 1 taught the agent visually.<br>Part 2 makes the teaching stick.</h1>
+        <h2 class="section-bridge-title">Part 1 taught the agent visually.<br>Part 2 makes the teaching stick.</h2>
         <p class="lede">Next: CLAUDE.md, project structure, skills, and the first written spec. The textual counterpart to the Figma canvas.</p>
       </div>
       <div class="slide-footer"><span>Back in 10 min</span><span>Save tokens/design-tokens.json</span></div>
@@ -8915,8 +8992,8 @@ Bind every value through semantic tokens.</div>
       <div class="slide-content">
         <div class="kicker">The turn</div>
         <h2>You built the screen from what's in your head.</h2>
-        <p class="lede">Close Claude Code. Reopen tomorrow. Every rule you just lived through gets re-guessed. Every component you just built has no spec a teammate can read.</p>
-        <p class="lede"><strong>Now we capture it.</strong></p>
+        <p class="lede lede-strong">Close Claude Code. Reopen tomorrow. Every rule you just lived through gets re-guessed. Every component you just built has no spec a teammate can read.</p>
+        <p class="lede lede-strong"><strong>Now we capture it.</strong></p>
       </div>
       <div class="slide-footer"><span>Visual finish line</span><span>Persistence comes next</span></div>
     </section>
@@ -9210,7 +9287,7 @@ stand alone with enough context that a fresh session can apply it.
       <div class="slide-footer"><span>Predictable lookup</span><span>No flat chaos</span></div>
     </section>
 
-    <section class="slide prompt-slide labeled-prompt-slide" data-section="Part 2" data-notes="Lesson 3's prompt slide. Walk the five rows, then move to the file-tree slide that follows — that's what the prompt produces. Hold on Constraints — the four-tier order and the README-per-tier rule are load-bearing. Full prompt to paste: Act as a design system architect scaffolding the repository. Create the project file structure the agent will navigate. Token-driven design system, atomic-design layout. Place primitives in foundations/, semantics in tokens/. Under components/, create four subfolders in this order: atoms/, molecules/, organisms/, patterns/. Add a README.md to each component subfolder, 1-2 paragraphs each — atoms = smallest functional units bound to semantic tokens; molecules = compositions of atoms with their own layout rules; organisms = feature-level UI blocks composed of molecules and atoms; patterns = composition blueprints, MD-only (no token files). Don't pre-create .claude/ — that's built by /skill-creator later. Return the tree of created paths. Show the diff before writing.">
+    <section class="slide prompt-slide labeled-prompt-slide" data-section="Part 2" data-notes="Lesson 3's prompt slide. Walk the five rows, then move to the file-tree slide that follows — that's what the prompt produces. Hold on Constraints — the four-tier order and the README-per-tier rule are load-bearing. Full prompt to paste: Act as a design system architect shaping the repository. Create the project file structure the agent will navigate. Token-driven design system, atomic-design layout. Place primitives in foundations/, semantics in tokens/. Under components/, create four subfolders in this order: atoms/, molecules/, organisms/, patterns/. Add a README.md to each component subfolder, 1-2 paragraphs each — atoms = smallest functional units bound to semantic tokens; molecules = compositions of atoms with their own layout rules; organisms = feature-level UI blocks composed of molecules and atoms; patterns = composition blueprints, MD-only (no token files). Don't pre-create .claude/ — that's built by /skill-creator later. Return the tree of created paths. Show the diff before writing.">
       <div class="slide-content">
         <div class="kicker">Lesson 3 · Project structure</div>
         <h2>Five rows. Four tiers. One file tree.</h2>
@@ -9220,7 +9297,7 @@ stand alone with enough context that a fresh session can apply it.
           </div>
           <div class="lp-row">
             <span class="lp-label">Role</span>
-            <div class="lp-text">Act as a design system architect scaffolding the repository.</div>
+            <div class="lp-text">Act as a design system architect shaping the repository.</div>
           </div>
           <div class="lp-row">
             <span class="lp-label">Ask</span>
