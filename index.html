@@ -4092,16 +4092,25 @@
   .quote-slide .slide-footer { color: rgba(255, 255, 255, 0.64); }
 
   /* Sticky line — used on the opener Sticky-line slide and the
-     closing Final-beat slide. Eyebrow + hero treatment: AI line is
-     a small mono eyebrow with a mint tick to the left; architecture
-     line is display-size and dominates the slide, with "yours" in
-     mint. */
+     closing Final-beat slide. Two-column layout (B+C):
+     LEFT: AI eyebrow + stacked poster typography (3 lines).
+     RIGHT: visual metaphor — thin Surface bar above a tall
+            mint-outlined Architecture foundation. */
+  .sticky-line-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(40px, 6vw, 96px);
+    align-items: center;
+    width: 100%;
+    margin-top: clamp(12px, 2vh, 24px);
+  }
+
   .sticky-line {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: clamp(20px, 4vh, 48px);
-    margin-top: clamp(20px, 4vh, 48px);
+    gap: clamp(20px, 3.5vh, 40px);
+    min-width: 0;
   }
   .sticky-line-eyebrow {
     margin: 0;
@@ -4125,23 +4134,106 @@
     transform: translateY(-50%);
     border-radius: 2px;
   }
-  .sticky-line-hero {
-    margin: 0;
-    font-size: clamp(56px, 9vw, 144px);
+  .sticky-line-stacked {
+    display: flex;
+    flex-direction: column;
+    font-size: clamp(56px, 8.5vw, 132px);
     font-weight: var(--fw-heavy);
-    line-height: 0.95;
+    line-height: 0.92;
     letter-spacing: -0.025em;
     color: #ffffff;
+    text-transform: capitalize;
   }
-  .sticky-line-emphasis {
+  .sticky-line-stacked span {
+    display: block;
+  }
+  .sticky-line-stacked em {
+    font-style: normal;
     color: var(--c-mint);
   }
+
+  /* Right column — layered visual metaphor */
+  .sticky-line-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+  }
+  .visual-layer {
+    position: relative;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+  }
+  .visual-surface {
+    height: clamp(48px, 7vh, 72px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  }
+  .visual-spacer {
+    height: clamp(28px, 4vh, 44px);
+    position: relative;
+  }
+  .visual-spacer::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    bottom: 4px;
+    width: 1px;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.24) 50%, transparent 50%);
+    background-size: 1px 6px;
+    transform: translateX(-0.5px);
+  }
+  .visual-architecture {
+    min-height: clamp(180px, 30vh, 320px);
+    border: 2px solid var(--c-mint);
+    background:
+      linear-gradient(180deg, rgba(53, 255, 181, 0.10), rgba(53, 255, 181, 0.02));
+    box-shadow:
+      0 0 36px rgba(53, 255, 181, 0.18),
+      inset 0 0 28px rgba(53, 255, 181, 0.06);
+    padding: 24px;
+  }
+  .visual-label {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 0.85vw, 14px);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .visual-label-mint { color: var(--c-mint); }
+  .visual-sub {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 0.75vw, 12px);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
   .sticky-line-tail {
     margin-top: clamp(24px, 4vh, 48px);
     max-width: 52ch;
   }
+
+  /* Stack to single column on smaller widths */
+  @media (max-width: 900px) {
+    .sticky-line-grid {
+      grid-template-columns: 1fr;
+      gap: clamp(28px, 5vh, 48px);
+    }
+    .sticky-line-stacked { font-size: clamp(44px, 11vw, 80px); }
+    .visual-architecture { min-height: clamp(140px, 22vh, 200px); }
+  }
   @media (max-width: 640px) {
-    .sticky-line-hero { font-size: clamp(40px, 12vw, 64px); }
+    .sticky-line-stacked { font-size: clamp(38px, 13vw, 64px); }
   }
 
   .twocol {
@@ -7551,12 +7643,28 @@
       <div class="slide-footer"><span>Designer = architect</span><span>1 min</span></div>
     </section>
 
-    <section class="slide section-break quote-slide" data-section="Opener" data-notes="Hold for three seconds after reading. The first line is treated as a small mono eyebrow — AI gets demoted to context. The second line dominates the slide as the hero, with 'yours' picked out in mint. This line returns throughout the session.">
+    <section class="slide section-break quote-slide" data-section="Opener" data-notes="Hold for three seconds after reading. Left side: AI demoted to a mono eyebrow, the architecture line stacked across three lines as a poster — 'YOURS' in mint. Right side: a visual metaphor — thin Surface layer at the top, a tall mint-outlined Architecture foundation below. This line returns throughout the session.">
       <div class="slide-content">
         <div class="kicker">Sticky line</div>
-        <div class="sticky-line">
-          <p class="sticky-line-eyebrow">AI is the surface.</p>
-          <p class="sticky-line-hero">The architecture<br>is <span class="sticky-line-emphasis">yours</span>.</p>
+        <div class="sticky-line-grid">
+          <div class="sticky-line">
+            <p class="sticky-line-eyebrow">AI is the surface.</p>
+            <div class="sticky-line-stacked">
+              <span>The</span>
+              <span>architecture</span>
+              <span>is <em>yours</em>.</span>
+            </div>
+          </div>
+          <div class="sticky-line-visual" aria-hidden="true">
+            <div class="visual-layer visual-surface">
+              <span class="visual-label">Surface · AI</span>
+            </div>
+            <div class="visual-spacer"></div>
+            <div class="visual-layer visual-architecture">
+              <span class="visual-label visual-label-mint">Architecture</span>
+              <span class="visual-sub">designed by you</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="slide-footer"><span>Remember this</span><span>Return often</span></div>
@@ -9890,12 +9998,28 @@ When you're done: 12 files (4 components × HTML, CSS, docs). Show me the file t
       <div class="slide-footer"><span>Monday morning</span><span>Lowest political cost first</span></div>
     </section>
 
-    <section class="slide section-break quote-slide" data-section="Closing" data-notes="Final line. Mirror of the opener Sticky-line slide. AI line as small mono eyebrow with mint tick, architecture line as display-size hero. Closes the loop — line introduced on slide 9 lands again as the goodbye.">
+    <section class="slide section-break quote-slide" data-section="Closing" data-notes="Final line. Mirror of the opener Sticky-line slide. Stacked poster typography on the left, layered visual metaphor on the right. Closes the loop — line introduced on slide 9 lands again as the goodbye.">
       <div class="slide-content">
         <div class="kicker">Final beat</div>
-        <div class="sticky-line">
-          <p class="sticky-line-eyebrow">AI is the surface.</p>
-          <p class="sticky-line-hero">The architecture<br>is <span class="sticky-line-emphasis">yours</span>.</p>
+        <div class="sticky-line-grid">
+          <div class="sticky-line">
+            <p class="sticky-line-eyebrow">AI is the surface.</p>
+            <div class="sticky-line-stacked">
+              <span>The</span>
+              <span>architecture</span>
+              <span>is <em>yours</em>.</span>
+            </div>
+          </div>
+          <div class="sticky-line-visual" aria-hidden="true">
+            <div class="visual-layer visual-surface">
+              <span class="visual-label">Surface · AI</span>
+            </div>
+            <div class="visual-spacer"></div>
+            <div class="visual-layer visual-architecture">
+              <span class="visual-label visual-label-mint">Architecture</span>
+              <span class="visual-sub">designed by you</span>
+            </div>
+          </div>
         </div>
         <p class="lede sticky-line-tail">You already knew how to build design systems. Now you know how to teach an agent to build them with you.</p>
       </div>
