@@ -4094,6 +4094,29 @@
   /* Sticky-line custom styles retired — both occurrences (opener and
      final beat) use the default section-break + h1 pattern. */
 
+  /* Hands-on session slide (inserted after the sticky-line opener).
+     Centered headline + the same blinking caret used inside prompts,
+     scaled up to match the headline. */
+  .slide-content.hands-on-slide {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .hands-on-title {
+    font-size: clamp(48px, 8vw, 124px);
+    font-weight: var(--fw-heavy);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+  .hands-on-caret {
+    width: auto;
+    margin-left: clamp(6px, 0.5vw, 12px);
+    color: var(--c-mint);
+    font-weight: var(--fw-bold);
+    vertical-align: baseline;
+  }
+
   .twocol {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(280px, 0.82fr);
@@ -7507,6 +7530,13 @@
         <h1>AI is the surface.<br>The architecture is yours.</h1>
       </div>
       <div class="slide-footer"><span>Remember this</span><span>Return often</span></div>
+    </section>
+
+    <section class="slide section-break" data-section="Opener" data-notes="Beat between the sticky line and the session map. Sets expectations: this is hands-on, not a lecture. Hold for a moment so the audience sees the caret blink — same caret used inside every prompt later in the deck.">
+      <div class="slide-content hands-on-slide">
+        <h1 class="hands-on-title">Hands-on session<span class="prompt-caret hands-on-caret" aria-hidden="true">|</span></h1>
+      </div>
+      <div class="slide-footer"><span>Format</span><span>Build, don't watch</span></div>
     </section>
 
     <section class="slide" data-section="Opener" data-notes="This is where anxiety turns into a map. Keep it crisp and concrete. Three pillars taught today; automation is named as the next session.">
