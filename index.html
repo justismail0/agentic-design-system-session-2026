@@ -9161,11 +9161,11 @@ why? Propose the full pairing matrix before writing.</div>
       </div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The first component built live, direct (no propose-then-approve). Figma only at this point — capture comes later in the session. Default icon-swaps should point at instances from the Icons frame on Utility (5:355, frame 26:524). Full prompt to paste: Build a Button in our Figma demo file. Read tokens.json first to learn the semantic tokens you can alias. Create a new Figma page named 'Button' and place the component set on it. Variant matrix: Style × Size × Icon only. Properties: Label (TEXT), Show left icon (BOOLEAN), Show right icon (BOOLEAN), Left icon (INSTANCE_SWAP), Right icon (INSTANCE_SWAP). Anatomy: left-icon, label, right-icon, centered horizontal flex. State model: default, hover, disabled. Active state has no semantic token, mark it. Bind every fill, stroke, text, and spacing through semantic tokens, never primitives. Default icon-swaps point at instances from the Icons frame on Utility.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The first component built live, direct (no propose-then-approve). Figma only at this point — capture comes later in the session. Default icon-swaps should point at instances from the Icons frame on Utility (5:355, frame 26:524). Full prompt to paste: Build a Button in our Figma demo file. Read the Figma file's semantic variables first to learn what you can alias. Create a new Figma page named 'Button' and place the component set on it. Variant matrix: Style × Size × Icon only. Properties: Label (TEXT), Show left icon (BOOLEAN), Show right icon (BOOLEAN), Left icon (INSTANCE_SWAP), Right icon (INSTANCE_SWAP). Anatomy: left-icon, label, right-icon, centered horizontal flex. State model: default, hover, disabled. Active state has no semantic token, mark it. Bind every fill, stroke, text, and spacing through semantic tokens, never primitives. Default icon-swaps point at instances from the Icons frame on Utility.">
       <div class="slide-content">
         <div class="kicker">Component 1 · Button</div>
         <div class="prompt-frame">
-          <div class="prompt">Build a Button in our Figma demo file. Read tokens.json first to learn the semantic tokens you can alias.
+          <div class="prompt">Build a Button in our Figma demo file. Read the Figma file's semantic variables first to learn what you can alias.
 
 Create a new Figma page named "Button" and place the component set on it.
 
@@ -9218,7 +9218,7 @@ Build the four Size variants. All slots present in every variant; visibility dri
       <div class="slide-footer"><span>2 of 4 · Jumbotron</span><span>~20 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders with aspect ratios. Welcome uses one (the logo at 1:1) and the screen's background is a raw image placed directly in the frame, not an Artwork. Direct build, Figma only. Bindings (corner radius, etc) come from reading the design + tokens.json, not from a list in the prompt. Full prompt to paste: Build an Artwork in our Figma file. Create a new Figma page named 'Artwork' and place the component set on it. Image-holder with multiple aspect ratios. Variant matrix: Aspect ratio (1:1 / 4:3 / 3:2 / 16:9 / 2:3), one axis only. Each variant has a single image layer that gets filled later when the component is placed on a screen. Build all five variants.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 3 of 4 — Artwork. Image holders with aspect ratios. Welcome uses one (the logo at 1:1) and the screen's background is a raw image placed directly in the frame, not an Artwork. Direct build, Figma only. Bindings (corner radius, etc) come from reading the Figma file and the existing variables, not from a list in the prompt. Full prompt to paste: Build an Artwork in our Figma file. Create a new Figma page named 'Artwork' and place the component set on it. Image-holder with multiple aspect ratios. Variant matrix: Aspect ratio (1:1 / 4:3 / 3:2 / 16:9 / 2:3), one axis only. Each variant has a single image layer that gets filled later when the component is placed on a screen. Build all five variants.">
       <div class="slide-content">
         <div class="kicker">Component 3 · Artwork</div>
         <div class="prompt-frame">
@@ -9236,7 +9236,7 @@ Build all five variants.</div>
             <li><span class="check"></span><span>Five aspect-ratio variants rendered (1:1 / 4:3 / 3:2 / 16:9 / 2:3)</span></li>
             <li><span class="check"></span><span>One axis only — no Full-bleed, no INSTANCE_SWAP property</span></li>
             <li><span class="check"></span><span>Each variant has a single image layer ready to fill</span></li>
-            <li><span class="check"></span><span>Style and bindings inferred from the design + tokens.json</span></li>
+            <li><span class="check"></span><span>Style and bindings inferred from Figma and the existing variables</span></li>
           </ul>
         </div>
       </div>
@@ -9368,8 +9368,14 @@ Project context for Claude Code working in this design-system repo.
 <span class="cm-comment">## 1 · Project identity</span>
 
 Token-driven design system. <span class="cm-em">Figma is the source of truth</span> for every
-token. The local <span class="cm-code">tokens.json</span> is the consolidated DTCG export — the
-same data, in a file the agent can read alongside the Figma file.
+token, once the variables are generated.
+
+- <span class="cm-code">tokens.json</span> — DTCG <span class="cm-em">seed</span> export. Used in Part 1 to generate the
+  Figma variable collections from a known starting point.
+- After Part 1 generates them, <span class="cm-em">the Figma variables are authoritative.</span>
+  All future reads come from Figma via MCP.
+- <span class="cm-code">foundations/*.json</span> + <span class="cm-code">tokens/*.json</span> (the split files) — <span class="cm-em">derived</span>
+  from Figma. They mirror Figma; never hand-edited.
 
 - <span class="cm-em">Figma file:</span> <span class="cm-code">vdVmrWthRNIyM1lf2XThdZ</span>
 - <span class="cm-em">Welcome screen:</span> node <span class="cm-code">1:51</span>
@@ -9384,7 +9390,7 @@ same data, in a file the agent can read alongside the Figma file.
 Three tiers. Components reference semantic tokens only — never primitives
 directly. Per-component bindings live alongside the component, not in a
 shared collection. The split files in <span class="cm-code">foundations/</span> and <span class="cm-code">tokens/</span>
-mirror sections of <span class="cm-code">tokens.json</span>; the consolidated file is the source.
+are derived from Figma; never hand-edited.
 
 <span class="cm-comment">## 3 · Reference tables</span>
 
@@ -9426,8 +9432,9 @@ mirror sections of <span class="cm-code">tokens.json</span>; the consolidated fi
 
 1. <span class="cm-em">Always set</span> <span class="cm-code">variable.scopes</span> explicitly. The <span class="cm-code">ALL_SCOPES</span> default
    pollutes pickers.
-2. <span class="cm-em">tokens.json is the source</span> — never hand-edit the split files in
-   <span class="cm-code">foundations/</span> or <span class="cm-code">tokens/</span>. Round-trip changes through Figma.
+2. <span class="cm-em">Figma is the source.</span> <span class="cm-code">tokens.json</span> is the seed used to
+   bootstrap the variables; <span class="cm-code">foundations/</span> and <span class="cm-code">tokens/</span> are derived
+   from Figma. Never hand-edit the split files.
 3. <span class="cm-em">Tier reference rule.</span> Molecule tokens may reference atom tokens via
    <span class="cm-code">$alias</span> paths. Never the other way around.
 4. <span class="cm-em">Patterns are MD-only.</span> No <span class="cm-code">tokens.json</span> or preview.
