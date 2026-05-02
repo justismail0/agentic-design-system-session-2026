@@ -4110,11 +4110,21 @@
     margin: 0;
   }
   .hands-on-caret {
-    width: auto;
-    margin-left: clamp(6px, 0.5vw, 12px);
-    color: var(--c-mint);
-    font-weight: var(--fw-bold);
-    vertical-align: baseline;
+    display: inline-block;
+    width: clamp(3px, 0.32vw, 6px);
+    height: 0.82em;
+    margin-left: clamp(8px, 0.6vw, 14px);
+    background: var(--c-mint);
+    border-radius: 2px;
+    vertical-align: -0.04em;
+    animation: handsOnCaretBlink 1.2s ease-in-out infinite;
+  }
+  @keyframes handsOnCaretBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hands-on-caret { animation: none; opacity: 0.9; }
   }
 
   .twocol {
@@ -7534,7 +7544,7 @@
 
     <section class="slide section-break" data-section="Opener" data-notes="Beat between the sticky line and the session map. Sets expectations: this is hands-on, not a lecture. Hold for a moment so the audience sees the caret blink — same caret used inside every prompt later in the deck.">
       <div class="slide-content hands-on-slide">
-        <h1 class="hands-on-title">Hands-on session<span class="prompt-caret hands-on-caret" aria-hidden="true">|</span></h1>
+        <h1 class="hands-on-title">Hands-on session<span class="hands-on-caret" aria-hidden="true"></span></h1>
       </div>
       <div class="slide-footer"><span>Format</span><span>Build, don't watch</span></div>
     </section>
