@@ -2867,6 +2867,214 @@
     color: var(--text-muted);
   }
 
+  /* Slide 27 — hero + alternatives 2-col layout. Figma Remote MCP
+     featured on the left as today's choice; Console MCP and CLI as
+     supporting "other options" on the right. */
+  .connection-2col {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(24px, 3vw, 44px);
+    align-items: stretch;
+    margin-top: var(--sp-4);
+    width: 100%;
+  }
+  .connection-hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: clamp(24px, 2.5vw, 36px);
+    border: 1px solid rgba(53, 255, 181, 0.55);
+    border-radius: var(--r-lg);
+    background: var(--bg-surface-grad);
+    box-shadow:
+      0 18px 44px rgba(53, 255, 181, 0.20),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .connection-hero::before {
+    content: '';
+    position: absolute;
+    width: 320px; height: 320px;
+    top: -120px; right: -120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(53, 255, 181, 0.22), transparent 70%);
+    filter: blur(60px);
+    z-index: 0;
+  }
+  .connection-hero > * { position: relative; z-index: 1; }
+  .connection-hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--c-mint-ink);
+    line-height: 1;
+  }
+  .connection-hero-name {
+    margin: 0;
+    font-size: clamp(26px, 2.4vw, 34px);
+    font-weight: var(--fw-bold);
+    color: var(--text-strong);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+  .connection-hero-spec {
+    margin: 8px 0 0;
+    display: grid;
+    gap: 0;
+  }
+  .connection-hero-spec > div {
+    display: grid;
+    grid-template-columns: clamp(60px, 5vw, 80px) 1fr;
+    gap: 12px;
+    align-items: baseline;
+    padding: 8px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .connection-hero-spec > div:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .connection-hero-spec dt {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+  }
+  .connection-hero-spec dd {
+    margin: 0;
+    font-size: clamp(14px, 1vw, 16px);
+    color: var(--text-default);
+  }
+  .connection-hero-best {
+    margin: 6px 0 0;
+    font-size: clamp(14px, 1vw, 16px);
+    color: var(--text-default);
+    line-height: 1.5;
+  }
+  .connection-hero-video {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding: 10px 16px;
+    border: 1px solid var(--c-mint-ink);
+    border-radius: 999px;
+    background: rgba(0, 140, 92, 0.06);
+    color: var(--c-mint-ink);
+    font-size: 13px;
+    font-weight: var(--fw-bold);
+    text-decoration: none;
+    width: fit-content;
+    transition: background 180ms ease, transform 180ms ease;
+  }
+  .connection-hero-video:hover {
+    background: rgba(0, 140, 92, 0.14);
+    transform: translateY(-1px);
+  }
+  .connection-hero-video-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--c-mint-ink);
+    color: #ffffff;
+    font-size: 9px;
+    padding-left: 1px;
+  }
+  .connection-hero-video-arrow {
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .connection-alts {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+  .connection-alts-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+  }
+  .connection-alt {
+    padding: 18px 20px;
+    border: 1px solid var(--border-medium);
+    border-radius: var(--r-md);
+    background: var(--bg-surface-grad);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .connection-alt h4 {
+    margin: 0;
+    font-size: clamp(16px, 1.15vw, 19px);
+    font-weight: var(--fw-bold);
+    color: var(--text-strong);
+    letter-spacing: -0.01em;
+  }
+  .connection-alt-where {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+  }
+  .connection-alt-best {
+    margin: 4px 0 0;
+    font-size: clamp(13px, 0.9vw, 14px);
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .connection-2col { grid-template-columns: 1fr; }
+  }
+
+  /* Dark theme */
+  :root[data-theme="dark"] .connection-hero {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(53, 255, 181, 0.55);
+    box-shadow:
+      0 22px 56px rgba(53, 255, 181, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  :root[data-theme="dark"] .connection-hero-eyebrow {
+    color: var(--c-mint);
+  }
+  :root[data-theme="dark"] .connection-hero-spec > div {
+    border-top-color: rgba(211, 201, 232, 0.12);
+  }
+  :root[data-theme="dark"] .connection-hero-video {
+    border-color: var(--c-mint);
+    background: rgba(53, 255, 181, 0.10);
+    color: var(--c-mint);
+  }
+  :root[data-theme="dark"] .connection-hero-video:hover {
+    background: rgba(53, 255, 181, 0.18);
+  }
+  :root[data-theme="dark"] .connection-hero-video-icon {
+    background: var(--c-mint);
+    color: #0a1410;
+  }
+  :root[data-theme="dark"] .connection-alt {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(211, 201, 232, 0.14);
+  }
+
   /* Flow card on the Figma Remote MCP slide */
   .connection-flow {
     display: flex;
@@ -8331,34 +8539,35 @@
     <section class="slide" data-section="Part 0" data-notes="Three options. Recommended is visually prominent (mint border, glow, RECOMMENDED pill). The other two stay quiet but are honest about their niche.">
       <div class="slide-content">
         <div class="kicker">Lesson 4 · Three options</div>
-        <h2>Three options. We use one today.</h2>
-        <p class="lede">Three ways Claude can read and write a Figma file. We use one today; the other two have niche jobs you'll meet later.</p>
-        <div class="connection-options">
-          <div class="connection-option recommended">
-            <span class="connection-option-num">01</span>
-            <h4>Figma Dev Mode MCP</h4>
-            <p class="connection-option-where">Hosted by Figma · OAuth login · official</p>
-            <div class="connection-option-best">
-              <span class="connection-option-best-label">Best for</span>
-              <p>Live sessions and shared setups. One-click connect, same for everyone, no install. What we use today.</p>
-            </div>
+        <h2>Figma Remote MCP — what we use today.</h2>
+        <p class="lede">The simplest way for Claude to read and write your Figma file. Two other options exist for niche jobs; we'll mention them, then move on.</p>
+        <div class="connection-2col">
+          <div class="connection-hero">
+            <span class="connection-hero-eyebrow">Today's choice</span>
+            <h3 class="connection-hero-name">Figma Remote MCP</h3>
+            <dl class="connection-hero-spec">
+              <div><dt>Where</dt><dd>Hosted by Figma</dd></div>
+              <div><dt>Auth</dt><dd>OAuth login</dd></div>
+              <div><dt>Access</dt><dd>Read + write</dd></div>
+            </dl>
+            <p class="connection-hero-best">Live sessions and shared setups. One-click connect, same for everyone, no install. What we use today.</p>
+            <a class="connection-hero-video" href="https://youtu.be/4v9jk0oJPsY" target="_blank" rel="noopener noreferrer">
+              <span class="connection-hero-video-icon" aria-hidden="true">▶</span>
+              <span>Watch the setup video</span>
+              <span class="connection-hero-video-arrow" aria-hidden="true">↗</span>
+            </a>
           </div>
-          <div class="connection-option">
-            <span class="connection-option-num">02</span>
-            <h4>Figma Console MCP</h4>
-            <p class="connection-option-where">Cloud + Figma Desktop plugin · open source (Southleft)</p>
-            <div class="connection-option-best">
-              <span class="connection-option-best-label">Best for</span>
-              <p>Turning your design system into a queryable API. 94+ tools — extract tokens, audit accessibility, build components programmatically.</p>
+          <div class="connection-alts">
+            <span class="connection-alts-label">Other options</span>
+            <div class="connection-alt">
+              <h4>Figma Console MCP</h4>
+              <p class="connection-alt-where">Open source · Southleft</p>
+              <p class="connection-alt-best">Turn your design system into a queryable API. 94+ tools — token extraction, accessibility audits, programmatic component creation.</p>
             </div>
-          </div>
-          <div class="connection-option">
-            <span class="connection-option-num">03</span>
-            <h4>Figma CLI</h4>
-            <p class="connection-option-where">Local install · WebSocket to Figma Desktop · no API key</p>
-            <div class="connection-option-best">
-              <span class="connection-option-best-label">Best for</span>
-              <p>Direct control of Figma Desktop from Claude Code. Generate components, manage tokens, batch-edit layers — all by chat.</p>
+            <div class="connection-alt">
+              <h4>Figma CLI</h4>
+              <p class="connection-alt-where">Local install · silships</p>
+              <p class="connection-alt-best">Control Figma Desktop directly from Claude Code. WebSocket connection, no API key needed.</p>
             </div>
           </div>
         </div>
