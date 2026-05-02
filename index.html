@@ -7295,8 +7295,12 @@
      dark-elevated in both themes (Claude.ai-style). */
 
   :root[data-theme="dark"] .prompt-insight {
-    border-color: rgba(211, 201, 232, 0.12);
-    background: rgba(211, 201, 232, 0.05);
+    border-color: rgba(211, 201, 232, 0.18);
+    background:
+      linear-gradient(180deg, rgba(36, 28, 56, 0.95), rgba(22, 16, 38, 0.95));
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
   :root[data-theme="dark"] .prompt-insight h3 {
@@ -8001,37 +8005,43 @@
       <div class="slide-footer"><span>From prompt to file</span><span>Four layers</span></div>
     </section>
 
-    <section class="slide" data-section="Part 0" data-notes="Meet the agent. Mirrors the LLM intro slide: name the agent, show what it does, name what it's good at. Hold for a beat after the title — this is the moment students 'meet Claude Code'.">
+    <section class="slide" data-section="Part 0" data-notes="Meet the agent. Two-column layout mirrors the LLM intro slide. Left: the agent concept (lede + best-for). Right: Claude Code badge + three capability rows (Reads / Runs / Remembers). Hold a beat after the title — this is the moment students meet Claude Code.">
       <div class="slide-content">
         <div class="kicker">Lesson 2 · The Agent</div>
-        <h2>Chat becomes work when the model can act.</h2>
-        <p class="lede">An agent is a model wrapped with tools, memory, and access to your files.</p>
-        <div class="agent-row">
-          <div class="agent-intro">
-            <div class="agent-logo" aria-hidden="true">
-              <img src="assets/logos/claude.svg" alt="Claude">
-            </div>
-            <div>
-              <p class="agent-eyebrow">Today we're using one specific agent</p>
-              <h3>Claude Code — by Anthropic</h3>
-            </div>
+        <div class="llm-2col">
+          <div class="llm-2col-text">
+            <h2>Chat becomes work when the model can act.</h2>
+            <p class="lede">An agent is a model wrapped with tools, memory, and access to your files.</p>
+            <p class="agent-best-for"><strong>Best for</strong> working alongside you on a real codebase, where the system is structured for reading and editing — not chat-only Q&amp;A.</p>
           </div>
-          <div class="agent-capabilities">
-            <div class="agent-capability">
-              <span class="agent-capability-name">Reads your project</span>
-              <span class="agent-capability-desc">Files, repos, tokens — the workspace becomes context, not just what you paste.</span>
-            </div>
-            <div class="agent-capability">
-              <span class="agent-capability-name">Runs commands</span>
-              <span class="agent-capability-desc">Scripts, tests, MCP calls — work, not just talk.</span>
-            </div>
-            <div class="agent-capability">
-              <span class="agent-capability-name">Remembers</span>
-              <span class="agent-capability-desc">CLAUDE.md, skills, project structure — context survives the session.</span>
+          <div class="llm-2col-claude">
+            <div class="llm-claude-card">
+              <header class="llm-claude-card-head">
+                <span class="llm-claude-card-logo" aria-hidden="true">
+                  <img src="assets/logos/claude.svg" alt="">
+                </span>
+                <div class="llm-claude-card-meta">
+                  <p class="llm-claude-card-eyebrow">Today's agent</p>
+                  <strong class="llm-claude-card-title">Claude Code — by Anthropic</strong>
+                </div>
+              </header>
+              <ul class="agent-capabilities-list">
+                <li>
+                  <span class="agent-capability-name">Reads your project</span>
+                  <span class="agent-capability-desc">Files, repos, tokens — the workspace becomes context, not just what you paste.</span>
+                </li>
+                <li>
+                  <span class="agent-capability-name">Runs commands</span>
+                  <span class="agent-capability-desc">Scripts, tests, MCP calls — work, not just talk.</span>
+                </li>
+                <li>
+                  <span class="agent-capability-name">Remembers</span>
+                  <span class="agent-capability-desc">CLAUDE.md, skills, project structure — context survives the session.</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-        <p class="agent-best-for"><strong>Best for</strong> working alongside you on a real codebase, where the system is structured for reading and editing — not chat-only Q&amp;A.</p>
       </div>
       <div class="slide-footer"><span>Agent layer</span><span>6 min</span></div>
     </section>
@@ -8043,20 +8053,20 @@
         <p class="lede">Don't confuse the entry point with the capability. Same agent — three places it can live. We're using the Desktop app today.</p>
         <div class="tools-layout">
           <nav class="tools-tablist" role="tablist" aria-label="Tools">
-            <button class="tools-tab" type="button" role="tab" data-tool="cli" aria-selected="false">
-              <span class="tools-tab-num">01</span>
-              <span class="tools-tab-body">
-                <span class="tools-tab-name">CLI</span>
-                <span class="tools-tab-meta">claude in a terminal</span>
-              </span>
-            </button>
             <button class="tools-tab" type="button" role="tab" data-tool="desktop" aria-selected="true">
-              <span class="tools-tab-num">02</span>
+              <span class="tools-tab-num">01</span>
               <span class="tools-tab-body">
                 <span class="tools-tab-name">Desktop App</span>
                 <span class="tools-tab-meta">standalone Mac / Win</span>
               </span>
               <span class="tools-tab-pill">Today</span>
+            </button>
+            <button class="tools-tab" type="button" role="tab" data-tool="cli" aria-selected="false">
+              <span class="tools-tab-num">02</span>
+              <span class="tools-tab-body">
+                <span class="tools-tab-name">CLI</span>
+                <span class="tools-tab-meta">claude in a terminal</span>
+              </span>
             </button>
             <button class="tools-tab" type="button" role="tab" data-tool="ide" aria-selected="false">
               <span class="tools-tab-num">03</span>
@@ -8322,7 +8332,7 @@ Don't write any token files yet. Just the folder skeleton and the four tier READ
       <div class="slide-content">
         <div class="kicker">Part 1 · Teach · 75 min</div>
         <h1>Tokens via Claude Code + Figma MCP</h1>
-        <p class="lede">Teach the agent your visual system: primitives, semantics, and a disabled state across every role.</p>
+        <p class="lede">Teach the agent your visual system: primitives, semantics, and how to scale it. The disabled state is just one example of scaling.</p>
         <div class="section-manifest">
           <div class="manifest-header">
             <p class="manifest-label">What you'll build in Figma</p>
@@ -8349,8 +8359,8 @@ Don't write any token files yet. Just the folder skeleton and the four tier READ
             </div>
             <div class="manifest-card">
               <span class="manifest-card-num">03</span>
-              <h4 class="manifest-card-title">Disabled state</h4>
-              <p class="manifest-card-meta">text · bg · icon · border</p>
+              <h4 class="manifest-card-title">A scaled system</h4>
+              <p class="manifest-card-meta">e.g. add a disabled state across every role</p>
             </div>
           </div>
         </div>
@@ -8625,7 +8635,7 @@ why? Propose the full pairing matrix before writing.</div>
       <div class="slide-footer"><span>Craft discipline</span><span>You drive. Claude supports.</span></div>
     </section>
 
-    <section class="slide" data-section="Part 1" data-notes="Use this before the break. Two homework asks — dark mode + challenge the weak cell — both apply the same discipline you saw in this part.">
+    <section class="slide" data-section="Part 1" data-notes="Use this before the break. Names what's in the file at this point. Homework framing comes later in the closing.">
       <div class="slide-content">
         <div class="kicker">Deliverables before break</div>
         <div class="grid-2">
@@ -8637,13 +8647,6 @@ why? Propose the full pairing matrix before writing.</div>
             <li><span class="check"></span><span><code>Primitive: Colors</code> — 7 hues, ~65 variables</span></li>
             <li><span class="check"></span><span><code>Semantic: Colors</code> — all values aliased</span></li>
             <li><span class="check"></span><span>Disabled state across every role</span></li>
-          </ul>
-        </div>
-        <div class="homework-strip">
-          <span class="homework-label">Homework</span>
-          <ul class="homework-list">
-            <li><strong>Add a Dark mode column</strong> with defended pairings — same propose-then-execute discipline.</li>
-            <li><strong>Push back when the math fails.</strong> Run the agent's first binding through the contrast check. Reject any pairing that doesn't clear WCAG.</li>
           </ul>
         </div>
       </div>
