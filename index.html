@@ -2758,6 +2758,63 @@
     z-index: 0;
   }
   .connection-option > * { position: relative; z-index: 1; }
+
+  /* Numbered badge top-left (01/02/03), mono micro caps. Mint on the
+     recommended card, muted on the rest. */
+  .connection-option-num {
+    position: absolute;
+    top: 16px;
+    left: 24px;
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+    opacity: 0.55;
+    line-height: 1;
+  }
+  .connection-option.recommended .connection-option-num {
+    color: var(--c-mint);
+    opacity: 0.95;
+  }
+  .connection-option h4 {
+    margin-top: 16px;
+  }
+
+  /* Best-for block — labelled section separated from the rest by a
+     hairline divider above. Body text in default colour on the
+     recommended card, muted on the others. */
+  .connection-option-best {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .connection-option-best-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+    line-height: 1;
+  }
+  .connection-option-best p {
+    margin: 0;
+    font-size: var(--ts-small);
+    line-height: var(--lh-normal);
+    color: var(--text-default);
+  }
+  .connection-option:not(.recommended) .connection-option-best p {
+    color: var(--text-muted);
+  }
+  :root[data-theme="dark"] .connection-option-best {
+    border-top-color: rgba(211, 201, 232, 0.10);
+  }
+
   /* Pill floats top-right so the title/where/best rhythm matches across all 3 cards. */
   .connection-option-pill {
     position: absolute;
@@ -8274,24 +8331,35 @@
     <section class="slide" data-section="Part 0" data-notes="Three options. Recommended is visually prominent (mint border, glow, RECOMMENDED pill). The other two stay quiet but are honest about their niche.">
       <div class="slide-content">
         <div class="kicker">Lesson 4 · Three options</div>
-        <h2>Three options. One recommended.</h2>
-        <p class="lede">Three ways Claude can read and write a Figma file. We'll use one today; the other two have niche jobs you'll meet later.</p>
+        <h2>Three options. We use one today.</h2>
+        <p class="lede">Three ways Claude can read and write a Figma file. We use one today; the other two have niche jobs you'll meet later.</p>
         <div class="connection-options">
           <div class="connection-option recommended">
-            <span class="connection-option-pill">Recommended</span>
-            <h4>Figma Remote MCP</h4>
-            <p class="connection-option-where">Runs on Figma's servers · OAuth-authenticated</p>
-            <p class="connection-option-best">Best for standardised read/write across sessions — same setup for every student, no local infra.</p>
+            <span class="connection-option-num">01</span>
+            <h4>Figma Dev Mode MCP</h4>
+            <p class="connection-option-where">Hosted by Figma · OAuth login · official</p>
+            <div class="connection-option-best">
+              <span class="connection-option-best-label">Best for</span>
+              <p>Live sessions and shared setups. One-click connect, same for everyone, no install. What we use today.</p>
+            </div>
           </div>
           <div class="connection-option">
+            <span class="connection-option-num">02</span>
             <h4>Figma Console MCP</h4>
-            <p class="connection-option-where">Runs inside the Figma file</p>
-            <p class="connection-option-best">Best for atomic scripts and complex variable manipulation — when you need the Plugin API surface.</p>
+            <p class="connection-option-where">Cloud + Figma Desktop plugin · open source (Southleft)</p>
+            <div class="connection-option-best">
+              <span class="connection-option-best-label">Best for</span>
+              <p>Turning your design system into a queryable API. 94+ tools — extract tokens, audit accessibility, build components programmatically.</p>
+            </div>
           </div>
           <div class="connection-option">
+            <span class="connection-option-num">03</span>
             <h4>Figma CLI</h4>
-            <p class="connection-option-where">Runs on your local machine</p>
-            <p class="connection-option-best">Best for batch operations and CI/CD pipelines — when scripted, scheduled access matters.</p>
+            <p class="connection-option-where">Local install · WebSocket to Figma Desktop · no API key</p>
+            <div class="connection-option-best">
+              <span class="connection-option-best-label">Best for</span>
+              <p>Direct control of Figma Desktop from Claude Code. Generate components, manage tokens, batch-edit layers — all by chat.</p>
+            </div>
           </div>
         </div>
       </div>
