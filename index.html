@@ -9146,7 +9146,7 @@ why? Propose the full pairing matrix before writing.</div>
       </div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The first component built live, direct (no propose-then-approve). Figma only at this point — capture comes later in the session. Default icon-swaps should point at instances from the Icons frame on Utility (5:355, frame 26:524). Full prompt to paste: Build a Button in our Figma demo file. Read the Figma file's semantic variables first to learn what you can alias. Create a new Figma page named 'Button' and place the component set on it. Variant matrix: Style × Size × Icon only. Properties: Label (TEXT), Show left icon (BOOLEAN), Show right icon (BOOLEAN), Left icon (INSTANCE_SWAP), Right icon (INSTANCE_SWAP). Anatomy: left-icon, label, right-icon, centered horizontal flex. State model: default, hover, disabled. Active state has no semantic token, mark it. Bind every fill, stroke, text, and spacing through semantic tokens, never primitives. Default icon-swaps point at instances from the Icons frame on Utility.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 1 of 4 — Button. The first component built live, direct (no propose-then-approve). Figma only at this point — capture comes later in the session. Default icon-swaps should point at instances from the Icons frame on Utility (5:355, frame 26:524). Full prompt to paste: Build a Button in our Figma demo file. Read the Figma file's semantic variables first to learn what you can alias. Create a new Figma page named 'Button' and place the component set on it. Variant matrix: Style × Size × Icon only. Properties: a Label text field, two toggles for showing the left and right icons, and two instance-swap properties for picking which icon to show. Anatomy: left-icon, label, right-icon, centered horizontal flex. State model: default, hover, disabled. Active state has no semantic token, mark it. Bind every fill, stroke, text, and spacing through semantic tokens, never primitives. Default icon-swaps point at instances from the Icons frame on Utility.">
       <div class="slide-content">
         <div class="kicker">Component 1 · Button</div>
         <div class="prompt-frame">
@@ -9155,7 +9155,7 @@ why? Propose the full pairing matrix before writing.</div>
 Create a new Figma page named "Button" and place the component set on it.
 
 Variant matrix: Style × Size × Icon only.
-Properties: Label (TEXT), Show left icon (BOOLEAN), Show right icon (BOOLEAN), Left icon (INSTANCE_SWAP), Right icon (INSTANCE_SWAP).
+Properties: a Label text field, two toggles for showing the left and right icons, and two instance-swap properties for picking which icon to show.
 Anatomy: left-icon, label, right-icon, centered horizontal flex.
 State model: default, hover, disabled. Active state has no semantic token, mark it.
 
@@ -9174,7 +9174,7 @@ Bind every fill, stroke, text, and spacing through semantic tokens, never primit
       <div class="slide-footer"><span>1 of 4 · Button</span><span>~25 min</span></div>
     </section>
 
-    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. The hide-by-prop pattern is load-bearing. The Welcome screen needs Title + Subtitle but no Overline or Description. Direct build, no propose-then-approve. Figma only at this point. Full prompt to paste: Build a Jumbotron in our Figma file. Create a new Figma page named 'Jumbotron' and place the component set on it. Heading block with one required slot (Title) and three optional ones (Overline, Subtitle, Description). Vertical auto-layout, left-aligned by default. Variant matrix: Size (lg / md / sm / xs), one axis only. Properties: Title (TEXT, required); Show overline (BOOLEAN, default false), Subtitle (TEXT), Show subtitle (BOOLEAN, default true), Description (TEXT), Show description (BOOLEAN, default false). Per-size typography: bind to semantic-typography tokens (no raw px). Slot colors via semantic text tokens. Slot spacing via semantic spacing tokens. Build the four Size variants. All slots present in every variant; visibility driven by booleans.">
+    <section class="slide" data-section="Part 2" data-notes="Prompt 2 of 4 — Jumbotron. The hide-by-prop pattern is load-bearing. The Welcome screen needs Title + Subtitle but no Overline or Description. Direct build, no propose-then-approve. Figma only at this point. Full prompt to paste: Build a Jumbotron in our Figma file. Create a new Figma page named 'Jumbotron' and place the component set on it. Heading block with one required slot (Title) and three optional ones (Overline, Subtitle, Description). Vertical auto-layout, left-aligned by default. Variant matrix: Size (lg / md / sm / xs), one axis only. Properties: a required Title text field; text fields for Subtitle and Description; three toggles for showing the Overline (default off), Subtitle (default on), and Description (default off). Per-size typography: bind to semantic-typography tokens (no raw px). Slot colors via semantic text tokens. Slot spacing via semantic spacing tokens. Build the four Size variants. All slots present in every variant; visibility driven by the toggles.">
       <div class="slide-content">
         <div class="kicker">Component 2 · Jumbotron</div>
         <div class="prompt-frame">
@@ -9185,18 +9185,18 @@ Create a new Figma page named "Jumbotron" and place the component set on it.
 Heading block with one required slot (Title) and three optional ones (Overline, Subtitle, Description).
 
 Variant matrix: Size (lg / md / sm / xs), one axis only.
-Properties: Title (TEXT, required); Show overline (BOOLEAN, default false), Subtitle (TEXT), Show subtitle (BOOLEAN, default true), Description (TEXT), Show description (BOOLEAN, default false).
+Properties: a required Title text field; text fields for Subtitle and Description; three toggles for showing the Overline (default off), Subtitle (default on), and Description (default off).
 Per-size typography: bind to semantic-typography tokens (no raw px). Slot colors via semantic text tokens. Slot spacing via semantic spacing tokens.
 
-Build the four Size variants. All slots present in every variant; visibility driven by booleans.</div>
+Build the four Size variants. All slots present in every variant; visibility driven by the toggles.</div>
         </div>
         <div class="prompt-insight">
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>One axis: Size (lg / md / sm / xs)</span></li>
-            <li><span class="check"></span><span>Title always present; Overline / Subtitle / Description toggle via booleans</span></li>
+            <li><span class="check"></span><span>Title always present; Overline / Subtitle / Description toggle via show/hide toggles</span></li>
             <li><span class="check"></span><span>Typography bound to semantic tokens (no raw px)</span></li>
-            <li><span class="check"></span><span>All slots present in every variant; visibility driven by booleans</span></li>
+            <li><span class="check"></span><span>All slots present in every variant; visibility driven by the toggles</span></li>
           </ul>
         </div>
       </div>
@@ -9219,7 +9219,7 @@ Build all five variants.</div>
           <h3>Checkpoint</h3>
           <ul class="clean-list">
             <li><span class="check"></span><span>Five aspect-ratio variants rendered (1:1 / 4:3 / 3:2 / 16:9 / 2:3)</span></li>
-            <li><span class="check"></span><span>One axis only — no Full-bleed, no INSTANCE_SWAP property</span></li>
+            <li><span class="check"></span><span>One axis only — no Full-bleed, no instance-swap property</span></li>
             <li><span class="check"></span><span>Each variant has a single image layer ready to fill</span></li>
             <li><span class="check"></span><span>Style and bindings inferred from Figma and the existing variables</span></li>
           </ul>
