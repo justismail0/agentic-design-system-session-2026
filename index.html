@@ -2905,124 +2905,118 @@
     margin: 0;
     max-width: 44ch;
   }
-  .llm-claude-mark {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 18px;
+  /* Slide 16 right column — Claude family card with segmented
+     control for the model variants. Header (logo + "Today's family"
+     + "Claude — by Anthropic") sits above; the segment shows the
+     three model variants with the active one highlighted; a detail
+     panel below describes the active pick. */
+  .llm-claude-card {
     background: var(--bg-surface-grad);
     border: 1px solid rgba(255, 138, 60, 0.32);
     border-radius: var(--r-lg);
-    margin-top: var(--sp-2);
-    width: max-content;
-    max-width: 100%;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
   }
-  .llm-claude-mark-logo {
-    width: 44px;
-    height: 44px;
+  .llm-claude-card-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: linear-gradient(180deg, rgba(255, 138, 60, 0.10), transparent 80%);
+    border-bottom: 1px solid rgba(255, 138, 60, 0.20);
+  }
+  .llm-claude-card-logo {
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
-    border-radius: 12px;
+    border-radius: 10px;
     background: linear-gradient(160deg, #ff8a3c 0%, #d4651e 100%);
     display: grid;
     place-items: center;
     padding: 8px;
-    box-shadow: 0 0 18px rgba(255, 138, 60, 0.28);
+    box-shadow: 0 0 14px rgba(255, 138, 60, 0.25);
   }
-  .llm-claude-mark-logo img {
+  .llm-claude-card-logo img {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
-  .llm-claude-mark-body {
+  .llm-claude-card-meta {
     display: flex;
     flex-direction: column;
     gap: 2px;
     min-width: 0;
   }
-  .llm-claude-mark-eyebrow {
+  .llm-claude-card-eyebrow {
     margin: 0;
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: var(--fw-bold);
     text-transform: uppercase;
     letter-spacing: 0.16em;
     color: rgba(255, 138, 60, 0.95);
     line-height: 1;
   }
-  .llm-claude-mark-name {
-    font-size: clamp(15px, 1.1vw, 18px);
+  .llm-claude-card-title {
+    font-size: clamp(15px, 1.05vw, 17px);
     font-weight: var(--fw-bold);
     color: var(--text-strong);
     letter-spacing: -0.01em;
     line-height: 1.2;
   }
-
-  .llm-2col-models {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    min-width: 0;
-  }
-  .llm-model {
+  .llm-claude-segment {
     display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
-    column-gap: 12px;
-    row-gap: 6px;
-    align-items: baseline;
-    padding: 14px 18px;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 18px 18px 0;
     border: 1px solid var(--border-medium);
-    border-radius: var(--r-lg);
-    background: var(--bg-surface-grad);
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(80, 65, 112, 0.04);
   }
-  .llm-model.is-active {
-    border-color: rgba(0, 140, 92, 0.5);
-    background:
-      linear-gradient(180deg, rgba(0, 140, 92, 0.06), transparent),
-      var(--bg-surface-grad);
-    box-shadow: 0 8px 24px rgba(0, 140, 92, 0.10);
-  }
-  .llm-model-name {
-    grid-column: 1;
-    grid-row: 1;
-    font-size: clamp(18px, 1.4vw, 22px);
+  .llm-claude-segment-tab {
+    text-align: center;
+    padding: 10px 12px;
+    font-size: clamp(13px, 0.95vw, 15px);
     font-weight: var(--fw-bold);
-    color: var(--text-strong);
-    letter-spacing: -0.01em;
-    line-height: 1.1;
+    color: var(--text-muted);
+    border-right: 1px solid var(--border-medium);
+    background: transparent;
+    transition: color 180ms ease, background 180ms ease;
   }
-  .llm-model-tag {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: start;
+  .llm-claude-segment-tab:last-child { border-right: 0; }
+  .llm-claude-segment-tab.is-active {
+    color: #ffffff;
+    background: linear-gradient(180deg, var(--c-mint-ink), #006b46);
+    box-shadow: inset 0 0 12px rgba(0, 140, 92, 0.45);
+  }
+  .llm-claude-segment-detail {
+    margin: 14px 18px 18px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: rgba(0, 140, 92, 0.04);
+    border-left: 3px solid var(--c-mint-ink);
+  }
+  .llm-claude-segment-detail-tag {
+    display: inline-block;
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: var(--fw-bold);
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: var(--text-muted);
-    padding: 2px 8px;
-    border-radius: 4px;
-    background: rgba(80, 65, 112, 0.06);
-    border: 1px solid var(--border-subtle);
-  }
-  .llm-model.is-active .llm-model-tag {
     color: var(--c-mint-ink);
-    background: rgba(0, 140, 92, 0.08);
-    border-color: rgba(0, 140, 92, 0.4);
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: rgba(0, 140, 92, 0.10);
+    margin-bottom: 6px;
   }
-  .llm-model-desc {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    font-size: clamp(13px, 0.95vw, 15px);
-    color: var(--text-muted);
+  .llm-claude-segment-detail p {
+    margin: 4px 0 0;
+    font-size: clamp(14px, 1vw, 16px);
+    color: var(--text-strong);
     line-height: 1.4;
   }
 
-  /* Right column container — Claude badge + compact model list */
+  /* Right column container */
   .llm-2col-claude {
     display: flex;
     flex-direction: column;
@@ -3059,88 +3053,6 @@
     line-height: 1.4;
   }
 
-  /* Compact model rows — tighter than .llm-model, single visual line */
-  .llm-models-compact {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    min-width: 0;
-  }
-  .llm-model-compact {
-    display: grid;
-    grid-template-columns: auto auto 1fr;
-    align-items: baseline;
-    column-gap: 12px;
-    padding: 10px 14px;
-    border: 1px solid var(--border-medium);
-    border-radius: var(--r-md);
-    background: var(--bg-surface-grad);
-  }
-  .llm-model-compact.is-active {
-    border-color: rgba(0, 140, 92, 0.45);
-    background:
-      linear-gradient(180deg, rgba(0, 140, 92, 0.05), transparent),
-      var(--bg-surface-grad);
-  }
-  .llm-model-compact .llm-model-name {
-    font-size: clamp(15px, 1.05vw, 17px);
-    font-weight: var(--fw-bold);
-    color: var(--text-strong);
-  }
-  .llm-model-compact .llm-model-tag {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    padding: 2px 7px;
-    border-radius: 4px;
-    color: var(--text-muted);
-    background: rgba(80, 65, 112, 0.06);
-    border: 1px solid var(--border-subtle);
-  }
-  .llm-model-compact.is-active .llm-model-tag {
-    color: var(--c-mint-ink);
-    background: rgba(0, 140, 92, 0.08);
-    border-color: rgba(0, 140, 92, 0.4);
-  }
-  .llm-model-compact .llm-model-desc {
-    font-size: clamp(12px, 0.85vw, 13px);
-    color: var(--text-muted);
-    text-align: right;
-    font-style: italic;
-  }
-
-  /* Dark-theme overrides for the new blocks */
-  :root[data-theme="dark"] .llm-info dt {
-    color: rgba(244, 240, 255, 0.55);
-  }
-  :root[data-theme="dark"] .llm-info dd {
-    color: rgba(244, 240, 255, 0.92);
-  }
-  :root[data-theme="dark"] .llm-model-compact {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(211, 201, 232, 0.14);
-  }
-  :root[data-theme="dark"] .llm-model-compact.is-active {
-    border-color: rgba(53, 255, 181, 0.45);
-    background:
-      linear-gradient(180deg, rgba(53, 255, 181, 0.06), transparent),
-      rgba(255, 255, 255, 0.04);
-  }
-  :root[data-theme="dark"] .llm-model-compact .llm-model-tag {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(211, 201, 232, 0.14);
-  }
-  :root[data-theme="dark"] .llm-model-compact.is-active .llm-model-tag {
-    color: var(--c-mint);
-    background: rgba(53, 255, 181, 0.12);
-    border-color: rgba(53, 255, 181, 0.32);
-  }
-
   /* Stack to single column under 900px */
   @media (max-width: 900px) {
     .llm-2col { grid-template-columns: 1fr; gap: var(--sp-4); }
@@ -3148,29 +3060,40 @@
   }
 
   /* Dark theme */
-  :root[data-theme="dark"] .llm-claude-mark {
+  :root[data-theme="dark"] .llm-claude-card {
     background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 138, 60, 0.40);
+    border-color: rgba(255, 138, 60, 0.42);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.36);
   }
-  :root[data-theme="dark"] .llm-model {
+  :root[data-theme="dark"] .llm-claude-card-head {
+    background: linear-gradient(180deg, rgba(255, 138, 60, 0.14), transparent 80%);
+    border-bottom-color: rgba(255, 138, 60, 0.28);
+  }
+  :root[data-theme="dark"] .llm-claude-segment {
     background: rgba(255, 255, 255, 0.04);
     border-color: rgba(211, 201, 232, 0.14);
   }
-  :root[data-theme="dark"] .llm-model.is-active {
-    border-color: rgba(53, 255, 181, 0.45);
-    background:
-      linear-gradient(180deg, rgba(53, 255, 181, 0.08), transparent),
-      rgba(255, 255, 255, 0.04);
-    box-shadow: 0 12px 32px rgba(53, 255, 181, 0.16);
+  :root[data-theme="dark"] .llm-claude-segment-tab {
+    border-right-color: rgba(211, 201, 232, 0.14);
   }
-  :root[data-theme="dark"] .llm-model-tag {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(211, 201, 232, 0.14);
+  :root[data-theme="dark"] .llm-claude-segment-tab.is-active {
+    color: #0a1410;
+    background: linear-gradient(180deg, var(--c-mint), #2dd9a0);
+    box-shadow: inset 0 0 14px rgba(53, 255, 181, 0.32);
   }
-  :root[data-theme="dark"] .llm-model.is-active .llm-model-tag {
+  :root[data-theme="dark"] .llm-claude-segment-detail {
+    background: rgba(53, 255, 181, 0.07);
+    border-left-color: var(--c-mint);
+  }
+  :root[data-theme="dark"] .llm-claude-segment-detail-tag {
     color: var(--c-mint);
-    background: rgba(53, 255, 181, 0.12);
-    border-color: rgba(53, 255, 181, 0.32);
+    background: rgba(53, 255, 181, 0.14);
+  }
+  :root[data-theme="dark"] .llm-info dt {
+    color: rgba(244, 240, 255, 0.55);
+  }
+  :root[data-theme="dark"] .llm-info dd {
+    color: rgba(244, 240, 255, 0.92);
   }
 
   /* ─── Agent intro slide — parallel to .llm-claude-row.
@@ -7842,7 +7765,7 @@
       </div>
     </section>
 
-    <section class="slide" data-section="Part 0" data-notes="Two-column layout focused on the LLM concept. Left: the metaphor, plus three rows answering What / When / Best for. Right: the Claude family — badge at top, three compact model rows below (Sonnet active). The right column is the supporting cast; the left is the lesson.">
+    <section class="slide" data-section="Part 0" data-notes="Two-column layout focused on the LLM concept. Left: the metaphor, plus three rows answering What / When / Best for. Right: the Claude family card — header at top, three model rows below (Opus active — that's what we're using for the live agentic work today). The right column is the supporting cast; the left is the lesson.">
       <div class="slide-content">
         <div class="kicker">Lesson 1 · LLMs and Claude</div>
         <div class="llm-2col">
@@ -7865,36 +7788,30 @@
             </dl>
           </div>
           <div class="llm-2col-claude">
-            <div class="llm-claude-mark">
-              <div class="llm-claude-mark-logo" aria-hidden="true">
-                <img src="assets/logos/claude.svg" alt="Claude">
+            <div class="llm-claude-card">
+              <header class="llm-claude-card-head">
+                <span class="llm-claude-card-logo" aria-hidden="true">
+                  <img src="assets/logos/claude.svg" alt="">
+                </span>
+                <div class="llm-claude-card-meta">
+                  <p class="llm-claude-card-eyebrow">Today's family</p>
+                  <strong class="llm-claude-card-title">Claude — by Anthropic</strong>
+                </div>
+              </header>
+              <div class="llm-claude-segment" role="tablist" aria-label="Claude model variants">
+                <span class="llm-claude-segment-tab" role="tab" aria-selected="false">Sonnet</span>
+                <span class="llm-claude-segment-tab is-active" role="tab" aria-selected="true">Opus</span>
+                <span class="llm-claude-segment-tab" role="tab" aria-selected="false">Haiku</span>
               </div>
-              <div class="llm-claude-mark-body">
-                <p class="llm-claude-mark-eyebrow">Today's family</p>
-                <strong class="llm-claude-mark-name">Claude — by Anthropic</strong>
+              <div class="llm-claude-segment-detail">
+                <span class="llm-claude-segment-detail-tag">Today's pick</span>
+                <p>Deepest reasoning. Best for agentic work.</p>
               </div>
             </div>
-            <ul class="llm-models-compact">
-              <li class="llm-model-compact is-active">
-                <span class="llm-model-name">Sonnet</span>
-                <span class="llm-model-tag">Today's pick</span>
-                <span class="llm-model-desc">balanced workhorse</span>
-              </li>
-              <li class="llm-model-compact">
-                <span class="llm-model-name">Opus</span>
-                <span class="llm-model-tag">Heavy thinking</span>
-                <span class="llm-model-desc">deeper, slower</span>
-              </li>
-              <li class="llm-model-compact">
-                <span class="llm-model-name">Haiku</span>
-                <span class="llm-model-tag">Light + fast</span>
-                <span class="llm-model-desc">fastest, cheapest</span>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
-      <div class="slide-footer"><span>Model layer · Today: Sonnet</span><span>6 min</span></div>
+      <div class="slide-footer"><span>Model layer · Today: Opus</span><span>6 min</span></div>
     </section>
 
     <section class="slide quote-slide" data-section="Part 0" data-notes="This sentence earns everything else. Repeat it later when introducing CLAUDE.md and audit.">
