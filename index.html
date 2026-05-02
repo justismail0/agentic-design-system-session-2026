@@ -2881,124 +2881,176 @@
   }
 
   /* ─── LLMs + Claude merged slide — Claude as narrator with model footnote ─── */
-  .llm-claude-row {
-    margin-top: var(--sp-5);
+  /* Slide 16 — LLMs & Claude. Two-column layout: text + claude
+     badge on the left, three model rows on the right. Replaces the
+     old llm-claude-row block (3-card grid below the intro panel). */
+  .llm-2col {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+    width: 100%;
+    margin-top: var(--sp-4);
+  }
+  .llm-2col-text {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-4);
+    gap: var(--sp-3);
+    min-width: 0;
   }
-  .llm-claude-intro {
+  .llm-2col-text h2 {
+    margin: 0;
+  }
+  .llm-2col-text .lede {
+    margin: 0;
+    max-width: 44ch;
+  }
+  .llm-claude-mark {
     display: flex;
     align-items: center;
-    gap: var(--sp-4);
-    padding: var(--sp-5) var(--sp-6);
+    gap: 14px;
+    padding: 14px 18px;
     background: var(--bg-surface-grad);
-    border: 1px solid rgba(255, 138, 60, 0.28);
+    border: 1px solid rgba(255, 138, 60, 0.32);
     border-radius: var(--r-lg);
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
+    margin-top: var(--sp-2);
+    width: max-content;
+    max-width: 100%;
   }
-  .llm-claude-intro::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 8% 50%, rgba(255, 138, 60, 0.16), transparent 50%);
-    z-index: 0;
-    pointer-events: none;
-  }
-  .llm-claude-intro > * { position: relative; z-index: 1; }
-  .llm-claude-logo {
-    width: 56px;
-    height: 56px;
+  .llm-claude-mark-logo {
+    width: 44px;
+    height: 44px;
     flex-shrink: 0;
-    border-radius: var(--r-lg);
+    border-radius: 12px;
     background: linear-gradient(160deg, #ff8a3c 0%, #d4651e 100%);
     display: grid;
     place-items: center;
-    padding: 10px;
-    box-shadow: 0 0 24px rgba(255, 138, 60, 0.28);
+    padding: 8px;
+    box-shadow: 0 0 18px rgba(255, 138, 60, 0.28);
   }
-  .llm-claude-logo img {
+  .llm-claude-mark-logo img {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
-  .llm-claude-row .llm-claude-eyebrow {
-    font-family: var(--font-mono);
-    font-size: var(--ts-small);
-    font-weight: var(--fw-bold);
-    color: rgba(255, 138, 60, 0.9);
-    letter-spacing: var(--ls-eyebrow);
-    text-transform: uppercase;
-    margin: 0 0 4px;
-    line-height: 1;
-  }
-  .llm-claude-row .llm-claude-intro h3 {
-    font-family: var(--font-display);
-    font-size: var(--ts-h3);
-    font-weight: var(--fw-bold);
-    color: var(--text-strong);
-    margin: 0;
-    letter-spacing: var(--ls-snug);
-    line-height: var(--lh-tight);
-  }
-  .llm-claude-models {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp-3);
-  }
-  .llm-claude-model {
-    padding: var(--sp-4);
-    background: var(--bg-surface-grad);
-    border: 1px solid var(--border-medium);
-    border-radius: var(--r-lg);
+  .llm-claude-mark-body {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
     min-width: 0;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
   }
-  .llm-claude-model[data-model="sonnet"] {
-    border-color: rgba(53, 255, 181, 0.45);
-    background:
-      radial-gradient(circle at 0% 0%, rgba(53, 255, 181, 0.14), transparent 60%),
-      var(--bg-surface-grad);
-    box-shadow: 0 12px 32px rgba(53, 255, 181, 0.18);
+  .llm-claude-mark-eyebrow {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(255, 138, 60, 0.95);
+    line-height: 1;
   }
-  .llm-claude-model-name {
-    font-family: var(--font-display);
-    font-size: var(--ts-h4);
+  .llm-claude-mark-name {
+    font-size: clamp(15px, 1.1vw, 18px);
     font-weight: var(--fw-bold);
     color: var(--text-strong);
-    line-height: var(--lh-tight);
-    letter-spacing: var(--ls-snug);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
   }
-  .llm-claude-model-tag {
-    display: inline-block;
-    width: max-content;
-    font-family: var(--font-mono);
-    font-size: var(--ts-micro);
+
+  .llm-2col-models {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+  }
+  .llm-model {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    row-gap: 6px;
+    align-items: baseline;
+    padding: 14px 18px;
+    border: 1px solid var(--border-medium);
+    border-radius: var(--r-lg);
+    background: var(--bg-surface-grad);
+  }
+  .llm-model.is-active {
+    border-color: rgba(0, 140, 92, 0.5);
+    background:
+      linear-gradient(180deg, rgba(0, 140, 92, 0.06), transparent),
+      var(--bg-surface-grad);
+    box-shadow: 0 8px 24px rgba(0, 140, 92, 0.10);
+  }
+  .llm-model-name {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: clamp(18px, 1.4vw, 22px);
     font-weight: var(--fw-bold);
-    letter-spacing: var(--ls-eyebrow);
-    text-transform: uppercase;
-    color: var(--text-muted);
-    padding: 2px 7px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-subtle);
-    margin-top: 2px;
+    color: var(--text-strong);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
   }
-  .llm-claude-model-tag.active {
+  .llm-model-tag {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(80, 65, 112, 0.06);
+    border: 1px solid var(--border-subtle);
+  }
+  .llm-model.is-active .llm-model-tag {
+    color: var(--c-mint-ink);
+    background: rgba(0, 140, 92, 0.08);
+    border-color: rgba(0, 140, 92, 0.4);
+  }
+  .llm-model-desc {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: clamp(13px, 0.95vw, 15px);
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Stack to single column under 900px */
+  @media (max-width: 900px) {
+    .llm-2col { grid-template-columns: 1fr; gap: var(--sp-4); }
+  }
+
+  /* Dark theme */
+  :root[data-theme="dark"] .llm-claude-mark {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 138, 60, 0.40);
+  }
+  :root[data-theme="dark"] .llm-model {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(211, 201, 232, 0.14);
+  }
+  :root[data-theme="dark"] .llm-model.is-active {
+    border-color: rgba(53, 255, 181, 0.45);
+    background:
+      linear-gradient(180deg, rgba(53, 255, 181, 0.08), transparent),
+      rgba(255, 255, 255, 0.04);
+    box-shadow: 0 12px 32px rgba(53, 255, 181, 0.16);
+  }
+  :root[data-theme="dark"] .llm-model-tag {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(211, 201, 232, 0.14);
+  }
+  :root[data-theme="dark"] .llm-model.is-active .llm-model-tag {
     color: var(--c-mint);
     background: rgba(53, 255, 181, 0.12);
     border-color: rgba(53, 255, 181, 0.32);
-  }
-  .llm-claude-model-desc {
-    font-size: var(--ts-small);
-    color: var(--text-muted);
-    line-height: var(--lh-normal);
-    margin-top: 6px;
   }
 
   /* ─── Agent intro slide — parallel to .llm-claude-row.
@@ -7670,38 +7722,40 @@
       </div>
     </section>
 
-    <section class="slide" data-section="Part 0" data-notes="Lead with the autocomplete metaphor. Then introduce Claude as the specific family we'll be talking to today — Sonnet is the workhorse, Opus is the heavy thinker, Haiku is the fast one.">
+    <section class="slide" data-section="Part 0" data-notes="Two-column simplified layout. Left: the autocomplete metaphor + Claude badge. Right: three model rows (Sonnet active). Walk Sonnet first, then mention Opus and Haiku as the rest of the family. We're using Sonnet today.">
       <div class="slide-content">
         <div class="kicker">Lesson 1 · LLMs and Claude</div>
-        <h2>Imagine autocomplete that has read most of the internet.</h2>
-        <p class="lede">Predicts the next token from the context it has. Give it tools and a memory and you have an agentic workflow.</p>
-        <div class="llm-claude-row">
-          <div class="llm-claude-intro">
-            <div class="llm-claude-logo" aria-hidden="true">
-              <img src="assets/logos/claude.svg" alt="Claude">
-            </div>
-            <div>
-              <p class="llm-claude-eyebrow">Today we're using one specific family</p>
-              <h3>Claude — by Anthropic</h3>
-            </div>
-          </div>
-          <div class="llm-claude-models">
-            <div class="llm-claude-model" data-model="sonnet">
-              <span class="llm-claude-model-name">Sonnet</span>
-              <span class="llm-claude-model-tag active">Today's pick</span>
-              <span class="llm-claude-model-desc">Balanced speed and depth — the workhorse for live sessions.</span>
-            </div>
-            <div class="llm-claude-model" data-model="opus">
-              <span class="llm-claude-model-name">Opus</span>
-              <span class="llm-claude-model-tag">Heavy thinking</span>
-              <span class="llm-claude-model-desc">Deepest reasoning. Slower and more expensive.</span>
-            </div>
-            <div class="llm-claude-model" data-model="haiku">
-              <span class="llm-claude-model-name">Haiku</span>
-              <span class="llm-claude-model-tag">Light + fast</span>
-              <span class="llm-claude-model-desc">Fastest and cheapest. Best for light tasks.</span>
+        <div class="llm-2col">
+          <div class="llm-2col-text">
+            <h2>Imagine autocomplete that has read most of the internet.</h2>
+            <p class="lede">Predicts the next token from the context it has. Give it tools and a memory, and you have an agentic workflow.</p>
+            <div class="llm-claude-mark">
+              <div class="llm-claude-mark-logo" aria-hidden="true">
+                <img src="assets/logos/claude.svg" alt="Claude">
+              </div>
+              <div class="llm-claude-mark-body">
+                <p class="llm-claude-mark-eyebrow">Today's family</p>
+                <strong class="llm-claude-mark-name">Claude — by Anthropic</strong>
+              </div>
             </div>
           </div>
+          <ul class="llm-2col-models">
+            <li class="llm-model is-active">
+              <span class="llm-model-name">Sonnet</span>
+              <span class="llm-model-tag">Today's pick</span>
+              <span class="llm-model-desc">Balanced. The workhorse for live sessions.</span>
+            </li>
+            <li class="llm-model">
+              <span class="llm-model-name">Opus</span>
+              <span class="llm-model-tag">Heavy thinking</span>
+              <span class="llm-model-desc">Deepest reasoning. Slower, more expensive.</span>
+            </li>
+            <li class="llm-model">
+              <span class="llm-model-name">Haiku</span>
+              <span class="llm-model-tag">Light + fast</span>
+              <span class="llm-model-desc">Fastest and cheapest. Best for light tasks.</span>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="slide-footer"><span>Model layer · Today: Sonnet</span><span>6 min</span></div>
