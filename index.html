@@ -7365,7 +7365,7 @@
   <div class="deck-frame" aria-hidden="true">
     <span class="frame-label">Master Design Systems and Design Tokens Bootcamp</span>
     <span class="frame-label right" id="frame-round">Opener</span>
-    <span class="frame-label bottom-left" id="frame-lesson">{Session opener}</span>
+    <span class="frame-label bottom-left" id="frame-lesson">Session opener</span>
     <span class="frame-label bottom-right">Mohamed Ismail</span>
   </div>
 
@@ -9915,7 +9915,7 @@ When you're done: 12 files (4 components × HTML, CSS, docs). Show me the file t
     progressFill.style.width = `${((index + 1) / slides.length) * 100}%`;
     notesText.textContent = slides[index].dataset.notes || "No notes for this slide.";
     frameRound.textContent = slides[index].dataset.section || "Lesson";
-    frameLesson.textContent = `{${slideLesson(slides[index])}}`;
+    frameLesson.textContent = slideLesson(slides[index]);
     document.title = `${index + 1}. ${slideTitle(slides[index])}`;
     if (pushHash) history.replaceState(null, "", `#${index + 1}`);
   }
